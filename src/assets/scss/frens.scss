@@ -1,0 +1,64 @@
+.frens-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .frens-container {
+    width: 120px;
+    height: 120px;
+    background-color: rgb(177 168 43);
+    border-radius: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 50px 15px rgb(255, 243, 80);
+
+    .frens-image {
+      width: 170px;
+    }
+  }
+
+  .earning-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .earning {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #fafafa;
+      background-color: black;
+      width: 300px;
+      height: 120px;
+      border-radius: 15px;
+    }
+  }
+
+  .friend-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #fafafa;
+    background-color: black;
+    width: 600px;
+    height: 60px;
+    border-radius: 15px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .frens-section .earning-container {
+    flex-direction: column;
+  }
+  .frens-section .friend-list {
+    width: 100%;
+    gap: 50px;
+  }
+}

@@ -1,0 +1,117 @@
+.heading {
+  font-size: 32px;
+  font-weight: 900;
+  margin: 0;
+}
+.logo {
+  width: 30px;
+  height: auto;
+}
+.menu-logo {
+  width: 40px;
+  height: auto;
+}
+.earn-amount {
+  font-size: 48px;
+  font-weight: 900;
+  margin: 0;
+}
+.earn-logo {
+  width: 50px;
+  height: auto;
+}
+
+.farming {
+  border: 1px solid #fafafa;
+  background-color: black;
+  border-radius: 40px;
+  gap: 5px;
+  padding: 30px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #fafafa;
+  border-radius: 10px;
+
+  .mine-items {
+    font-size: 28px;
+    font-weight: 900;
+    padding: 5px;
+    margin-inline: 15px;
+    margin-block: 10px;
+    cursor: pointer;
+    text-wrap: nowrap;
+  }
+  .selected-icon {
+    background-color: black;
+    border-radius: 10px;
+    border: 1px solid #fafafa;
+  }
+}
+
+.electronics-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  .electronics {
+    background-color: black;
+    border-radius: 50px;
+    gap: 5px;
+    width: 370px;
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #fafafa;
+
+    .electronics-body {
+      padding: 20px;
+
+      .bitcoin-image {
+        width: 100px;
+        height: auto;
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 20px;
+    font-weight: 800;
+  }
+  .menu-logo {
+    width: 25px;
+  }
+  .earn-amount {
+    font-size: 35px;
+  }
+  .earn-logo {
+    width: 40px;
+  }
+  .mine .mine-items {
+    font-size: 12px;
+    font-weight: 500;
+    padding-inline: 7px;
+    margin-inline: 0px;
+    margin-block: 5px;
+    padding-block: 5px;
+  }
+  .electronics-container {
+    flex-direction: column;
+    gap: 20px;
+    .electronics {
+      width: 300px;
+    }
+  }
+}
