@@ -11,9 +11,10 @@ export const Mine = () => {
   const dispatch = useDispatch<AppDispatch>();
   const handleIconClick = (icon: string) => dispatch(setIcon(icon));
 
+  window.location.replace("http://localhost:3000");
+  window.location.href = "http://localhost:3000";
   return (
     <section className="">
-      <a href="http://localhost:3000">CLİCK ME PLS</a>
       <MainButton
         text="TestButton"
         onClick={() =>
