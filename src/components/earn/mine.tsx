@@ -13,12 +13,15 @@ export const Mine = () => {
 
   return (
     <section className="">
+      <a href="http://localhost:3000">CLİCK ME PLS</a>
       <MainButton
         text="TestButton"
-        onClick={() => alert(JSON.stringify((window as any).Telegram.WebApp))}
+        onClick={() =>
+          alert(JSON.stringify((window as any).Telegram.WebApp.initData))
+        }
       ></MainButton>
 
-      {/* <div className="d-flex align-items-center justify-content-center">
+      <div className="d-flex align-items-center justify-content-center">
         <div className="mt-2 d-flex align-items-center">
           <img src={logo} alt="" className="earn-logo me-2" />
           <p className="earn-amount">9,000,000</p>
@@ -127,7 +130,7 @@ export const Mine = () => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </section>
   );
 };
