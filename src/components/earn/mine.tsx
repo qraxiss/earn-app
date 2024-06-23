@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIcon } from "../../slices/selected-icon/slice";
 import { AppDispatch } from "../../store/index";
 import { MainButton } from "@twa-dev/sdk/react";
-import test from "../../api/earn/test";
 
 export const Mine = () => {
   const selectedIcon = useSelector((state: any) => state.selectedIcon.icon);
@@ -14,7 +13,12 @@ export const Mine = () => {
 
   return (
     <section className="">
-      <MainButton text="TestButton" onClick={() => test()}></MainButton>
+      <MainButton
+        text="TestButton"
+        onClick={() =>
+          alert(JSON.stringify((window as any).Telegram.WebApp.initData))
+        }
+      ></MainButton>
       <div className="d-flex align-items-center justify-content-center">
         <div className="mt-2 d-flex align-items-center">
           <img src={logo} alt="" className="earn-logo me-2" />
