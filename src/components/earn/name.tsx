@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../assets/images/icon.svg";
+import How from "../../assets/images/how.png";
 import NameImage from "../../assets/images/name.webp";
 import { Image } from "react-bootstrap";
 
@@ -10,11 +11,31 @@ const nameData = [
 ];
 
 export const Name = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <section className="name-section">
-      <div className="name-container my-5">
-        <Image src={NameImage} alt="Name" className="name-image" />
-      </div>
+      {isMobile ? (
+        <div className="howto-container my-5">
+          <Image src={How} alt="howto" className="howto-image" />
+        </div>
+      ) : (
+        <div className="name-container my-5">
+          <Image src={NameImage} alt="Name" className="name-image" />
+        </div>
+      )}
       <p className="heading my-3">CLAIM YOUR NAME</p>
 
       <div className="input-group mb-3 search-input">

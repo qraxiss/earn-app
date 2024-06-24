@@ -10,6 +10,26 @@
 @import "./name.scss";
 @import "./task.scss";
 
+.header-container {
+  background-color: black;
+  cursor: pointer;
+  .icon-container {
+    width: 50px;
+    display: flex;
+    justify-content: end;
+    .custom-icon {
+      border: 1px solid #fafafa;
+      padding-block: 0px;
+      border-radius: 20px;
+      padding-inline: 5px;
+      font-size: 20px;
+    }
+  }
+  .bot {
+    color: #b4b2b9;
+  }
+}
+
 .header {
   background-color: #0a1628;
   min-height: 100vh;
@@ -44,6 +64,31 @@
   }
 }
 
+.navbar-mobile {
+  background: #15253b;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
+  .navbar-items-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 800;
+    padding-inline: 10px;
+    padding-block: 8px;
+    margin-inline: 5px;
+    margin-block: 5px;
+    cursor: pointer;
+  }
+  .selected-icon {
+    background-color: #1e3557;
+    border-radius: 10px;
+  }
+}
+
 .claim-button {
   width: 250px;
   height: 50px;
@@ -54,23 +99,22 @@
   border-radius: 30px;
   border: 1px solid #fafafa;
 }
-
 .container-custom {
   @media (min-width: 992px) {
     max-width: 90%;
   }
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    width: 100%;
-    .navbar-items {
-      font-size: 12px;
-      font-weight: 700;
-      padding-inline: 10px;
-      padding-block: 8px;
-      margin-inline: 5px;
-      margin-block: 0px;
-    }
-  }
-}
+// @media (max-width: 768px) {
+//   .navbar {
+//     width: 100%;
+//     .navbar-items-mobile {
+//       font-size: 12px;
+//       font-weight: 700;
+//       padding-inline: 10px;
+//       padding-block: 8px;
+//       margin-inline: 5px;
+//       margin-block: 0px;
+//     }
+//   }
+// }

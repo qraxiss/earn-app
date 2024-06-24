@@ -13,7 +13,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 50px 15px rgba(245, 86, 184, 0.5),
+    box-shadow:
+      0 0 50px 15px rgba(245, 86, 184, 0.5),
       0 0 50px 15px rgba(20, 197, 240, 0.5);
 
     .task-image {
@@ -51,17 +52,20 @@
 }
 
 @media (max-width: 768px) {
-  .task-section .follow-container {
-    width: 100%;
-    gap: 50px;
-    .follow-images {
-      width: 50px;
-      height: 40px;
-      margin-inline: 10px;
-    }
-    .task-heading {
-      font-size: 16px;
-      font-weight: 600;
+  .task-section {
+    margin-bottom: 50px;
+    .follow-container {
+      width: 100%;
+      gap: 50px;
+      .follow-images {
+        width: 50px;
+        height: 40px;
+        margin-inline: 10px;
+      }
+      .task-heading {
+        font-size: 16px;
+        font-weight: 600;
+      }
     }
   }
 }
