@@ -7,37 +7,47 @@ const data = [
   {
     title: "Day 1",
     image: logo,
-    points: "200K",
+    points: "20K",
   },
   {
     title: "Day 2",
     image: logo,
-    points: "300K",
+    points: "25K",
   },
   {
     title: "Day 3",
     image: logo,
-    points: "400K",
+    points: "30K",
   },
   {
     title: "Day 4",
     image: logo,
-    points: "500K",
+    points: "40K",
   },
   {
     title: "Day 5",
     image: logo,
-    points: "750K",
+    points: "100K",
   },
   {
     title: "Day 6",
     image: logo,
-    points: "1M",
+    points: "200K",
   },
   {
     title: "Day 7",
     image: logo,
-    points: "2M",
+    points: "500K",
+  },
+  {
+    title: "Day 8",
+    image: logo,
+    points: "1M",
+  },
+  {
+    title: "Day 9",
+    image: logo,
+    points: "5M",
   },
 ];
 

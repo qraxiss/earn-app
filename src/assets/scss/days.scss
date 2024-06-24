@@ -18,8 +18,8 @@
       cursor: pointer;
 
       .days-item {
-        width: 170px;
-        height: 190px;
+        width: 150px;
+        height: 180px;
         border: 1px solid #fafafa;
         background-color: black;
         justify-content: center;
@@ -32,7 +32,7 @@
     }
 
     .days-item.active {
-      background-color: black;
+      background-color: #1e3557;
       cursor: pointer;
     }
 
@@ -59,10 +59,14 @@
 }
 
 @media (max-width: 768px) {
-  .days-section .days-container {
-    width: 100%;
-    .days .days-item {
-      width: 150px;
+  .days-section {
+    margin-bottom: 50px;
+    .days-container {
+      width: 100%;
+      .days .days-item {
+        width: 100px;
+        height: 130px;
+      }
     }
   }
 }

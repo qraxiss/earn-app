@@ -54,11 +54,14 @@
 }
 
 @media (max-width: 768px) {
-  .frens-section .earning-container {
-    flex-direction: column;
-  }
-  .frens-section .friend-list {
-    width: 100%;
-    gap: 50px;
+  .frens-section {
+    margin-bottom: 50px;
+    .earning-container {
+      flex-direction: column;
+    }
+    .friend-list {
+      width: 100%;
+      gap: 50px;
+    }
   }
 }
