@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../../assets/images/icon.svg";
-import Discord from "../../assets/images/discord.svg";
+import Instagram from "../../assets/images/Instagram.png";
 import Telegram from "../../assets/images/telegram.png";
 import Twitter from "../../assets/images/twitter.png";
 import Youtube from "../../assets/images/youtube.png";
@@ -26,7 +26,7 @@ export const Task = () => {
     {
       id: 3,
       name: "Join Our Discord",
-      image: Discord,
+      image: Instagram,
       reward: "+10,000",
       completed: true,
     },
@@ -49,18 +49,19 @@ export const Task = () => {
 
   return (
     <section className="task-section">
-      <div className="task-container my-5">
+      <div className="task-container mt-3 mb-5">
         <Image src={logo} alt="Task" className="task-image" />
       </div>
       <p className="heading my-3">Earn More Coins</p>
-      <div>
+      <div className="task d-flex flex-column align-items-center">
         {tasks.map((task) => (
           <div
             key={task.id}
-            className="d-flex justify-content-between align-items-center follow-container my-3 p-3"
+            className="d-flex justify-content-between align-items-center follow-container my-1 p-2"
             onClick={() => handleTaskCompletion(task.id)}
           >
             <div className="d-flex align-items-center">
+              <div>
               <Image
                 src={task.image}
                 alt={task.name}
@@ -68,11 +69,12 @@ export const Task = () => {
                   task.name === "Follow Our X Account" ? "x-image" : ""
                 }`}
               />
-              <div>
+              </div>
+              <div className=" px-1 ">
                 <p className="m-0 task-heading">{task.name}</p>
                 <div className="d-flex align-items-center">
                   <img src={logo} alt="" className="logo me-2" />
-                  <h4 className="m-0">{task.reward}</h4>
+                  <h4 className="reward m-0">{task.reward}</h4>
                 </div>
               </div>
             </div>

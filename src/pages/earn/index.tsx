@@ -58,7 +58,7 @@ export const Earn: React.FC = () => {
     <section className="section header">
       {isMobile ? (
         <>
-          <div className="d-flex justify-content-between align-items-center header-container p-2">
+          {/* <div className="d-flex justify-content-between align-items-center header-container p-2">
             <h6 className="m-0">Cancel</h6>
             <div className="d-flex flex-column align-items-center">
               <p className="heading">Shopcek</p>
@@ -67,7 +67,7 @@ export const Earn: React.FC = () => {
             <div className="icon-container">
               <i className="bi bi-three-dots custom-icon"></i>
             </div>
-          </div>
+          </div> */}
 
           <Container fluid className="container-custom">
             {renderSelectedComponent()}
