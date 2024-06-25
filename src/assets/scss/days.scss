@@ -79,21 +79,21 @@
     }
     .days-container {
       width: 100%;
-      .days{
+      .days {
         gap: 15px;
         .days-item {
-         width: 100px;
-         height: 100px;
- 
-         .days-title {
-           font-size: 18px;
-           font-weight: 500;
-           margin: 0px;
-         }
-         .days-logo {
-           width: 30px;
-         }
-       }
+          width: 100px;
+          height: 100px;
+
+          .days-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0px;
+          }
+          .days-logo {
+            width: 30px;
+          }
+        }
       }
     }
   }

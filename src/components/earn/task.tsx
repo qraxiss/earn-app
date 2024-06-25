@@ -11,28 +11,28 @@ export const Task = () => {
   const [tasks, setTasks] = useState([
     {
       id: 1,
-      name: "Join Our Telegram",
+      name: "Subscribe to Shopcek Telegram",
       image: Telegram,
       reward: "+10,000",
       completed: true,
     },
     {
       id: 2,
-      name: "Follow Our X Account",
+      name: "Follow Shopcek On X ",
       image: Twitter,
       reward: "+10,000",
       completed: false,
     },
     {
       id: 3,
-      name: "Join Our Discord",
+      name: "Join Shopcek Instagram ",
       image: Instagram,
       reward: "+10,000",
       completed: true,
     },
     {
       id: 4,
-      name: "Join Our Youtube",
+      name: "Follow Shopcek on YouTube",
       image: Youtube,
       reward: "+10,000",
       completed: false,
@@ -62,13 +62,13 @@ export const Task = () => {
           >
             <div className="d-flex align-items-center">
               <div>
-              <Image
-                src={task.image}
-                alt={task.name}
-                className={`follow-images ${
-                  task.name === "Follow Our X Account" ? "x-image" : ""
-                }`}
-              />
+                <Image
+                  src={task.image}
+                  alt={task.name}
+                  className={`follow-images ${
+                    task.name === "Follow Shopcek On X " ? "x-image" : ""
+                  }`}
+                />
               </div>
               <div className=" px-1 ">
                 <p className="m-0 task-heading">{task.name}</p>
