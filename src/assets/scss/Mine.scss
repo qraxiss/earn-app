@@ -43,11 +43,13 @@
     background-color: #081220;
     border-radius: 10px;
     width: 110px;
-  .earning-logo{
-    width: 10px;
-  }
+    cursor: pointer;
+
+    .earning-logo {
+      width: 10px;
+    }
     .dollar {
-      width:13px;
+      width: 13px;
     }
     .product-heading {
       text-align: center;
@@ -70,7 +72,7 @@
     }
   }
 }
-.mine-logo{
+.mine-logo {
   width: 24px;
 }
 .mine-container {
@@ -87,7 +89,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 50px 15px rgba(245, 86, 184, 0.5),
+    box-shadow:
+      0 0 50px 15px rgba(245, 86, 184, 0.5),
       0 0 50px 15px rgba(20, 197, 240, 0.5);
     font-size: 20px;
     text-align: center;

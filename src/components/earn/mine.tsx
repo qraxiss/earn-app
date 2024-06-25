@@ -15,7 +15,6 @@ import {
   realEstate,
 } from "../../Data/Products";
 
-
 export const Mine = () => {
   const selectedIcon = useSelector((state: any) => state.selectedIcon.icon);
   const dispatch = useDispatch<AppDispatch>();
@@ -67,11 +66,13 @@ export const Mine = () => {
 
       {isMobile ? (
         <>
-          <div className="mine-container my-5">
+          <div className="mine-container mt-3 mb-5">
             <h4 className="mine-start">Start Selling</h4>
           </div>
           <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
-            <h4 className="m-0"><img className="mine-logo" src={EarningLogo} alt="" /> 235.15K/h</h4>
+            <h4 className="m-0">
+              <img className="mine-logo" src={EarningLogo} alt="" /> 235.15K/h
+            </h4>
             <h4 className="m-0">04:00</h4>
           </div>
         </>
