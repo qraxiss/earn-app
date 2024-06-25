@@ -27,32 +27,52 @@
   flex-wrap: wrap;
   align-items: center;
   width: 100%;
-  gap: 20px;
+  gap: 10px;
   margin-block: 20px;
 
+  h6 {
+    font-size: 8px;
+  }
+  h5 {
+    margin-block: 2px;
+    font-size: 14px;
+  }
+
   .product {
-    width: 150px;
     border: 1px solid #737373;
     background-color: #081220;
     border-radius: 10px;
-
+    width: 110px;
+  .earning-logo{
+    width: 10px;
+  }
+    .dollar {
+      width:13px;
+    }
     .product-heading {
       text-align: center;
       margin-inline: 6px;
       border-bottom: 1px solid #737373;
-      font-size: 20px;
+      font-size: 14px;
+      width: 75px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-height: 43px;
       font-weight: 600;
       margin-bottom: 3px;
       text-wrap: wrap;
     }
     .product-image {
       width: 60px;
-      height: 60px;
+      height: 50px;
       object-fit: contain;
     }
   }
 }
-
+.mine-logo{
+  width: 24px;
+}
 .mine-container {
   display: flex;
   justify-content: center;
@@ -67,8 +87,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow:
-      0 0 50px 15px rgba(245, 86, 184, 0.5),
+    box-shadow: 0 0 50px 15px rgba(245, 86, 184, 0.5),
       0 0 50px 15px rgba(20, 197, 240, 0.5);
     font-size: 20px;
     text-align: center;
@@ -141,7 +160,7 @@
 
 @media (max-width: 768px) {
   .mine-section {
-    margin-bottom: 50px;
+    padding-block: 50px;
   }
   .heading {
     font-size: 20px;
@@ -154,16 +173,23 @@
   .earn-amount {
     font-size: 35px;
   }
+  .logo {
+    width: 20px;
+    height: auto;
+  }
   .earn-logo {
     width: 40px;
   }
-  .mine .mine-items {
-    font-size: 12px;
-    font-weight: 500;
-    padding-inline: 8px;
-    margin-inline: 0px;
-    margin-block: 0px;
-    padding-block: 10px;
+  .mine {
+    width: 100%;
+    .mine-items {
+      font-size: 12px;
+      font-weight: 500;
+      padding-inline: 8px;
+      margin-inline: 0px;
+      margin-block: 0px;
+      padding-block: 10px;
+    }
   }
   .electronics-container {
     flex-direction: column;

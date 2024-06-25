@@ -1,50 +1,46 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/images/icon.svg";
-import Iphone from "../../assets/images/Iphone.png";
+import EarningLogo from "../../assets/images/EarningLogo.png";
 import BitcoinImage from "../../assets/images/bitcoin.png";
-import Airpods from "../../assets/images/Airpods.png";
-import Amazon from "../../assets/images/AmazonEcho.png";
-import Watch from "../../assets/images/Watch.png";
+// import Amazon from "../../assets/images/AmazonEcho.png";
+// import Watch from "../../assets/images/Watch.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setIcon } from "../../slices/selected-icon/slice";
 import { AppDispatch } from "../../store/index";
 import { Image } from "react-bootstrap";
+import {
+  vehicles,
+  electronics,
+  fashion,
+  realEstate,
+} from "../../Data/Products";
 
-const productsData = [
-  {
-    name: "Apple Iphone",
-    power: 0,
-    hourlyRate: 300,
-    upgradeCost: "1.3K",
-    image: Iphone,
-  },
-  {
-    name: "Amazon Echo",
-    power: 0,
-    hourlyRate: 40,
-    upgradeCost: 400,
-    image: Amazon,
-  },
-  {
-    name: "Apple Watch Hermes",
-    power: 0,
-    hourlyRate: 50,
-    upgradeCost: 700,
-    image: Watch,
-  },
-  {
-    name: "Apple Airpods",
-    power: 0,
-    hourlyRate: 50,
-    upgradeCost: 600,
-    image: Airpods,
-  },
-];
 
 export const Mine = () => {
   const selectedIcon = useSelector((state: any) => state.selectedIcon.icon);
   const dispatch = useDispatch<AppDispatch>();
-  const handleIconClick = (icon: string) => dispatch(setIcon(icon));
+  const [selectedCategory, setSelectedCategory] = useState(electronics);
+
+  const handleIconClick = (icon: string) => {
+    console.log(icon);
+    switch (icon) {
+      case "fashion":
+        setSelectedCategory(fashion);
+        break;
+      case "vehicle":
+        setSelectedCategory(vehicles);
+        break;
+      case "electronics":
+        setSelectedCategory(electronics);
+        break;
+      case "real-estate":
+        setSelectedCategory(realEstate);
+        break;
+      default:
+        break;
+    }
+    dispatch(setIcon(icon));
+  };
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -75,7 +71,7 @@ export const Mine = () => {
             <h4 className="mine-start">Start Selling</h4>
           </div>
           <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
-            <h4 className="m-0">$ 235.15K/h</h4>
+            <h4 className="m-0"><img className="mine-logo" src={EarningLogo} alt="" /> 235.15K/h</h4>
             <h4 className="m-0">04:00</h4>
           </div>
         </>
@@ -116,16 +112,6 @@ export const Mine = () => {
           </span>
           <span
             className={`mine-items ${
-              selectedIcon === "digital" ? "selected-icon" : ""
-            }`}
-            onClick={() => {
-              handleIconClick("digital");
-            }}
-          >
-            Digital
-          </span>
-          <span
-            className={`mine-items ${
               selectedIcon === "vehicle" ? "selected-icon" : ""
             }`}
             onClick={() => {
@@ -149,15 +135,22 @@ export const Mine = () => {
 
       {isMobile ? (
         <div className="products-container">
-          {productsData.map((product) => (
+          {selectedCategory.map((product) => (
             <div
               className="d-flex justify-content-center align-items-center flex-column product"
               key={product.name}
             >
-              <p className="product-heading">{product.name}</p>
+              <p className="product-heading">
+                {product.name.length > 11
+                  ? product.name.slice(0, 11) + "..."
+                  : product.name}
+              </p>
               <div className="d-flex justify-content-between align-items-center gap-3">
                 <h6 className="">PWR {product.power}</h6>
-                <h6 className="">$ {product.hourlyRate}/h</h6>
+                <h6 className="d-flex justify-content-center align-items-center">
+                  <img className="earning-logo me-1" src={EarningLogo} alt="" />
+                  {product.price}/h
+                </h6>
               </div>
               <Image
                 src={product.image}
@@ -165,9 +158,9 @@ export const Mine = () => {
                 className="product-image"
               />
               <h5>Upgrade</h5>
-              <div className="d-flex justify-content-center align-items-center">
-                <h3 className="me-3">$</h3>
-                <h6 className="">{product.upgradeCost}</h6>
+              <div className="d-flex justify-content-center align-items-center m-2">
+                <img className="dollar me-2" src={logo} alt="" />
+                <h6 className="m-0">{product.earnings}</h6>
               </div>
             </div>
           ))}

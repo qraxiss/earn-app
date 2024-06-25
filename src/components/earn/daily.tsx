@@ -56,9 +56,10 @@ export const Daily = () => {
 
   return (
     <section className="days-section">
-      <div className="weekdays my-5">
+      <div className="weekdays mt-3 mb-5">
         <Image src={Days} alt="weekdays" className="weekdays-image" />
       </div>
+      <p className="heading my-3">DAILY REWARD</p>
       <div className="days-container my-3">
         <div className="days">
           {data.map((item, index) => (
@@ -68,11 +69,11 @@ export const Daily = () => {
                 index === activeDay - 1 ? "active" : "disabled"
               }`}
             >
-              <h4>{item.title}</h4>
+              <p className="days-title">{item.title}</p>
               <Image
                 src={item.image}
                 alt={`${item.title} reward`}
-                className="earn-logo"
+                className="days-logo"
               />
               <h4 className="heading">{item.points}</h4>
             </div>

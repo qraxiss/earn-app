@@ -32,44 +32,46 @@ export const Name = () => {
           <Image src={How} alt="howto" className="howto-image" />
         </div>
       ) : (
-        <div className="name-container my-5">
-          <Image src={NameImage} alt="Name" className="name-image" />
-        </div>
-      )}
-      <p className="heading my-3">CLAIM YOUR NAME</p>
+        <>
+          <div className="name-container my-5">
+            <Image src={NameImage} alt="Name" className="name-image" />
+          </div>
+          <p className="heading my-3">CLAIM YOUR NAME</p>
 
-      <div className="input-group mb-3 search-input">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Find What Suits You"
-          aria-label="Find What Suits You"
-        />
-        <div className="input-group-append">
-          <span className="input-group-text" id="basic-addon2">
-            <i className="bi bi-search"></i>
-          </span>
-        </div>
-      </div>
-
-      <div>
-        <button className="claim-button my-3">Claim</button>
-      </div>
-
-      <div className="list-container">
-        {nameData.map((item, index) => (
-          <div
-            key={index}
-            className="d-flex align-items-center justify-content-between my-2"
-          >
-            <h2 className="m-0 flex-1">{item.letters}</h2>
-            <div className="d-flex align-items-center flex-1">
-              <img src={logo} alt="logo" className="logo me-2" />
-              <p className="heading amount">{item.amount}</p>
+          <div className="input-group mb-3 search-input">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Find What Suits You"
+              aria-label="Find What Suits You"
+            />
+            <div className="input-group-append">
+              <span className="input-group-text" id="basic-addon2">
+                <i className="bi bi-search"></i>
+              </span>
             </div>
           </div>
-        ))}
-      </div>
+
+          <div>
+            <button className="claim-button my-3">Claim</button>
+          </div>
+
+          <div className="list-container">
+            {nameData.map((item, index) => (
+              <div
+                key={index}
+                className="d-flex align-items-center justify-content-between my-2"
+              >
+                <h2 className="m-0 flex-1">{item.letters}</h2>
+                <div className="d-flex align-items-center flex-1">
+                  <img src={logo} alt="logo" className="logo me-2" />
+                  <p className="heading amount">{item.amount}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 };
