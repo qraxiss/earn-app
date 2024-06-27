@@ -22,6 +22,7 @@ export const Earn: React.FC = () => {
   const handleIconClick = (icon: string) => {
     dispatch(setMenu(icon));
     setSelectedComponent(icon);
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {

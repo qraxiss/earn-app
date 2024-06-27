@@ -23,7 +23,7 @@
 
 .products-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
   width: 100%;
@@ -42,7 +42,7 @@
     border: 1px solid #737373;
     background-color: #081220;
     border-radius: 10px;
-    width: 110px;
+    width: 30%;
     cursor: pointer;
 
     .earning-logo {
@@ -56,14 +56,13 @@
       margin-inline: 6px;
       border-bottom: 1px solid #737373;
       font-size: 14px;
-      width: 75px;
-      white-space: nowrap;
+      width: 90px;
+      white-space: normal;
       overflow: hidden;
       text-overflow: ellipsis;
-      min-height: 43px;
-      font-weight: 600;
+      height: 43px; 
+      font-weight: 600; 
       margin-bottom: 3px;
-      text-wrap: wrap;
     }
     .product-image {
       width: 60px;
@@ -72,6 +71,46 @@
     }
   }
 }
+.buy-heading{
+  display: none;
+}
+.product {
+  position: relative;
+  min-height: 166px; /* Ensure relative positioning for absolute elements */
+}
+.image-container {
+  height: 50px;
+  width: 100%;
+  display: none !important;
+}
+.hourly-income {
+  display: none !important; 
+  padding: 2px 16px;
+  border-radius: 5px;
+  font-size: 9px !important;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.product:hover .buy-button{
+  background: #15253B;
+  transition: background 0.3s, padding 0.3s, border-radius 0.3s;
+  padding: 5px 20px;
+  border-radius: 5px;
+}
+
+.product:hover .product-image,.product:hover .pwr,.product:hover .upgrade-heading {
+  display: none !important; 
+  transition: opacity 0.5s;
+}
+
+.product:hover .hourly-income,
+.product:hover .image-container ,
+.product:hover .buy-heading{
+  display: block !important; 
+  transition: opacity 0.5s;
+}
+
 .mine-logo {
   width: 24px;
 }
@@ -79,18 +118,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+
   cursor: pointer;
 
   .mine-start {
     width: 120px;
     height: 120px;
+    border: 5px solid  #cdffd8;
     background: linear-gradient(108deg, #f556b8, #14c5f0);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow:
-      0 0 50px 15px rgba(245, 86, 184, 0.5),
+    z-index: 1;
+    box-shadow: 0 0 50px 15px rgba(245, 86, 184, 0.5),
       0 0 50px 15px rgba(20, 197, 240, 0.5);
     font-size: 20px;
     text-align: center;
@@ -160,7 +202,20 @@
     }
   }
 }
-
+@media (min-width: 650px) {
+  .products-container .product .product-image {
+    width: 110px;
+    height: 100px;
+    object-fit: contain;
+  }
+  .hourly-income{
+    font-size: 18px !important;
+  }
+  .image-container{
+    height: 68px;
+    margin-top: 20px;
+  }
+}
 @media (max-width: 768px) {
   .mine-section {
     padding-block: 50px;

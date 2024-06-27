@@ -6,9 +6,9 @@ import { Image } from "react-bootstrap";
 export const Friends = () => {
   const [copied, setCopied] = useState(false);
   const [friends, setFriends] = useState([
-    { id: 1, address: "0x95......873", reward: "50.000" },
-    { id: 2, address: "0x85......873", reward: "50.000" },
-    { id: 3, address: "0x75......873", reward: "50.000" },
+    { id: 1, username: "UserName", reward: "30.000" },
+    { id: 2, username: "UserName", reward: "30.000" },
+    { id: 3, username: "UserName", reward: "30.000" },
   ]);
 
   const handleCopy = () => {
@@ -31,7 +31,7 @@ export const Friends = () => {
           <p className="earning-title">You EARN</p>
           <div className="d-flex align-items-center">
             <img src={logo} alt="" className="menu-logo me-2" />
-            <p className="heading">50.000</p>
+            <p className="heading">30.000</p>
           </div>
         </div>
         <div className="earning">
@@ -53,7 +53,7 @@ export const Friends = () => {
         <p className="heading my-3">List of Your Friends ({friends.length})</p>
         {friends.map((friend) => (
           <div key={friend.id} className="friend-list my-3">
-            <h3>{friend.address}</h3>
+            <h4 className="m-0">{friend.username}</h4>
             <div className="d-flex align-items-center">
               <img src={logo} alt="" className="menu-logo me-2" />
               <p className="heading">{friend.reward}</p>

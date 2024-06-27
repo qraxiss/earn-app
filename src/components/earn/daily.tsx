@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../assets/images/icon.svg";
+import logo from "../../assets/images/EarningLogo.png";
 import Days from "../../assets/images/days.png";
 import { Image } from "react-bootstrap";
 
