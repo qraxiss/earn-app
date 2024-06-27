@@ -91,46 +91,50 @@ export const Mine = () => {
 
       <div className="d-flex align-items-center justify-content-center mt-3">
         <div className="d-flex justify-content-between align-items-center mine">
-          <span
-            className={`mine-items ${
+          <div
+            className={`mine-items text-center ${
               selectedIcon === "electronics" ? "selected-icon" : ""
             }`}
+            style={{ width: "25%" }}
             onClick={() => {
               handleIconClick("electronics");
             }}
           >
             Electronics
-          </span>
-          <span
-            className={`mine-items ${
+          </div>
+          <div
+            className={`mine-items text-center ${
               selectedIcon === "fashion" ? "selected-icon" : ""
             }`}
+            style={{ width: "25%" }}
             onClick={() => {
               handleIconClick("fashion");
             }}
           >
             Fashion
-          </span>
-          <span
-            className={`mine-items ${
+          </div>
+          <div
+            className={`mine-items text-center ${
               selectedIcon === "vehicle" ? "selected-icon" : ""
             }`}
+            style={{ width: "25%" }}
             onClick={() => {
               handleIconClick("vehicle");
             }}
           >
             Vehicle
-          </span>
-          <span
-            className={`mine-items ${
+          </div>
+          <div
+            className={`mine-items text-center ${
               selectedIcon === "real-estate" ? "selected-icon" : ""
             }`}
+            style={{ width: "25%" }}
             onClick={() => {
               handleIconClick("real-estate");
             }}
           >
             Real Estate
-          </span>
+          </div>
         </div>
       </div>
 
@@ -141,16 +145,12 @@ export const Mine = () => {
               className="d-flex justify-content-center align-items-center flex-column product"
               key={product.name}
             >
-              <p className="product-heading">
-                {product.name.length > 11
-                  ? product.name.slice(0, 11) + "..."
-                  : product.name}
-              </p>
-              <div className="d-flex justify-content-between align-items-center gap-3">
+              <p className="product-heading">{product.name}</p>
+              <div className="pwr d-flex justify-content-between align-items-center gap-3">
                 <h6 className="">PWR {product.power}</h6>
                 <h6 className="d-flex justify-content-center align-items-center">
                   <img className="earning-logo me-1" src={EarningLogo} alt="" />
-                  {product.price}/h
+                  {product.earnings}/h
                 </h6>
               </div>
               <Image
@@ -158,10 +158,21 @@ export const Mine = () => {
                 alt={product.name}
                 className="product-image"
               />
-              <h5>Upgrade</h5>
-              <div className="d-flex justify-content-center align-items-center m-2">
-                <img className="dollar me-2" src={logo} alt="" />
-                <h6 className="m-0">{product.earnings}</h6>
+              <div className="image-container">
+                <h6 className="hourly-income ">Hourly Rental Income</h6>
+                <h6 className="d-flex justify-content-center align-items-center">
+                  <img className="earning-logo me-1" src={EarningLogo} alt="" />
+                   + {product.earnings}/h
+                </h6>
+              </div>
+
+              <div className="buy-button d-flex  flex-column justify-content-center align-items-center m-2">
+                <h5 className="upgrade-heading">Upgrade</h5>
+                <h5 className="buy-heading">BUY</h5>
+                <div className="d-flex justify-content-center align-items-center">
+                  <img className="dollar me-2" src={logo} alt="" />
+                  <h6 className="m-0">{product.price}</h6>
+                </div>
               </div>
             </div>
           ))}

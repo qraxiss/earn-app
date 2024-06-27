@@ -7,43 +7,77 @@ import Youtube from "../../assets/images/youtube.png";
 import BlueTick from "../../assets/images/bluetick.png";
 import { Image } from "react-bootstrap";
 
-export const Task = () => {
-  const [tasks, setTasks] = useState([
+// Define the Task type
+interface Task {
+  id: number;
+  name: string;
+  image: string;
+  reward: string;
+  status: "go" | "claim";
+  completed: boolean;
+  claimed: boolean;
+}
+
+export const Task: React.FC = () => {
+  const [tasks, setTasks] = useState<Task[]>([
     {
       id: 1,
       name: "Subscribe to Shopcek Telegram",
       image: Telegram,
       reward: "+10,000",
+      status: "go", // Initially set to "go"
       completed: true,
+      claimed: false,
     },
     {
       id: 2,
       name: "Follow Shopcek On X ",
       image: Twitter,
       reward: "+10,000",
+      status: "go", // Initially set to "go"
       completed: false,
+      claimed: false,
     },
     {
       id: 3,
       name: "Join Shopcek Instagram ",
       image: Instagram,
       reward: "+10,000",
+      status: "go", // Initially set to "go"
       completed: true,
+      claimed: false,
     },
     {
       id: 4,
       name: "Follow Shopcek on YouTube",
       image: Youtube,
       reward: "+10,000",
+      status: "go", // Initially set to "go"
       completed: false,
+      claimed: false,
     },
   ]);
 
-  const handleTaskCompletion = (id: any) => {
+  const handleTaskCompletion = (id: number) => {
     setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
+      prevTasks.map((task) => {
+        if (task.id === id) {
+          if (task.status === "go") {
+            // Change status to "claim" if currently "go"
+            return {
+              ...task,
+              status: "claim",
+            };
+          } else if (task.status === "claim") {
+            // Mark task as claimed and show tick if currently "claim"
+            return {
+              ...task,
+              claimed: true,
+            };
+          }
+        }
+        return task; // Return unchanged task for other items
+      })
     );
   };
 
@@ -58,7 +92,6 @@ export const Task = () => {
           <div
             key={task.id}
             className="d-flex justify-content-between align-items-center follow-container my-1 p-2"
-            onClick={() => handleTaskCompletion(task.id)}
           >
             <div className="d-flex align-items-center">
               <div>
@@ -78,13 +111,20 @@ export const Task = () => {
                 </div>
               </div>
             </div>
-            <div>
-              {task.completed && (
+            <div className="tick-container">
+              {task.claimed ? (
                 <Image
                   src={BlueTick}
                   alt="Completed"
                   className="completed-tick"
                 />
+              ) : (
+                <button
+                  className="claim btn"
+                  onClick={() => handleTaskCompletion(task.id)}
+                >
+                  {task.status === "go" ? "Go" : "Claim"}
+                </button>
               )}
             </div>
           </div>
