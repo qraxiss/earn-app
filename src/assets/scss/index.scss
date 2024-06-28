@@ -67,21 +67,25 @@
 .navbar-mobile {
   background: #15253b;
   position: fixed;
-  bottom: 0;
+  bottom: -3px;
   width: 100%;
+  padding: 0 10px;
 
   .navbar-items-mobile {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: 800;
-    padding-inline: 10px;
-    padding-block: 8px;
-    margin-inline: 5px;
-    margin-block: 5px;
+    width: 70px;
+    // padding-inline: 7px;
+    padding-block: 6px;
+    // margin-inline: 11px;
+    margin-block: 13px;
+    position: relative;
     text-wrap: nowrap;
+    top: -12px;
     cursor: pointer;
   }
   .selected-icon {
@@ -95,10 +99,10 @@
   height: 50px;
   font-size: 20px;
   font-weight: 700;
-  background-color: #222222;
+  background-color: #15253b;
   color: white;
-  border-radius: 30px;
-  border: 1px solid #fafafa;
+  border-radius: 5px;
+  border: 1px solid #737373;
 }
 .container-custom {
   @media (min-width: 992px) {

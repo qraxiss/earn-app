@@ -46,16 +46,16 @@
     .x-image {
       filter: invert(1);
     }
-    .tick-container{
+    .tick-container {
       width: 60px;
       height: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
-      
-      .claim{
+
+      .claim {
         width: 60px;
-        height: 40px;
+        height: 35px;
         color: white;
         font-size: 14px;
         font-weight: 600;
@@ -63,14 +63,13 @@
         display: flex;
         justify-content: center;
         border: 1px solid #737373;
-        background-color: #1E3557;
+        background-color: #1e3557;
       }
       .completed-tick {
         width: 30px;
         height: 30px;
       }
     }
-
   }
 }
 
