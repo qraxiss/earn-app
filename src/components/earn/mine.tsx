@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/images/icon.svg";
 import EarningLogo from "../../assets/images/EarningLogo.png";
+import Lock from "../../assets/images/lock.png";
 import BitcoinImage from "../../assets/images/bitcoin.png";
-// import Amazon from "../../assets/images/AmazonEcho.png";
-// import Watch from "../../assets/images/Watch.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setIcon } from "../../slices/selected-icon/slice";
 import { AppDispatch } from "../../store/index";
@@ -19,6 +18,16 @@ export const Mine = () => {
   const selectedIcon = useSelector((state: any) => state.selectedIcon.icon);
   const dispatch = useDispatch<AppDispatch>();
   const [selectedCategory, setSelectedCategory] = useState(electronics);
+
+  const formatNumber = (num: number): string => {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + "m";
+    } else if (num >= 1000) {
+      return (num / 1000).toFixed(num % 1000 !== 0 ? 1 : 0) + "k";
+    } else {
+      return num.toString();
+    }
+  };
 
   const handleIconClick = (icon: string) => {
     console.log(icon);
@@ -66,12 +75,13 @@ export const Mine = () => {
 
       {isMobile ? (
         <>
-          <div className="mine-container mt-3 mb-5">
+          <div className="mine-container mt-3 mb-3">
             <h4 className="mine-start">Start Selling</h4>
           </div>
           <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
-            <h4 className="m-0">
-              <img className="mine-logo" src={EarningLogo} alt="" /> 235.15K/h
+            <h4 className="m-0 d-flex align-items-center">
+              <img className="mine-logo me-2" src={EarningLogo} alt="" />{" "}
+              235.15K/h
             </h4>
             <h4 className="m-0">04:00</h4>
           </div>
@@ -89,7 +99,7 @@ export const Mine = () => {
         </div>
       )}
 
-      <div className="d-flex align-items-center justify-content-center mt-3">
+      <div className="products-nav position-sticky top-0 z-3 d-flex align-items-center justify-content-center mt-3">
         <div className="d-flex justify-content-between align-items-center mine">
           <div
             className={`mine-items text-center ${
@@ -142,38 +152,61 @@ export const Mine = () => {
         <div className="products-container">
           {selectedCategory.map((product) => (
             <div
-              className="d-flex justify-content-center align-items-center flex-column product"
+              className={`d-flex justify-content-center align-items-center flex-column product ${product.eligible ? "product-hover" : ""}`}
               key={product.name}
             >
-              <p className="product-heading">{product.name}</p>
-              <div className="pwr d-flex justify-content-between align-items-center gap-3">
-                <h6 className="">PWR {product.power}</h6>
-                <h6 className="d-flex justify-content-center align-items-center">
-                  <img className="earning-logo me-1" src={EarningLogo} alt="" />
-                  {product.earnings}/h
-                </h6>
-              </div>
-              <Image
-                src={product.image}
-                alt={product.name}
-                className="product-image"
-              />
-              <div className="image-container">
-                <h6 className="hourly-income ">Hourly Rental Income</h6>
-                <h6 className="d-flex justify-content-center align-items-center">
-                  <img className="earning-logo me-1" src={EarningLogo} alt="" />
-                   + {product.earnings}/h
-                </h6>
-              </div>
+              <div
+                className={`d-flex justify-content-center align-items-center flex-column`}
+              >
+                <p className="product-heading">{product.name}</p>
+                <div
+                  className={`pwr d-flex justify-content-between align-items-center gap-3 ${!product.eligible ? "opacity-50" : ""}`}
+                >
+                  <h6 className="">PWR {product.power}</h6>
+                  <h6 className="d-flex justify-content-center align-items-center">
+                    <img
+                      className="earning-logo me-1"
+                      src={EarningLogo}
+                      alt=""
+                    />
+                    {formatNumber(product.earnings)}/h
+                  </h6>
+                </div>
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  className={`product-image ${!product.eligible ? "opacity-50" : ""}`}
+                />
 
-              <div className="buy-button d-flex  flex-column justify-content-center align-items-center m-2">
-                <h5 className="upgrade-heading">Upgrade</h5>
-                <h5 className="buy-heading">BUY</h5>
-                <div className="d-flex justify-content-center align-items-center">
-                  <img className="dollar me-2" src={logo} alt="" />
-                  <h6 className="m-0">{product.price}</h6>
+                <div className="image-container">
+                  <h6 className="hourly-income">Hourly Rental Income</h6>
+                  <h6 className="d-flex justify-content-center align-items-center">
+                    <img
+                      className="earning-logo me-1"
+                      src={EarningLogo}
+                      alt=""
+                    />
+                    + {formatNumber(product.earnings)}/h
+                  </h6>
+                </div>
+
+                <div
+                  className={`buy-button d-flex flex-column justify-content-center align-items-center ${!product.eligible ? "opacity-0" : ""}`}
+                >
+                  <h5 className="buy-heading">BUY</h5>
+                  <div className="m-1 d-flex justify-content-center align-items-center">
+                    <img className="dollar me-2" src={logo} alt="" />
+                    <h6 className="m-0">{formatNumber(product.price)}</h6>
+                  </div>
                 </div>
               </div>
+
+              {!product.eligible && (
+                <div className="lock">
+                  <Image src={Lock} />
+                  <h5>Invite +1 more friends</h5>
+                </div>
+              )}
             </div>
           ))}
         </div>

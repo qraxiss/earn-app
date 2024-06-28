@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import logo from "../../assets/images/icon.svg";
 import Frens from "../../assets/images/frens.png";
+import Copy from "../../assets/images/Copy.png";
 import { Image } from "react-bootstrap";
 
 export const Friends = () => {

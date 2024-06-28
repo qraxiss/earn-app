@@ -76,51 +76,51 @@ export const Earn: React.FC = () => {
 
           <div className="d-flex align-items-center justify-content-center pt-5">
             <div className="d-flex justify-content-between align-items-center navbar-mobile">
-              <span
-                className={`navbar-items-mobile ${
-                  selectedMenu === "daily" ? "selected-icon" : ""
-                }`}
-                onClick={() => handleIconClick("daily")}
-              >
-                <img src={DaysImage} alt="" className="menu-logo" />
-                Daily
-              </span>
-              <span
-                className={`navbar-items-mobile ${
-                  selectedMenu === "frens" ? "selected-icon" : ""
-                }`}
-                onClick={() => handleIconClick("frens")}
-              >
-                <img src={FrensImage} alt="" className="menu-logo" />
-                Frens
-              </span>
-              <span
-                className={`navbar-items-mobile ${
-                  selectedMenu === "mine" ? "selected-icon" : ""
-                }`}
-                onClick={() => handleIconClick("mine")}
-              >
-                <img src={Store} alt="" className="menu-logo" />
-                My Store
-              </span>
-              <span
-                className={`navbar-items-mobile ${
-                  selectedMenu === "task" ? "selected-icon" : ""
-                }`}
-                onClick={() => handleIconClick("task")}
-              >
-                <img src={TaskImage} alt="" className="menu-logo" />
-                Task
-              </span>
-              <span
-                className={`navbar-items-mobile ${
-                  selectedMenu === "name" ? "selected-icon" : ""
-                }`}
-                onClick={() => handleIconClick("name")}
-              >
-                <img src={How} alt="" className="menu-logo" />
-                How
-              </span>
+              <div className="flex-fill text-center">
+                <span
+                  className={`navbar-items-mobile ${selectedMenu === "daily" ? "selected-icon" : ""}`}
+                  onClick={() => handleIconClick("daily")}
+                >
+                  <img src={DaysImage} alt="" className="menu-logo" />
+                  Daily
+                </span>
+              </div>
+              <div className="flex-fill text-center">
+                <span
+                  className={`navbar-items-mobile ${selectedMenu === "frens" ? "selected-icon" : ""}`}
+                  onClick={() => handleIconClick("frens")}
+                >
+                  <img src={FrensImage} alt="" className="menu-logo" />
+                  Frens
+                </span>
+              </div>
+              <div className="flex-fill text-center">
+                <span
+                  className={`navbar-items-mobile ${selectedMenu === "mine" ? "selected-icon" : ""}`}
+                  onClick={() => handleIconClick("mine")}
+                >
+                  <img src={Store} alt="" className="menu-logo" />
+                  My Store
+                </span>
+              </div>
+              <div className="flex-fill text-center">
+                <span
+                  className={`navbar-items-mobile ${selectedMenu === "task" ? "selected-icon" : ""}`}
+                  onClick={() => handleIconClick("task")}
+                >
+                  <img src={TaskImage} alt="" className="menu-logo" />
+                  Task
+                </span>
+              </div>
+              <div className="flex-fill text-center">
+                <span
+                  className={`navbar-items-mobile ${selectedMenu === "name" ? "selected-icon" : ""}`}
+                  onClick={() => handleIconClick("name")}
+                >
+                  <img src={How} alt="" className="menu-logo" />
+                  How
+                </span>
+              </div>
             </div>
           </div>
         </>
