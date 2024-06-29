@@ -196,7 +196,7 @@ export const Mine = () => {
                   <h5 className="buy-heading">BUY</h5>
                   <div className="m-1 d-flex justify-content-center align-items-center">
                     <img className="dollar me-2" src={logo} alt="" />
-                    <h6 className="m-0">{formatNumber(product.price)}</h6>
+                    <h4 className="m-0">{formatNumber(product.price)}</h4>
                   </div>
                 </div>
               </div>

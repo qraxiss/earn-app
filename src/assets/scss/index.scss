@@ -10,6 +10,9 @@
 @import "./name.scss";
 @import "./task.scss";
 
+body {
+  background-color: #0b182b;
+}
 .header-container {
   background-color: black;
   cursor: pointer;
@@ -31,7 +34,7 @@
 }
 
 .header {
-  background-color: #0a1628;
+  background-color: #0b182b;
   min-height: 100vh;
   color: white;
 }
@@ -97,7 +100,7 @@
 .claim-button {
   width: 250px;
   height: 50px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   background-color: #15253b;
   color: white;
