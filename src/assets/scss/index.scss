@@ -10,8 +10,10 @@
 @import "./name.scss";
 @import "./task.scss";
 
-body {
+body,
+html {
   background-color: #0b182b;
+  overscroll-behavior: none;
 }
 .header-container {
   background-color: black;
