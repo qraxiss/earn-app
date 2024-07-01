@@ -4,6 +4,8 @@ import { Earn } from "./pages/earn";
 
 import eruda from "eruda";
 
+import { MainButton } from "@twa-dev/sdk/react";
+
 function App() {
   eruda.init();
 
@@ -12,6 +14,12 @@ function App() {
   return (
     <div>
       <Earn />
+      <MainButton
+        text="test"
+        onClick={() => {
+          alert((window as any).Telegram);
+        }}
+      ></MainButton>
     </div>
   );
 }
