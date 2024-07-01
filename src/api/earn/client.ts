@@ -1,9 +1,10 @@
 import axios from "axios";
-
-axios.defaults.headers.common["Telegram-Data"] = (
-  window as any
-)?.Telegram?.WebApp?.initData;
+import WebApp from "@twa-dev/sdk";
 
 export default axios.create({
-  baseURL: "http://127.0.0.1:1338/api",
+  baseURL: "https://api.shopcek.com/earn/api",
+  headers: {
+    "Telegram-Data": WebApp.initData,
+  },
+  withCredentials: true,
 });

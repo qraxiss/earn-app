@@ -1,5 +1,4 @@
 import eruda from "eruda";
-import WebApp from "@twa-dev/sdk";
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
@@ -9,7 +8,6 @@ import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./store/index";
 
 eruda.init();
-console.log("first mount", WebApp);
 
 const AppWrapper = () => {
   useEffect(() => {
