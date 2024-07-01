@@ -6,7 +6,7 @@ const client = axios.create({
 });
 
 export async function login() {
-  const res = await client.post("/auth/telegram", {
+  const res = await client.post("/telegram/auth", {
     service: "earn",
     botUsername: "orospucocugu_bot",
     initData: WebApp.initData,
