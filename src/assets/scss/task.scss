@@ -5,6 +5,9 @@
   align-items: center;
   flex-direction: column;
 
+  .task {
+    width: 100%;
+  }
   .task-container {
     width: 99px;
     height: 90px;
@@ -13,7 +16,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 50px 15px rgba(245, 86, 184, 0.5),
+    box-shadow:
+      0 0 50px 15px rgba(245, 86, 184, 0.5),
       0 0 50px 15px rgba(20, 197, 240, 0.5);
 
     .task-image {
@@ -23,10 +27,10 @@
 
   .follow-container {
     width: 600px;
-    border: 1px solid #fafafa;
-    border-radius: 15px;
-    background-color: black;
-    height: 80px;
+    border: 1px solid #737373;
+    border-radius: 5px;
+    background-color: #081220;
+    height: 90px;
     cursor: pointer;
 
     .follow-images {
@@ -35,33 +39,66 @@
       margin-inline: 15px;
     }
     .task-heading {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 700;
     }
 
     .x-image {
       filter: invert(1);
     }
+    .tick-container {
+      width: 60px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    .completed-tick {
-      width: 30px;
-      height: 30px;
+      .claim {
+        width: 60px;
+        height: 35px;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        border: 1px solid #737373;
+        background-color: #1e3557;
+      }
+      .completed-tick {
+        width: 30px;
+        height: 30px;
+      }
     }
   }
 }
 
 @media (max-width: 768px) {
-  .task-section .follow-container {
-    width: 100%;
-    gap: 50px;
-    .follow-images {
-      width: 50px;
-      height: 40px;
-      margin-inline: 10px;
+  .task-section {
+    .task-container {
+      width: 70px;
+      height: 70px;
+      .task-image {
+        width: 80px;
+      }
     }
-    .task-heading {
-      font-size: 16px;
-      font-weight: 600;
+    padding-block: 50px;
+    .follow-container {
+      width: 100%;
+      height: 70px;
+      .follow-images {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        margin-inline: 10px;
+      }
+      .task-heading {
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .reward {
+        font-size: 14px;
+      }
     }
   }
 }

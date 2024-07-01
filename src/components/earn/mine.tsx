@@ -1,134 +1,265 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../assets/images/icon.svg";
+import EarningLogo from "../../assets/images/EarningLogo.png";
+import Lock from "../../assets/images/lock.png";
 import BitcoinImage from "../../assets/images/bitcoin.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setIcon } from "../../slices/selected-icon/slice";
 import { AppDispatch } from "../../store/index";
-import { MainButton } from "@twa-dev/sdk/react";
+import { Image } from "react-bootstrap";
+import {
+  vehicles,
+  electronics,
+  fashion,
+  realEstate,
+} from "../../Data/Products";
 
 export const Mine = () => {
   const selectedIcon = useSelector((state: any) => state.selectedIcon.icon);
   const dispatch = useDispatch<AppDispatch>();
-  const handleIconClick = (icon: string) => dispatch(setIcon(icon));
+  const [selectedCategory, setSelectedCategory] = useState(electronics);
+
+  const formatNumber = (num: number): string => {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + "m";
+    } else if (num >= 1000) {
+      return (num / 1000).toFixed(num % 1000 !== 0 ? 1 : 0) + "k";
+    } else {
+      return num.toString();
+    }
+  };
+
+  const handleIconClick = (icon: string) => {
+    console.log(icon);
+    switch (icon) {
+      case "fashion":
+        setSelectedCategory(fashion);
+        break;
+      case "vehicle":
+        setSelectedCategory(vehicles);
+        break;
+      case "electronics":
+        setSelectedCategory(electronics);
+        break;
+      case "real-estate":
+        setSelectedCategory(realEstate);
+        break;
+      default:
+        break;
+    }
+    dispatch(setIcon(icon));
+  };
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
-    <section className="">
-      <MainButton
-        text="TestButton"
-        onClick={() =>
-          alert(JSON.stringify((window as any).Telegram.WebApp.initData))
-        }
-      ></MainButton>
+    <section className="mine-section">
       <div className="d-flex align-items-center justify-content-center">
-        <div className="mt-2 d-flex align-items-center">
-          <img src={logo} alt="" className="earn-logo me-2" />
+        <div className="my-3 d-flex align-items-center">
+          <Image src={logo} alt="" className="earn-logo me-2" />
           <p className="earn-amount">9,000,000</p>
         </div>
       </div>
-      <div className="d-flex align-items-center justify-content-center mt-5">
-        <div className="farming">
-          <div className="d-flex align-items-center">
-            <img src={logo} alt="" className="logo me-2" />
-            <h3 className="m-0">940.60K</h3>
+
+      {isMobile ? (
+        <>
+          <div className="mine-container mt-3 mb-3">
+            <h4 className="mine-start">Start Selling</h4>
           </div>
-          <p className="heading">Farming</p>
-          <h4>4h 00m</h4>
+          <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <h4 className="m-0 d-flex align-items-center">
+              <img className="mine-logo me-2" src={EarningLogo} alt="" />{" "}
+              235.15K/h
+            </h4>
+            <h4 className="m-0">04:00</h4>
+          </div>
+        </>
+      ) : (
+        <div className="d-flex align-items-center justify-content-center mt-5">
+          <div className="farming">
+            <div className="d-flex align-items-center">
+              <img src={logo} alt="" className="logo me-2" />
+              <h3 className="m-0">940.60K</h3>
+            </div>
+            <p className="heading">Farming</p>
+            <h4>4h 00m</h4>
+          </div>
         </div>
-      </div>
-      <div className="d-flex align-items-center justify-content-center mt-5">
+      )}
+
+      <div className="products-nav position-sticky top-0 z-3 d-flex align-items-center justify-content-center mt-3">
         <div className="d-flex justify-content-between align-items-center mine">
-          <span
-            className={`mine-items ${
+          <div
+            className={`mine-items text-center ${
               selectedIcon === "electronics" ? "selected-icon" : ""
             }`}
+            style={{ width: "25%" }}
             onClick={() => {
               handleIconClick("electronics");
             }}
           >
             Electronics
-          </span>
-          <span
-            className={`mine-items ${
+          </div>
+          <div
+            className={`mine-items text-center ${
               selectedIcon === "fashion" ? "selected-icon" : ""
             }`}
+            style={{ width: "25%" }}
             onClick={() => {
               handleIconClick("fashion");
             }}
           >
             Fashion
-          </span>
-          <span
-            className={`mine-items ${
-              selectedIcon === "digital" ? "selected-icon" : ""
-            }`}
-            onClick={() => {
-              handleIconClick("digital");
-            }}
-          >
-            Digital
-          </span>
-          <span
-            className={`mine-items ${
+          </div>
+          <div
+            className={`mine-items text-center ${
               selectedIcon === "vehicle" ? "selected-icon" : ""
             }`}
+            style={{ width: "25%" }}
             onClick={() => {
               handleIconClick("vehicle");
             }}
           >
             Vehicle
-          </span>
-          <span
-            className={`mine-items ${
+          </div>
+          <div
+            className={`mine-items text-center ${
               selectedIcon === "real-estate" ? "selected-icon" : ""
             }`}
+            style={{ width: "25%" }}
             onClick={() => {
               handleIconClick("real-estate");
             }}
           >
             Real Estate
-          </span>
-        </div>
-      </div>
-      <div className="electronics-container mt-5">
-        <div className="electronics mx-3">
-          <div className="d-flex align-items-center electronics-body">
-            <img src={BitcoinImage} alt="" className="bitcoin-image" />
-            <div>
-              <h3 className="border-bottom py-2 m-0">New Era Baseball Cap</h3>
-              <div className="d-flex align-items-center">
-                <img src={logo} alt="" className="logo me-2" />
-                <h3 className="m-0 py-2">200 / h</h3>
-              </div>
-            </div>
-          </div>
-          <div className="d-flex justify-content-center align-content-center px-4 pb-3">
-            <p className="heading px-2">PWR 22</p>
-            <div className="d-flex align-items-center border-start px-2">
-              <img src={logo} alt="" className="logo me-2" />
-              <p className="heading">189.5K</p>
-            </div>
-          </div>
-        </div>
-        <div className="electronics mx-3">
-          <div className="d-flex align-items-center electronics-body">
-            <img src={BitcoinImage} alt="" className="bitcoin-image" />
-            <div>
-              <h3 className="border-bottom py-2 m-0">New Era Baseball Cap</h3>
-              <div className="d-flex align-items-center">
-                <img src={logo} alt="" className="logo me-2" />
-                <h3 className="m-0 py-2">200 / h</h3>
-              </div>
-            </div>
-          </div>
-          <div className="d-flex justify-content-center align-content-center px-4 pb-3">
-            <p className="heading px-2">PWR 22</p>
-            <div className="d-flex align-items-center border-start px-2">
-              <img src={logo} alt="" className="logo me-2" />
-              <p className="heading">189.5K</p>
-            </div>
           </div>
         </div>
       </div>
+
+      {isMobile ? (
+        <div className="products-container">
+          {selectedCategory.map((product) => (
+            <div
+              className={`d-flex justify-content-center align-items-center flex-column product ${
+                product.eligible ? "product-hover" : ""
+              }`}
+              key={product.name}
+            >
+              <div
+                className={`d-flex justify-content-center align-items-center flex-column`}
+              >
+                <p className="product-heading">{product.name}</p>
+                <div
+                  className={`pwr d-flex justify-content-between align-items-center gap-3 ${
+                    !product.eligible ? "opacity-50" : ""
+                  }`}
+                >
+                  <h6 className="">PWR {product.power}</h6>
+                  <h6 className="d-flex justify-content-center align-items-center">
+                    <img
+                      className="earning-logo me-1"
+                      src={EarningLogo}
+                      alt=""
+                    />
+                    {formatNumber(product.earnings)}/h
+                  </h6>
+                </div>
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  className={`product-image ${
+                    !product.eligible ? "opacity-50" : ""
+                  }`}
+                />
+
+                <div className="image-container">
+                  <h6 className="hourly-income">Hourly Rental Income</h6>
+                  <h6 className="d-flex justify-content-center align-items-center">
+                    <img
+                      className="earning-logo me-1"
+                      src={EarningLogo}
+                      alt=""
+                    />
+                    + {formatNumber(product.earnings)}/h
+                  </h6>
+                </div>
+
+                <div
+                  className={`buy-button d-flex flex-column justify-content-center align-items-center ${
+                    !product.eligible ? "opacity-0" : ""
+                  }`}
+                >
+                  <h5 className="buy-heading">BUY</h5>
+                  <div className="m-1 d-flex justify-content-center align-items-center">
+                    <img className="dollar me-2" src={logo} alt="" />
+                    <h4 className="m-0">{formatNumber(product.price)}</h4>
+                  </div>
+                </div>
+              </div>
+
+              {!product.eligible && (
+                <div className="lock">
+                  <Image src={Lock} />
+                  <h5>Invite +1 more friends</h5>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="electronics-container mt-5">
+          <div className="electronics mx-3">
+            <div className="d-flex align-items-center electronics-body">
+              <Image src={BitcoinImage} alt="" className="bitcoin-image" />
+              <div>
+                <h3 className="border-bottom py-2 m-0">New Era Baseball Cap</h3>
+                <div className="d-flex align-items-center">
+                  <Image src={logo} alt="" className="logo me-2" />
+                  <h3 className="m-0 py-2">200 / h</h3>
+                </div>
+              </div>
+            </div>
+            <div className="d-flex justify-content-center align-content-center px-4 pb-3">
+              <p className="heading px-2">PWR 22</p>
+              <div className="d-flex align-items-center border-start px-2">
+                <Image src={logo} alt="" className="logo me-2" />
+                <p className="heading">189.5K</p>
+              </div>
+            </div>
+          </div>
+          <div className="electronics mx-3">
+            <div className="d-flex align-items-center electronics-body">
+              <Image src={BitcoinImage} alt="" className="bitcoin-image" />
+              <div>
+                <h3 className="border-bottom py-2 m-0">New Era Baseball Cap</h3>
+                <div className="d-flex align-items-center">
+                  <Image src={logo} alt="" className="logo me-2" />
+                  <h3 className="m-0 py-2">200 / h</h3>
+                </div>
+              </div>
+            </div>
+            <div className="d-flex justify-content-center align-content-center px-4 pb-3">
+              <p className="heading px-2">PWR 22</p>
+              <div className="d-flex align-items-center border-start px-2">
+                <Image src={logo} alt="" className="logo me-2" />
+                <p className="heading">189.5K</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

@@ -18,27 +18,44 @@
       cursor: pointer;
 
       .days-item {
-        width: 170px;
-        height: 190px;
-        border: 1px solid #fafafa;
-        background-color: black;
+        width: 150px;
+        height: 180px;
+        border: 1px solid #737373;
+        background-color: #081220;
         justify-content: center;
-        border-radius: 15px;
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 10px;
+        opacity: 0.5;
+
+        .days-title {
+          font-size: 24px;
+          font-weight: 700;
+        }
+
+        .days-logo {
+          width: 50px;
+        }
       }
     }
 
     .days-item.active {
-      background-color: black;
-      cursor: pointer;
+      background-color: #081220;
+      opacity: 1;
+      border: 1px solid transparent; /* Transparent border for active day */
+      border-image: linear-gradient(
+        to right,
+        #0097b2,
+        #7ed957
+      ); /* Linear gradient border */
+      border-image-slice: 1;
+      border-radius: 10px; /* Apply border-radius */
     }
 
-    .days-item.disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
+    .days-item.active + .days-item {
+      opacity: 1;
+      background-color: #1e3557;
     }
   }
 
@@ -58,11 +75,198 @@
   }
 }
 
+.lucky-Item {
+  border: 1px solid #5c63f9;
+  width: 65%;
+  height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .luckyItem-image {
+    width: 150px;
+    height: 130px;
+  }
+}
+
+.trivia-question {
+  width: 80%;
+  height: 25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent; /* Transparent border for active day */
+  border-image: linear-gradient(to right, #0097b2, #7ed957);
+  border-image-slice: 1;
+  padding: 10px;
+
+  .options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding-inline: 20px;
+  }
+
+  .option-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    border: 1px solid transparent;
+    border-image: linear-gradient(to right, #0097b2, #7ed957);
+    border-image-slice: 1;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+}
+.daily-card {
+  position: relative;
+  display: flex;
+  background-color: #081220;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 18px;
+  width: 32%;
+  height: 150px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.daily-card.panel-open {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.not-completed {
+  border: 1px solid #737373;
+}
+.completed::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  padding: 1.8px;
+  background: linear-gradient(45deg, #0097b2, #7ed957);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.daily-card h5 {
+  font-weight: 400;
+}
+.daily-card img {
+  width: 55%;
+}
+.dot {
+  display: flex;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  background-color: #fff;
+  right: 7px;
+  top: 6px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.white-dot {
+  display: flex;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  background-color: #fff;
+  right: 7px;
+  top: 6px;
+  height: 10px;
+  border-radius: 50%;
+  animation: blink 1s infinite; /* Apply the blink animation */
+}
+
+/* Keyframes for the blinking effect */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  } /* Start and end state */
+  50% {
+    opacity: 0;
+  } /* Mid state */
+}
+.slide-up-panel {
+  position: fixed;
+  bottom: -72%;
+  left: 0;
+  width: 100%;
+  height: 72%;
+  background-color: #0b182b;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-top: 2px solid #13c5f0;
+  transition: bottom 0.3s ease-in-out;
+  z-index: 1050;
+}
+
+.slide-up-panel.show {
+  bottom: 0;
+}
+
+.slide-up-panel.daily-login {
+  border-top-color: #13c5f0;
+}
+
+.slide-up-panel.lucky-item {
+  border-top-color: #5c63f9;
+}
+
+.slide-up-panel.trivia-quest {
+  border-top-color: #7ed957;
+}
+
+.panel-body {
+  overflow-y: auto;
+}
+
+.close {
+  color: gray;
+  position: absolute;
+  right: 15px;
+  top: 11px;
+  font-size: 20px;
+  cursor: pointer;
+}
 @media (max-width: 768px) {
-  .days-section .days-container {
-    width: 100%;
-    .days .days-item {
-      width: 150px;
+  .days-section {
+    padding-top: 40px;
+    padding-bottom: 50px;
+    .weekdays {
+      width: 70px;
+      height: 70px;
+      .weekdays-image {
+        width: 120px;
+      }
+    }
+    .days-container {
+      width: 100%;
+      .days {
+        gap: 10px;
+        .days-item {
+          width: 30%;
+          height: 90px;
+
+          .days-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0px;
+          }
+          .days-logo {
+            width: 30px;
+          }
+        }
+      }
     }
   }
 }

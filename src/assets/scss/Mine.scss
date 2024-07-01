@@ -21,8 +21,157 @@
   height: auto;
 }
 
+.products-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  margin-block: 20px;
+
+  h6 {
+    font-size: 14px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+  h5 {
+    margin-block: 2px;
+    font-size: 14px;
+  }
+
+  .product {
+    border: 1px solid #737373;
+    background-color: #081220;
+    border-radius: 5px;
+    width: 48%;
+    padding: 5px;
+    min-height: 210px;
+    cursor: pointer;
+
+    .earning-logo {
+      width: 15px;
+    }
+    .dollar {
+      width: 24px;
+    }
+    .product-heading {
+      text-align: center;
+      margin-inline: 6px;
+      border-bottom: 1px solid #737373;
+      font-size: 18px;
+      width: 90px;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: 50px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .product-image {
+      width: 100px;
+      height: 90px;
+      object-fit: contain;
+    }
+  }
+}
+.lock {
+  position: absolute;
+  bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lock img {
+  width: 90px;
+  height: 90px;
+}
+.lock h5 {
+  width: 100px;
+  text-align: center;
+}
+.buy-heading {
+  display: none;
+}
+.product {
+  position: relative;
+}
+.image-container {
+  height: 72px;
+  width: 100%;
+  display: none !important;
+  margin-block: 5px;
+}
+.hourly-income {
+  display: none !important;
+  padding: 2px 16px;
+  border-radius: 5px;
+  font-size: 16px !important;
+  margin-top: 5px;
+  text-align: center;
+}
+.product-hover:hover {
+  justify-content: space-between !important;
+}
+.product-hover:hover .buy-button {
+  background: #15253b;
+  transition:
+    background 0.3s,
+    padding 0.3s,
+    border-radius 0.3s;
+  padding: 5px 30px;
+  border-radius: 5px;
+  border: 1px solid #737373;
+}
+
+.product-hover:hover .product-image,
+.product-hover:hover .pwr,
+.product-hover:hover .upgrade-heading {
+  display: none !important;
+  transition: opacity 0.5s;
+}
+
+.product-hover:hover .hourly-income,
+.product-hover:hover .image-container,
+.product-hover:hover .buy-heading {
+  display: block !important;
+  transition: opacity 0.5s;
+}
+
+.mine-logo {
+  width: 24px;
+}
+.mine-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  cursor: pointer;
+
+  .mine-start {
+    width: 120px;
+    height: 120px;
+    border: 5px solid #cdffd8;
+    background: linear-gradient(108deg, #f556b8, #14c5f0);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    box-shadow:
+      0 0 50px 15px rgba(245, 86, 184, 0.5),
+      0 0 50px 15px rgba(20, 197, 240, 0.5);
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
 .farming {
-  border: 1px solid #fafafa;
+  border: 1px solid #737373;
   background-color: black;
   border-radius: 40px;
   gap: 5px;
@@ -37,8 +186,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #fafafa;
-  border-radius: 10px;
+  border: 1px solid #737373;
+  border-radius: 5px;
 
   .mine-items {
     font-size: 28px;
@@ -50,9 +199,8 @@
     text-wrap: nowrap;
   }
   .selected-icon {
-    background-color: black;
-    border-radius: 10px;
-    border: 1px solid #fafafa;
+    background-color: #1e3557;
+    border-radius: 5px;
   }
 }
 
@@ -84,28 +232,57 @@
     }
   }
 }
+.products-nav {
+  background-color: #0a1628;
+}
 
+@media (min-width: 650px) {
+  .products-container .product .product-image {
+    width: 110px;
+    height: 100px;
+    object-fit: contain;
+  }
+  .hourly-income {
+    font-size: 18px !important;
+  }
+  .image-container {
+    height: 68px;
+    margin-top: 20px;
+  }
+}
 @media (max-width: 768px) {
+  .mine-section {
+    padding-bottom: 50px;
+    padding-top: 20px;
+  }
   .heading {
     font-size: 20px;
     font-weight: 800;
   }
   .menu-logo {
     width: 25px;
+    height: 25px;
   }
   .earn-amount {
     font-size: 35px;
   }
+  .logo {
+    width: 20px;
+    height: auto;
+  }
   .earn-logo {
     width: 40px;
   }
-  .mine .mine-items {
-    font-size: 12px;
-    font-weight: 500;
-    padding-inline: 7px;
-    margin-inline: 0px;
-    margin-block: 5px;
-    padding-block: 5px;
+  .mine {
+    width: 100%;
+    .mine-items {
+      font-size: 12px;
+      font-weight: 500;
+      padding-inline: 8px;
+      margin-inline: 0px;
+      margin-block: 0px;
+      padding-block: 10px;
+    }
   }
   .electronics-container {
     flex-direction: column;
