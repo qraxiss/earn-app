@@ -1,10 +1,23 @@
 import axios from "axios";
-import WebApp from "@twa-dev/sdk";
+import { responseWrapper } from "../helpers/axios";
 
-export default axios.create({
-  baseURL: "https://api.shopcek.com/earn/api",
-  headers: {
-    "Telegram-Data": WebApp.initData,
-  },
+const client = axios.create({
+  baseURL: "http://localhost:1338/api",
   withCredentials: true,
 });
+
+export async function login(jwt: string) {
+  const res = await client.post("/auth/jwt", {
+    jwt,
+  });
+
+  return responseWrapper(res);
+}
+
+export async function logout() {
+  const res = await client.post("/auth/logout");
+
+  return responseWrapper(res);
+}
+
+export default client;
