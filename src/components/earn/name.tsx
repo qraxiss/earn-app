@@ -29,12 +29,11 @@ export const Name = () => {
     <section className="name-section">
       {isMobile ? (
         <>
-        <div className="howto-container my-5">
-          <Image src={How} alt="howto" className="howto-image" />
-        </div>
-        <p className="heading my-3">HOW TO USE</p>
+          <div className="howto-container my-5">
+            <Image src={How} alt="howto" className="howto-image" />
+          </div>
+          <p className="heading my-3">HOW TO USE</p>
         </>
-
       ) : (
         <>
           <div className="name-container my-5">

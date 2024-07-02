@@ -60,7 +60,7 @@
     margin-bottom: 20px;
   }
 
-  .icon{
+  .icon {
     width: 40px;
     margin-top: 20px;
   }
@@ -71,19 +71,19 @@
 }
 
 .content-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 5px; 
-    padding: 1px; 
-    box-sizing: border-box;
-    background: linear-gradient(to bottom, #13C5F0, #F556B7);
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: destination-out;
-            mask-composite: exclude; /* For Chrome/Safari */
-  }
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  padding: 1px;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom, #13c5f0, #f556b7);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude; /* For Chrome/Safari */
+}

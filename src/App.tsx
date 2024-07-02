@@ -17,9 +17,7 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div>
         {isLoading ? <Loading /> : <Earn />}
-      </div>
     </ErrorBoundary>
   );
 }
