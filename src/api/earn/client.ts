@@ -1,23 +1,26 @@
 import axios from "axios";
-import { responseWrapper } from "../helpers/axios";
-
+import config from "../../config";
 const client = axios.create({
-  baseURL: "http://localhost:1338/api",
+  baseURL: config.earnUrl,
   withCredentials: true,
 });
 
-export async function login(jwt: string) {
-  const res = await client.post("/auth/jwt", {
-    jwt,
-  });
+// client.interceptors.request.use(
+//   (config) => {
+//     return config;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 
-  return responseWrapper(res);
-}
-
-export async function logout() {
-  const res = await client.post("/auth/logout");
-
-  return responseWrapper(res);
-}
+// client.interceptors.response.use(
+//   (response) => {
+//     return response.data;
+//   },
+//   (error) => {
+//     return Promise.reject(error);
+//   }
+// );
 
 export default client;

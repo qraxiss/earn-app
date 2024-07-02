@@ -34,7 +34,7 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    loginSucess(state: initialState, action: PayloadAction<user>) {
+    loginSuccess(state: initialState, action: PayloadAction<user>) {
       state.data.logged = true;
       state.loading = false;
       state.data.user = action.payload;
@@ -47,7 +47,7 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    logoutSucess(state: initialState) {
+    logoutSuccess(state: initialState) {
       state.data.logged = false;
       state.loading = false;
       state.data.user = null;
@@ -57,10 +57,10 @@ const authSlice = createSlice({
 
 export const {
   loginStart,
-  loginSucess,
+  loginSuccess,
   loginFailure,
   logoutFailure,
   logoutStart,
-  logoutSucess,
+  logoutSuccess,
 } = authSlice.actions;
 export default authSlice.reducer;

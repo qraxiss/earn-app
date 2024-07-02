@@ -1,12 +1,12 @@
 import {
   loginStart,
   loginFailure,
-  loginSucess,
+  loginSuccess,
   logoutFailure,
   logoutStart,
-  logoutSucess,
+  logoutSuccess,
 } from "./slice";
-import { login as loginEarn, logout } from "../../api/earn/client";
+import { login as loginEarn, logout } from "../../api/earn/auth";
 import { login as loginAuth } from "../../api/auth/client";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -16,13 +16,15 @@ export const loginAsync = createAsyncThunk(
     try {
       dispatch(loginStart());
       const { jwt } = await loginAuth();
+      const data = await dispatch(loginEarn.initiate({ jwt }));
+      console.log("data", data);
       const {
-        data: { success },
-      } = await loginEarn(jwt);
-      console.log(success);
-      if (success) {
+        data: { status },
+      } = data;
+
+      if (status == true) {
         dispatch(
-          loginSucess({
+          loginSuccess({
             username: "qraxiss",
           })
         );
@@ -42,10 +44,10 @@ export const logoutAsync = createAsyncThunk(
       dispatch(logoutStart());
       const {
         data: { status },
-      } = await logout();
+      } = await dispatch(logout.initiate({}));
 
-      if (status) {
-        dispatch(logoutSucess());
+      if (status == true) {
+        dispatch(logoutSuccess());
       } else {
         dispatch(logoutFailure("Logout failed!"));
       }
