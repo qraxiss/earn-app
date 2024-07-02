@@ -339,13 +339,13 @@ export const Daily = () => {
                   <div className="trivia-question my-3">
                     {dailyData[2]?.questions?.[currentQuestionIndex] && (
                       <div className="question-container">
-                        <h5 className="my-3">
+                        <h6 className="my-3">
                           {
                             dailyData[2].questions[currentQuestionIndex]
                               .question
                           }
-                        </h5>
-                        <div className="options my-4">
+                        </h6>
+                        <div className="options my-3">
                           {dailyData[2].questions[
                             currentQuestionIndex
                           ].options.map((option, idx) => (
