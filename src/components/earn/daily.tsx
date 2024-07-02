@@ -231,7 +231,20 @@ export const Daily = () => {
             >
               {activeTask === "login" && (
                 <>
-                  <h5 className="my-3">Daily Log-In</h5>
+                  <div className="d-flex align-items-center w-100">
+                    <h5
+                      className="my-3 flex-grow-1 text-center"
+                      style={{ marginRight: "-25px" }}
+                    >
+                      Daily Log-In
+                    </h5>
+                    <span
+                      onClick={() => handleClosePanel(null)}
+                      className="close cursor-pointer d-flex align-items-center justify-content-end"
+                    >
+                      <i className="bi bi-x-circle"></i>
+                    </span>
+                  </div>{" "}
                   <p className="w-75 ">
                     Complete your daily logins & Boost your earnings!
                   </p>
@@ -253,12 +266,6 @@ export const Daily = () => {
                             className="days-logo"
                           />
                           <h4 className="heading">{item.points}</h4>
-                          <span
-                            onClick={() => handleClosePanel(null)}
-                            className="close"
-                          >
-                            <i className="bi bi-x-circle"></i>
-                          </span>
                         </div>
                       ))}
                       <div>
@@ -275,7 +282,20 @@ export const Daily = () => {
               )}
               {activeTask === "luckyItem" && (
                 <>
-                  <h5 className="my-3">Lucky Item</h5>
+                  <div className="d-flex align-items-center w-100">
+                    <h5
+                      className="my-3 flex-grow-1 text-center"
+                      style={{ marginRight: "-25px" }}
+                    >
+                      Lucky Item
+                    </h5>
+                    <span
+                      onClick={() => handleClosePanel(null)}
+                      className="close cursor-pointer d-flex align-items-center justify-content-end"
+                    >
+                      <i className="bi bi-x-circle"></i>
+                    </span>
+                  </div>
                   <p className="w-75 m-0">
                     Find the Lucky Item of the day & Earn extra coins!
                   </p>
@@ -295,30 +315,37 @@ export const Daily = () => {
                       {claim ? "Come back tomorrow!" : "Claim"}
                     </button>
                   </div>
-                  <span
-                    onClick={() => handleClosePanel(null)}
-                    className="close"
-                  >
-                    <i className="bi bi-x-circle"></i>
-                  </span>
                 </>
               )}
               {activeTask === "triviaQuest" && (
                 <>
-                  <h5 className="my-3">Trivia Quest</h5>
+                  <div className="d-flex align-items-center w-100">
+                    <h5
+                      className="my-3 flex-grow-1 text-center"
+                      style={{ marginRight: "-25px" }}
+                    >
+                      Trivia Quest
+                    </h5>
+                    <span
+                      onClick={() => handleClosePanel(null)}
+                      className="close cursor-pointer d-flex align-items-center justify-content-end"
+                    >
+                      <i className="bi bi-x-circle"></i>
+                    </span>
+                  </div>{" "}
                   <p className="w-75 m-0">
                     Take on today's trivia and earn rewards!
                   </p>
                   <div className="trivia-question my-3">
                     {dailyData[2]?.questions?.[currentQuestionIndex] && (
                       <div className="question-container">
-                        <h5 className="my-3">
+                        <h6 className="my-3">
                           {
                             dailyData[2].questions[currentQuestionIndex]
                               .question
                           }
-                        </h5>
-                        <div className="options my-4">
+                        </h6>
+                        <div className="options my-3">
                           {dailyData[2].questions[
                             currentQuestionIndex
                           ].options.map((option, idx) => (
@@ -345,12 +372,6 @@ export const Daily = () => {
                       {claim ? "Come back tomorrow!" : "Claim"}
                     </button>
                   </div>
-                  <span
-                    onClick={() => handleClosePanel(null)}
-                    className="close"
-                  >
-                    <i className="bi bi-x-circle"></i>
-                  </span>
                 </>
               )}
             </SlideUpPanel>

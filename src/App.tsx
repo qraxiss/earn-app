@@ -1,31 +1,21 @@
+import React, { useState, useEffect } from "react";
 import "./assets/scss/index.scss";
 import { Earn } from "./pages/earn";
-import { loginAsync, logoutAsync } from "./slices/auth/thunk";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "./store";
+import ErrorBoundary from "./components/ErrorBoundry";
+import Loading from "./components/Loading";
+
 function App() {
-  const dispatch: AppDispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
-  return (
-    <div>
-      <button
-        onClick={async () => {
-          await dispatch(loginAsync());
-        }}
-      >
-        login
-      </button>
-      <button
-        onClick={async () => {
-          await dispatch(logoutAsync());
-        }}
-      >
-        logout
-      </button>
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
 
-      {/* <Earn /> */}
-    </div>
-  );
+    return () => clearTimeout(timer);
+  }, []);
+
+  return <ErrorBoundary>{isLoading ? <Loading /> : <Earn />}</ErrorBoundary>;
 }
 
 export default App;

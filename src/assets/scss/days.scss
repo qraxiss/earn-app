@@ -28,6 +28,7 @@
         align-items: center;
         padding: 10px;
         opacity: 0.5;
+        border-radius: 5px;
 
         .days-title {
           font-size: 24px;
@@ -41,16 +42,29 @@
     }
 
     .days-item.active {
+      position: relative;
       background-color: #081220;
       opacity: 1;
-      border: 1px solid transparent; /* Transparent border for active day */
-      border-image: linear-gradient(
-        to right,
-        #0097b2,
-        #7ed957
-      ); /* Linear gradient border */
-      border-image-slice: 1;
-      border-radius: 10px; /* Apply border-radius */
+      border-radius: 5px;
+      border: none;
+    }
+
+    .days-item.active::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      padding: 2px;
+      box-sizing: border-box;
+      background: linear-gradient(to right, #0097b2, #7ed957);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude; /* For Chrome/Safari */
     }
 
     .days-item.active + .days-item {
@@ -77,6 +91,7 @@
 
 .lucky-Item {
   border: 1px solid #5c63f9;
+  border-radius: 5px;
   width: 65%;
   height: 25vh;
   display: flex;
@@ -95,10 +110,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid transparent; /* Transparent border for active day */
-  border-image: linear-gradient(to right, #0097b2, #7ed957);
-  border-image-slice: 1;
+  position: relative;
   padding: 10px;
+  border-radius: 15px;
 
   .options {
     display: grid;
@@ -111,15 +125,51 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2px;
+    padding: 5px;
     border: 1px solid transparent;
-    border-image: linear-gradient(to right, #0097b2, #7ed957);
-    border-image-slice: 1;
-    border-radius: 5px;
+    position: relative;
     cursor: pointer;
     text-align: center;
+    border-radius: 5px;
+  }
+
+  .option-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    padding: 2px;
+    box-sizing: border-box;
+    background: linear-gradient(to right, #0097b2, #7ed957);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
   }
 }
+
+.trivia-question::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px; /* Same border-radius as .trivia-question */
+  padding: 2px; /* Space between the border and the content */
+  box-sizing: border-box;
+  background: linear-gradient(to right, #0097b2, #7ed957);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
 .daily-card {
   position: relative;
   display: flex;
@@ -191,17 +241,17 @@
   0%,
   100% {
     opacity: 1;
-  } /* Start and end state */
+  }
   50% {
     opacity: 0;
-  } /* Mid state */
+  }
 }
 .slide-up-panel {
   position: fixed;
-  bottom: -72%;
+  bottom: -75%;
   left: 0;
   width: 100%;
-  height: 72%;
+  height: 75%;
   background-color: #0b182b;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
@@ -232,11 +282,9 @@
 
 .close {
   color: gray;
-  position: absolute;
-  right: 15px;
-  top: 11px;
   font-size: 20px;
   cursor: pointer;
+  margin-right: 10px;
 }
 @media (max-width: 768px) {
   .days-section {

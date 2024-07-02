@@ -18,6 +18,9 @@ export const Mine = () => {
   const selectedIcon = useSelector((state: any) => state.selectedIcon.icon);
   const dispatch = useDispatch<AppDispatch>();
   const [selectedCategory, setSelectedCategory] = useState(electronics);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isSellingStarted, setIsSellingStarted] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(14400);
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) {
@@ -49,7 +52,34 @@ export const Mine = () => {
     }
     dispatch(setIcon(icon));
   };
-  const [isMobile, setIsMobile] = useState(false);
+
+  const startSelling = () => {
+    setIsSellingStarted(true);
+    setTimeLeft(14400);
+  };
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isSellingStarted && timeLeft > 0) {
+      interval = setInterval(() => {
+        setTimeLeft((prevTime) => prevTime - 1);
+      }, 1000);
+    } else if (timeLeft === 0) {
+      setIsSellingStarted(false);
+      document.body.style.backgroundColor = "#FF92FF";
+    }
+
+    return () => clearInterval(interval);
+  }, [isSellingStarted, timeLeft]);
+
+  const formatTime = (seconds: number): string => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+    return `${hours}:${minutes < 10 ? "0" : ""}${minutes}:${
+      remainingSeconds < 10 ? "0" : ""
+    }${remainingSeconds}`;
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -66,28 +96,46 @@ export const Mine = () => {
 
   return (
     <section className="mine-section">
-      <div className="d-flex align-items-center justify-content-center">
-        <div className="my-3 d-flex align-items-center">
-          <Image src={logo} alt="" className="earn-logo me-2" />
-          <p className="earn-amount">9,000,000</p>
-        </div>
-      </div>
-
       {isMobile ? (
         <>
-          <div className="mine-container mt-3 mb-3">
-            <h4 className="mine-start">Start Selling</h4>
-          </div>
           <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
             <h4 className="m-0 d-flex align-items-center">
               <img className="mine-logo me-2" src={EarningLogo} alt="" />{" "}
               235.15K/h
             </h4>
-            <h4 className="m-0">04:00</h4>
+            {isSellingStarted ? (
+              <h4 className="m-0">{formatTime(timeLeft)}</h4>
+            ) : (
+              <h4 className="m-0">04:00</h4>
+            )}
+          </div>
+          <div className="mt-3">
+            {!isSellingStarted ? (
+              <h4 className="mine-start m-0" onClick={startSelling}>
+                Start Selling
+              </h4>
+            ) : (
+              <h4 className="mine-start started m-0">
+                <div className="fill-animation"></div>
+                Sales Started
+              </h4>
+            )}
+          </div>
+          <div className="d-flex align-items-center justify-content-center border-bottom">
+            <div className="my-4 d-flex align-items-center">
+              <Image src={logo} alt="" className="earn-logo me-2" />
+              <p className="earn-amount">9,000,000</p>
+            </div>
           </div>
         </>
       ) : (
-        <div className="d-flex align-items-center justify-content-center mt-5">
+        <div className="d-flex flex-column align-items-center mt-5">
+          <div className="d-flex align-items-center justify-content-center">
+            <div className="my-3 d-flex align-items-center">
+              <Image src={logo} alt="" className="earn-logo me-2" />
+              <p className="earn-amount">9,000,000</p>
+            </div>
+          </div>
           <div className="farming">
             <div className="d-flex align-items-center">
               <img src={logo} alt="" className="logo me-2" />
@@ -152,9 +200,7 @@ export const Mine = () => {
         <div className="products-container">
           {selectedCategory.map((product) => (
             <div
-              className={`d-flex justify-content-center align-items-center flex-column product ${
-                product.eligible ? "product-hover" : ""
-              }`}
+              className={`d-flex justify-content-center align-items-center flex-column product product-hover`}
               key={product.name}
             >
               <div
@@ -173,7 +219,7 @@ export const Mine = () => {
                       src={EarningLogo}
                       alt=""
                     />
-                    {formatNumber(product.earnings)}/h
+                    {formatNumber(product.power)} /h
                   </h6>
                 </div>
                 <Image
@@ -192,17 +238,26 @@ export const Mine = () => {
                       src={EarningLogo}
                       alt=""
                     />
-                    + {formatNumber(product.earnings)}/h
+                    + {formatNumber(product.earnings)} /h
                   </h6>
                 </div>
 
                 <div
-                  className={`buy-button d-flex flex-column justify-content-center align-items-center ${
-                    !product.eligible ? "opacity-0" : ""
-                  }`}
+                  className={`buy-button d-flex flex-column justify-content-center align-items-center`}
                 >
-                  <h5 className="buy-heading">BUY</h5>
-                  <div className="m-1 d-flex justify-content-center align-items-center">
+                  <div className="d-flex align-items-center gap-2">
+                    <h5 className="buy-heading">BUY</h5>
+                    {!product.eligible ? (
+                      <Image src={Lock} className="buy-lock" />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div
+                    className={`m-1 d-flex justify-content-center align-items-center ${
+                      !product.eligible ? "price-container" : ""
+                    }`}
+                  >
                     <img className="dollar me-2" src={logo} alt="" />
                     <h4 className="m-0">{formatNumber(product.price)}</h4>
                   </div>

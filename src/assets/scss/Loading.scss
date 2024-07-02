@@ -1,0 +1,133 @@
+.Loading-container {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.Loading-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.Loading-content-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 90vh;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.Loading-content {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100vh;
+}
+
+.loader-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  width: 150px;
+  aspect-ratio: 1;
+  display: grid;
+  border-radius: 50%;
+  background:
+    linear-gradient(0deg, #155f71 30%, #0000 0 70%, #13c5f0 0) 50% / 8% 100%,
+    linear-gradient(90deg, #155f71 30%, #0000 0 70%, #13c5f0 0) 50% / 100% 8%;
+  background-repeat: no-repeat;
+  animation: l23 1s infinite steps(12);
+  position: absolute; /* Ensure loader stays behind the logo */
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.915;
+  transform: rotate(30deg);
+}
+.loader::after {
+  opacity: 0.83;
+  transform: rotate(60deg);
+}
+
+.logo-container {
+  position: relative;
+  width: 50px;
+  z-index: 1;
+}
+
+.Loading-logo {
+  width: 70%;
+  animation: blink 1s infinite;
+}
+.sub-text {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 70px;
+  color: white;
+}
+
+.Loading-footer-logo {
+  width: 150px;
+  margin-top: 20px;
+  position: fixed;
+  top: 60px;
+}
+
+.Loading-content-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  padding: 2px;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom, #13c5f0, #f556b7);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+@keyframes l23 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}

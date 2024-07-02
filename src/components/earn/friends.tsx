@@ -27,7 +27,7 @@ export const Friends = () => {
       </div>
       <p className="heading my-3">INVITE FRIENDS</p>
 
-      <div className="gap-2 my-2 earning-container ">
+      <div className="gap-2 my-2 earning-container">
         <div className="earning">
           <p className="earning-title">You EARN</p>
           <div className="d-flex align-items-center">
@@ -50,10 +50,10 @@ export const Friends = () => {
         </button>
       </div>
 
-      <div>
+      <div className="friend-list-container">
         <p className="heading my-3">List of Your Friends ({friends.length})</p>
         {friends.map((friend) => (
-          <div key={friend.id} className="friend-list my-3">
+          <div key={friend.id} className="friend-list my-2">
             <h4 className="m-0">{friend.username}</h4>
             <div className="d-flex align-items-center">
               <img src={logo} alt="" className="menu-logo me-2" />

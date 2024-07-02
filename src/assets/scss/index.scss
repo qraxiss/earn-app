@@ -9,12 +9,22 @@
 @import "./frens.scss";
 @import "./name.scss";
 @import "./task.scss";
+@import "./Error.scss";
+@import "./Loading.scss";
 
 body,
 html {
   background-color: #0b182b;
   overscroll-behavior: none;
+  height: 100%;
+  overflow: hidden;
 }
+#root {
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .header-container {
   background-color: black;
   cursor: pointer;
@@ -72,7 +82,7 @@ html {
 .navbar-mobile {
   background: #15253b;
   position: fixed;
-  bottom: -3px;
+  bottom: -5px;
   width: 100%;
   padding: 0 10px;
 
