@@ -7,7 +7,7 @@ import FrensImage from "../../assets/images/frens.png";
 import MineImage from "../../assets/images/mine.png";
 import NameImage from "../../assets/images/name.webp";
 import TaskImage from "../../assets/images/task.png";
-import How from "../../assets/images/how.png";
+import Rank from "../../assets/images/RankLogo.png";
 import Store from "../../assets/images/store.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setMenu } from "../../slices/selected-menu/slice";
@@ -117,8 +117,8 @@ export const Earn: React.FC = () => {
                   className={`navbar-items-mobile ${selectedMenu === "name" ? "selected-icon" : ""}`}
                   onClick={() => handleIconClick("name")}
                 >
-                  <img src={How} alt="" className="menu-logo" />
-                  How
+                  <img src={Rank} alt="" className="menu-logo" />
+                  Rank
                 </span>
               </div>
             </div>
