@@ -179,7 +179,7 @@
 .mine-start {
   width: 100%;
   height: 50px;
-  border: 1px solid #c2c2c2;
+  border: 2px solid #c2c2c2;
   background: linear-gradient(108deg, #ff92ff, #5c63f9);
   display: flex;
   border-radius: 5px;
@@ -195,6 +195,19 @@
 
 .mine-start.started {
   background: none;
+  overflow: hidden;
+}
+
+.mine-start::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .fill-animation {
@@ -204,7 +217,7 @@
   width: 0;
   height: 100%;
   background: linear-gradient(108deg, #ff92ff, #5c63f9);
-  border-radius: 3px;
+  z-index: 1;
   animation: fillBackground 14400s linear forwards; /* 4 hours = 14400 seconds */
 }
 
@@ -235,6 +248,7 @@
   align-items: center;
   border: 1px solid #737373;
   border-radius: 5px;
+  background-color: #0b182b;
 
   .mine-items {
     font-size: 28px;

@@ -62,8 +62,25 @@ export const Task: React.FC = () => {
     setTasks((prevTasks) =>
       prevTasks.map((task) => {
         if (task.id === id) {
-          if (task.status === "go") {
-            // Change status to "claim" if currently "go"
+          if (task.status === "go" || task.claimed === true) {
+            // Alert based on the task ID
+            switch (id) {
+              case 1:
+                window.open("https://t.me/Shopcek", "_blank");
+                break;
+              case 2:
+                window.open("https://x.com/shopcek", "_blank");
+                break;
+              case 3:
+                window.open("https://instagram.com/shopcekcom", "_blank");
+                break;
+              case 4:
+                window.open("https://youtube.com/@shopcek", "_blank");
+                break;
+              default:
+                break;
+            }
+
             return {
               ...task,
               status: "claim",
@@ -91,6 +108,7 @@ export const Task: React.FC = () => {
         {tasks.map((task) => (
           <div
             key={task.id}
+            onClick={() => handleTaskCompletion(task.id)}
             className="d-flex justify-content-between align-items-center follow-container my-1 p-2"
           >
             <div className="d-flex align-items-center">
@@ -119,10 +137,7 @@ export const Task: React.FC = () => {
                   className="completed-tick"
                 />
               ) : (
-                <button
-                  className="claim btn"
-                  onClick={() => handleTaskCompletion(task.id)}
-                >
+                <button className="claim btn">
                   {task.status === "go" ? "Go" : "Claim"}
                 </button>
               )}

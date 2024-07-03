@@ -3,7 +3,7 @@ import IconImage from "../../src/assets/images/icon.svg";
 import ErrorBg from "../../src/assets/images/errorbg.png";
 import Shopcek from "../../src/assets/images/Shopcek.png";
 
-const Error = () => {
+const Loading = () => {
   return (
     <div className="Loading-container">
       <div
@@ -12,11 +12,6 @@ const Error = () => {
       ></div>
       <div className="Loading-content-container">
         <div className="Loading-content">
-          <img
-            src={Shopcek}
-            alt="Shopgeek Logo"
-            className="Loading-footer-logo"
-          />
           <div className="loader-container">
             <div className="loader"></div>
             <div className="logo-container">
@@ -34,4 +29,4 @@ const Error = () => {
   );
 };
 
-export default Error;
+export default Loading;

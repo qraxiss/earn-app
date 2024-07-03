@@ -33,7 +33,6 @@ export const Mine = () => {
   };
 
   const handleIconClick = (icon: string) => {
-    console.log(icon);
     switch (icon) {
       case "fashion":
         setSelectedCategory(fashion);
@@ -204,12 +203,12 @@ export const Mine = () => {
               <div
                 className={`d-flex justify-content-center align-items-center flex-column`}
               >
-                <p className="product-heading">{product.name}</p>
+                <p className="product-heading  mt-2">{product.name}</p>
                 <div
-                  className={`pwr d-flex justify-content-between align-items-center gap-3 ${!product.eligible ? "opacity-50" : ""}`}
+                  className={`pwr d-flex justify-content-between align-items-center gap-3 mb-2  ${!product.eligible ? "opacity-50" : ""}`}
                 >
-                  <h6 className="">PWR {product.power}</h6>
-                  <h6 className="d-flex justify-content-center align-items-center">
+                  <h6 className="m-0">PWR {product.power}</h6>
+                  <h6 className="d-flex justify-content-center align-items-center m-0">
                     <img
                       className="earning-logo me-1"
                       src={EarningLogo}
@@ -224,7 +223,7 @@ export const Mine = () => {
                   className={`product-image ${!product.eligible ? "opacity-50" : ""}`}
                 />
 
-                <div className="image-container">
+                <div className="image-container my-2">
                   <h6 className="hourly-income">Hourly Rental Income</h6>
                   <h6 className="d-flex justify-content-center align-items-center">
                     <img
@@ -237,7 +236,7 @@ export const Mine = () => {
                 </div>
 
                 <div
-                  className={`buy-button d-flex flex-column justify-content-center align-items-center`}
+                  className={`buy-button d-flex flex-column justify-content-center align-items-center my-2`}
                 >
                   <div className="d-flex align-items-center gap-2">
                     <h5 className="buy-heading">BUY</h5>
@@ -257,8 +256,8 @@ export const Mine = () => {
               </div>
 
               {!product.eligible && (
-                <div className="lock">
-                  <Image src={Lock} />
+                <div className="lock my-2">
+                  <Image src={Lock} className="my-2" />
                   <h5>Invite +1 more friends</h5>
                 </div>
               )}
