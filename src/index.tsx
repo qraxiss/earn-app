@@ -31,11 +31,11 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <ReduxProvider store={store}>
-      <AppWrapper />
-    </ReduxProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <ReduxProvider store={store}>
+    <AppWrapper />
+  </ReduxProvider>
+  // </React.StrictMode>
 );
 
 reportWebVitals();

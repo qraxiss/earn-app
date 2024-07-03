@@ -1,14 +1,14 @@
-import config from "../../config";
+import config from "../config";
 
 import axios from "axios";
 // import WebApp from "@twa-dev/sdk";
 
-const client = axios.create({
+const authClient = axios.create({
   baseURL: config.authUrl,
 });
 
 export async function login() {
-  const res = await client.post("/telegram/auth", {
+  const res = await authClient.post("/telegram/auth", {
     service: "earn",
     botUsername: "orospucocugubot_bot",
     initData:
@@ -18,4 +18,4 @@ export async function login() {
   return res.data;
 }
 
-export default client;
+export default authClient;

@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { combineReducers } from "@reduxjs/toolkit";
 import rootReducer from "../slices";
-import apiReducer from "../api";
+import apiMiddlewares from "../slices/middlewares";
 
 export const store = configureStore({
-  reducer: combineReducers({
-    app: rootReducer,
-    api: apiReducer,
-  }),
+  reducer: rootReducer,
+
   devTools: true,
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(...apiMiddlewares) as ReturnType<
+      typeof getDefaultMiddleware
+    >;
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

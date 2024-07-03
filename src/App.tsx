@@ -1,19 +1,32 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./assets/scss/index.scss";
 import { Earn } from "./pages/earn";
 import ErrorBoundary from "./components/ErrorBoundry";
 import Loading from "./components/Loading";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "./store";
+import { loginAsync, logoutAsync } from "./slices/thunk";
+import { cards, xp } from "./slices/api";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
+  const dispatch: AppDispatch = useDispatch();
+  let promise: Promise<any>;
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
+    (async () => {
+      await dispatch(logoutAsync());
+      await dispatch(loginAsync());
+      promise = Promise.all([
+        dispatch(xp.initiate({})),
+        dispatch(cards.initiate({})),
+      ]);
 
-    return () => clearTimeout(timer);
+      promise.then(() => {
+        setIsLoading(false);
+      });
+    })();
   }, []);
+
+  const [isLoading, setIsLoading] = useState(true);
 
   return <ErrorBoundary>{isLoading ? <Loading /> : <Earn />}</ErrorBoundary>;
 }

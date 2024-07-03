@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import { RootState } from "../../store";
 const initialState = {
   data: {
     logged: false,
@@ -23,7 +23,7 @@ type initialState = {
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: "auth/app",
   initialState,
   reducers: {
     loginStart(state: initialState) {
@@ -63,4 +63,7 @@ export const {
   logoutStart,
   logoutSuccess,
 } = authSlice.actions;
+
+export const authSelector = (state: RootState) => state["auth/app"];
+
 export default authSlice.reducer;

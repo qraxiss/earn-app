@@ -4,26 +4,25 @@ export default ({ client }: { client: AxiosInstance }) =>
   ({ baseUrl } = { baseUrl: "" }) =>
   async ({ url, method, data, params, headers }: any) => {
     try {
-      const result = await client({
+      const response = await client({
         url: baseUrl + url,
         method,
         data,
         params,
         headers,
       });
-      console.log(result.data);
-      return result.data;
+      const result = response.data.data;
+      console.info(response.config.url, result);
+      return { data: result };
     } catch (axiosError: any) {
       const err = axiosError;
-      console.log({
+      const error = {
         status: err.response?.status,
-        data: err.response?.data || err.message,
-      });
+        data: err.response?.data.error.message || err.message,
+      };
+      console.info(err.config.url, error);
       return {
-        error: {
-          status: err.response?.status,
-          data: err.response?.data || err.message,
-        },
+        error,
       };
     }
   };

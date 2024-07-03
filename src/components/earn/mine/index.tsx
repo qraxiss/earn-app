@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../assets/images/icon.svg";
-import EarningLogo from "../../assets/images/EarningLogo.png";
-import Lock from "../../assets/images/lock.png";
-import BitcoinImage from "../../assets/images/bitcoin.png";
+import logo from "../../../assets/images/icon.svg";
+import EarningLogo from "../../../assets/images/EarningLogo.png";
+import BitcoinImage from "../../../assets/images/bitcoin.png";
 import { useDispatch, useSelector } from "react-redux";
-import { setIcon } from "../../slices/selected-icon/slice";
-import { AppDispatch } from "../../store/index";
+import { setIcon } from "../../../slices/selected-icon/slice";
+import { AppDispatch } from "../../../store/index";
 import { Image } from "react-bootstrap";
-import {
-  vehicles,
-  electronics,
-  fashion,
-  realEstate,
-} from "../../Data/Products";
+import Product from "./product";
+import { useCardsQuery, useXpQuery } from "../../../slices/api";
 
 export const Mine = () => {
+  const xp = useXpQuery({});
+  const cards = useCardsQuery({});
   const selectedIcon = useSelector((state: any) => state.selectedIcon.icon);
   const dispatch = useDispatch<AppDispatch>();
-  const [selectedCategory, setSelectedCategory] = useState(electronics);
+  const [selectedCategory, setSelectedCategory] = useState([] as any[]);
   const [isMobile, setIsMobile] = useState(false);
   const [isSellingStarted, setIsSellingStarted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(14400);
@@ -33,23 +30,14 @@ export const Mine = () => {
   };
 
   const handleIconClick = (icon: string) => {
-    console.log(icon);
-    switch (icon) {
-      case "fashion":
-        setSelectedCategory(fashion);
-        break;
-      case "vehicle":
-        setSelectedCategory(vehicles);
-        break;
-      case "electronics":
-        setSelectedCategory(electronics);
-        break;
-      case "real-estate":
-        setSelectedCategory(realEstate);
-        break;
-      default:
-        break;
-    }
+    console.log(selectedCategory);
+    setSelectedCategory(
+      cards.data
+        .filter((item: any) => {
+          return item.info.category === icon;
+        })
+        .map((item: any) => ({ ...item }))
+    );
     dispatch(setIcon(icon));
   };
 
@@ -101,7 +89,7 @@ export const Mine = () => {
           <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
             <h4 className="m-0 d-flex align-items-center">
               <img className="mine-logo me-2" src={EarningLogo} alt="" />{" "}
-              235.15K/h
+              {formatNumber(Math.round(xp.data.earn))}/h
             </h4>
             {isSellingStarted ? (
               <h4 className="m-0">{formatTime(timeLeft)}</h4>
@@ -124,7 +112,9 @@ export const Mine = () => {
           <div className="d-flex align-items-center justify-content-center border-bottom">
             <div className="my-4 d-flex align-items-center">
               <Image src={logo} alt="" className="earn-logo me-2" />
-              <p className="earn-amount">9,000,000</p>
+              <p className="earn-amount">
+                {formatNumber(Math.round(xp.data.point))}
+              </p>
             </div>
           </div>
         </>
@@ -133,7 +123,9 @@ export const Mine = () => {
           <div className="d-flex align-items-center justify-content-center">
             <div className="my-3 d-flex align-items-center">
               <Image src={logo} alt="" className="earn-logo me-2" />
-              <p className="earn-amount">9,000,000</p>
+              <p className="earn-amount">
+                {formatNumber(Math.round(xp.data.point))}
+              </p>
             </div>
           </div>
           <div className="farming">
@@ -199,78 +191,7 @@ export const Mine = () => {
       {isMobile ? (
         <div className="products-container">
           {selectedCategory.map((product) => (
-            <div
-              className={`d-flex justify-content-center align-items-center flex-column product product-hover`}
-              key={product.name}
-            >
-              <div
-                className={`d-flex justify-content-center align-items-center flex-column`}
-              >
-                <p className="product-heading">{product.name}</p>
-                <div
-                  className={`pwr d-flex justify-content-between align-items-center gap-3 ${
-                    !product.eligible ? "opacity-50" : ""
-                  }`}
-                >
-                  <h6 className="">PWR {product.power}</h6>
-                  <h6 className="d-flex justify-content-center align-items-center">
-                    <img
-                      className="earning-logo me-1"
-                      src={EarningLogo}
-                      alt=""
-                    />
-                    {formatNumber(product.power)} /h
-                  </h6>
-                </div>
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  className={`product-image ${
-                    !product.eligible ? "opacity-50" : ""
-                  }`}
-                />
-
-                <div className="image-container">
-                  <h6 className="hourly-income">Hourly Rental Income</h6>
-                  <h6 className="d-flex justify-content-center align-items-center">
-                    <img
-                      className="earning-logo me-1"
-                      src={EarningLogo}
-                      alt=""
-                    />
-                    + {formatNumber(product.earnings)} /h
-                  </h6>
-                </div>
-
-                <div
-                  className={`buy-button d-flex flex-column justify-content-center align-items-center`}
-                >
-                  <div className="d-flex align-items-center gap-2">
-                    <h5 className="buy-heading">BUY</h5>
-                    {!product.eligible ? (
-                      <Image src={Lock} className="buy-lock" />
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                  <div
-                    className={`m-1 d-flex justify-content-center align-items-center ${
-                      !product.eligible ? "price-container" : ""
-                    }`}
-                  >
-                    <img className="dollar me-2" src={logo} alt="" />
-                    <h4 className="m-0">{formatNumber(product.price)}</h4>
-                  </div>
-                </div>
-              </div>
-
-              {!product.eligible && (
-                <div className="lock">
-                  <Image src={Lock} />
-                  <h5>Invite +1 more friends</h5>
-                </div>
-              )}
-            </div>
+            <Product product={product}></Product>
           ))}
         </div>
       ) : (
