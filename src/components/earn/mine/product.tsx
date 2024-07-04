@@ -113,7 +113,7 @@ export default function Product({
             <h6 className="hourly-income">Hourly Rental Income</h6>
             <h6 className="d-flex justify-content-center align-items-center">
               <img className="earning-logo me-1" src={EarningLogo} alt="" />+{" "}
-              {formatNumber(info.totalProfit)} /h
+              {formatNumber(upgrade.profit)} /h
             </h6>
           </div>
 
