@@ -16,8 +16,9 @@ export const buyCardAsync = createAsyncThunk(
       dispatch(buyCardStart());
       const { data } = await dispatch(buy.initiate({ cardId }));
       if (data) {
-        const { refetch } = dispatch(cards.initiate({}));
-        await refetch();
+        const { refetch: cardsRefetch } = dispatch(cards.initiate({}));
+        const { refetch: xpRefetch } = dispatch(xp.initiate({}));
+        await Promise.all([cardsRefetch(), xpRefetch()]);
         dispatch(buyCardSuccess());
       }
     } catch (error: any) {

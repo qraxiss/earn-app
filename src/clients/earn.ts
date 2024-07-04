@@ -8,7 +8,6 @@ const earnClient = axios.create({
 earnClient.interceptors.request.use(
   function (config) {
     const jwt = getStore().getState()["auth/app"].data.jwt;
-    console.log(jwt);
     config.headers.Authorization = `Bearer ${jwt}`;
     return config;
   },

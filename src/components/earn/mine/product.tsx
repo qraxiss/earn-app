@@ -3,6 +3,10 @@ import EarningLogo from "../../../assets/images/EarningLogo.png";
 import Lock from "../../../assets/images/lock.png";
 import logo from "../../../assets/images/icon.svg";
 
+import { buyCardAsync, upgradeCardAsync } from "../../../slices/thunk";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../store";
+
 const formatNumber = (num: number): string => {
   if (num >= 1000000) {
     return (num / 1000000).toFixed(1) + "m";
@@ -16,6 +20,8 @@ const formatNumber = (num: number): string => {
 export default function Product({
   product: { info, status, upgrade, buy },
 }: any) {
+  const dispatch: AppDispatch = useDispatch();
+
   if (!status.buyed) {
     return (
       <div
@@ -34,7 +40,7 @@ export default function Product({
             <h6 className="">PWR {status.level}</h6>
             <h6 className="d-flex justify-content-center align-items-center">
               <img className="earning-logo me-1" src={EarningLogo} alt="" />
-              {formatNumber(status.level)} /h
+              {formatNumber(info.totalProfit)} /h
             </h6>
           </div>
           <Image
@@ -47,12 +53,15 @@ export default function Product({
             <h6 className="hourly-income">Hourly Rental Income</h6>
             <h6 className="d-flex justify-content-center align-items-center">
               <img className="earning-logo me-1" src={EarningLogo} alt="" />+{" "}
-              {formatNumber(info.totalProfit)} /h
+              {formatNumber(buy.profit)} /h
             </h6>
           </div>
 
           <div
             className={`buy-button d-flex flex-column justify-content-center align-items-center`}
+            onClick={() => {
+              dispatch(buyCardAsync({ cardId: info.id }));
+            }}
           >
             <div className="d-flex align-items-center gap-2">
               <h5 className="buy-heading">BUY</h5>
@@ -95,7 +104,7 @@ export default function Product({
             <h6 className="">PWR {status.level}</h6>
             <h6 className="d-flex justify-content-center align-items-center">
               <img className="earning-logo me-1" src={EarningLogo} alt="" />
-              {formatNumber(status.level)} /h
+              {formatNumber(info.totalProfit)} /h
             </h6>
           </div>
           <Image src={info.image} alt={info.name} className={`product-image`} />
@@ -110,9 +119,12 @@ export default function Product({
 
           <div
             className={`buy-button d-flex flex-column justify-content-center align-items-center`}
+            onClick={() => {
+              dispatch(upgradeCardAsync({ cardId: info.id }));
+            }}
           >
             <div className="d-flex align-items-center gap-2">
-              <h5 className="buy-heading">BUY</h5>
+              <h5 className="buy-heading">UPGRADE</h5>
               {status.locked ? <Image src={Lock} className="buy-lock" /> : ""}
             </div>
             <div
