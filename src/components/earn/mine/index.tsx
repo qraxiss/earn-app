@@ -30,7 +30,6 @@ export const Mine = () => {
   };
 
   const handleIconClick = (icon: string) => {
-    console.log(selectedCategory);
     setSelectedCategory(
       cards.data
         .filter((item: any) => {

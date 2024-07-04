@@ -4,7 +4,7 @@ export default ({ client }: { client: AxiosInstance }) =>
   ({ baseUrl } = { baseUrl: "" }) =>
   async ({ url, method, data, params, headers }: any) => {
     try {
-      const response = await client({
+      const response = await client.request({
         url: baseUrl + url,
         method,
         data,

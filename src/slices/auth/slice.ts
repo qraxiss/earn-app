@@ -4,6 +4,7 @@ const initialState = {
   data: {
     logged: false,
     user: null,
+    jwt: null,
   },
   loading: false,
   error: null,
@@ -17,6 +18,7 @@ type initialState = {
   data: {
     logged: boolean;
     user: null | user;
+    jwt: null | string;
   };
   loading: boolean;
   error: null | string;
@@ -34,10 +36,14 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    loginSuccess(state: initialState, action: PayloadAction<user>) {
+    loginSuccess(
+      state: initialState,
+      { payload: { jwt, user } }: PayloadAction<any>
+    ) {
       state.data.logged = true;
       state.loading = false;
-      state.data.user = action.payload;
+      state.data.user = user;
+      state.data.jwt = jwt;
     },
     logoutStart(state: initialState) {
       state.loading = true;

@@ -13,7 +13,7 @@ function App() {
   let promise: Promise<any>;
   useEffect(() => {
     (async () => {
-      await dispatch(logoutAsync());
+      // await dispatch(logoutAsync());
       await dispatch(loginAsync());
       promise = Promise.all([
         dispatch(xp.initiate({})),

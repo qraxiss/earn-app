@@ -1,10 +1,10 @@
 import client from "../../clients/earn";
 import { createApi } from "@reduxjs/toolkit/query/react";
-import axiosReduxIntegration from "../../store/axios-redux-integration";
+import axiosReduxIntegration from "../../axios/axios-redux-integration";
 import config from "../../config";
 
 const pointApi = createApi({
-  baseQuery: axiosReduxIntegration({ client })({
+  baseQuery: axiosReduxIntegration({ client: client })({
     baseUrl: config.earnUrl + "/xp",
   }),
   reducerPath: "xp/api",

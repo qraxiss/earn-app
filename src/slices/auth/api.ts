@@ -1,11 +1,11 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import axiosReduxIntegration from "../../store/axios-redux-integration";
+import axiosReduxIntegration from "../../axios/axios-redux-integration";
 import client from "../../clients/earn";
 import config from "../../config";
 
 const authApi = createApi({
   reducerPath: "auth/api",
-  baseQuery: axiosReduxIntegration({ client })({
+  baseQuery: axiosReduxIntegration({ client: client })({
     baseUrl: config.earnUrl + "/auth",
   }),
   endpoints: (build) => ({

@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "../slices";
 import apiMiddlewares from "../slices/middlewares";
 
-export const store = configureStore({
+export const store: any = configureStore({
   reducer: rootReducer,
 
   devTools: true,

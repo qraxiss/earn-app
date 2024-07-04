@@ -16,20 +16,16 @@ export const loginAsync = createAsyncThunk(
     try {
       dispatch(loginStart());
       const { jwt } = await loginAuth();
-      const { data } = await dispatch(loginEarn.initiate({ jwt }));
-
-      if (data.error) {
-        const error = data.error.data?.message || data.error.data;
-        dispatch(loginFailure(error));
-      } else {
-        dispatch(
-          loginSuccess({
+      dispatch(
+        loginSuccess({
+          user: {
             username: "qraxiss",
-          })
-        );
-      }
+          },
+          jwt,
+        })
+      );
     } catch (error: any) {
-      dispatch(loginFailure(error.message));
+      dispatch(loginFailure(error?.message));
     }
   }
 );
