@@ -74,9 +74,9 @@
 }
 
 .my-rank {
-  position: sticky;
+  position: fixed;
+  width: 94% !important;
   bottom: 75px;
-  top: 0px;
   border: 1px solid #13c5f0 !important;
   .points {
     width: 100px !important;
@@ -124,7 +124,6 @@
   }
 
   .name-section {
-    padding-block: 20px;
     .search-input {
       width: 100%;
     }
@@ -189,7 +188,6 @@
 
 @media (max-width: 768px) {
   .name-section {
-    padding-block: 50px;
     .search-input {
       width: 100%;
     }

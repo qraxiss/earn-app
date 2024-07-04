@@ -201,7 +201,7 @@ export const Daily = () => {
 
   return (
     <section className="days-section">
-      <div className="weekdays mt-3 mb-5">
+      <div className="weekdays mt-4 mb-5">
         <Image src={Days} alt="weekdays" className="weekdays-image" />
       </div>
       <p className="heading my-3">DAILY TASKS</p>

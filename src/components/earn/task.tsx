@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../../assets/images/icon.svg";
+import logo from "../../assets/images/ShopcekLogo.png";
 import Instagram from "../../assets/images/Instagram.png";
 import Telegram from "../../assets/images/telegram.png";
 import Twitter from "../../assets/images/twitter.png";
@@ -100,10 +100,10 @@ export const Task: React.FC = () => {
 
   return (
     <section className="task-section">
-      <div className="task-container mt-3 mb-5">
+      <div className="task-container mt-4 mb-5">
         <Image src={logo} alt="Task" className="task-image" />
       </div>
-      <p className="heading my-3">Earn More Coins</p>
+      <p className="heading my-3">EARN MORE COINS</p>
       <div className="task d-flex flex-column align-items-center">
         {tasks.map((task) => (
           <div

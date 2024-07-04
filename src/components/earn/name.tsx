@@ -32,9 +32,10 @@ export const Name = () => {
       {isMobile ? (
         <>
           <section className="rank-section">
-            <div className="rank-container mt-3 mb-5">
+            <div className="rank-container mt-4 mb-5">
               <Image src={Rank} alt="rank" className="rank-image" />
             </div>
+            <p className="heading my-3">STATS</p>
             <div className="gap-2 my-2 stats-container ">
               <div className="rank">
                 <p className="rank-title">Total Players</p>
