@@ -8,11 +8,29 @@ import { AppDispatch } from "../../../store/index";
 import { Image } from "react-bootstrap";
 import Product from "./product";
 import { useCardsQuery, useXpQuery } from "../../../slices/api";
+import { RootState } from "../../../store";
 
 export const Mine = () => {
   const xp = useXpQuery({});
   const cards = useCardsQuery({});
+  const isXpLoading = useSelector(
+    (state: RootState) => state["xp/api"].queries["xp({})"].status
+  );
+  const isCardsLoading = useSelector(
+    (state: RootState) => state["card/api"].queries["cards({})"].status
+  );
   const selectedIcon = useSelector((state: any) => state.selectedIcon.icon);
+
+  // for re render cards and xp with new data.
+  useEffect(() => {
+    handleIconClick(selectedIcon);
+  }, [isXpLoading, isCardsLoading]);
+
+  //for render in first mount
+  useEffect(() => {
+    handleIconClick(selectedIcon);
+  }, []);
+
   const dispatch = useDispatch<AppDispatch>();
   const [selectedCategory, setSelectedCategory] = useState([] as any[]);
   const [isMobile, setIsMobile] = useState(false);
@@ -28,10 +46,6 @@ export const Mine = () => {
       return num.toString();
     }
   };
-
-  useEffect(() => {
-    handleIconClick(selectedIcon);
-  }, []);
 
   const handleIconClick = (icon: string) => {
     setSelectedCategory(
