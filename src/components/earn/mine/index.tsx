@@ -115,9 +115,7 @@ export const Mine = () => {
           <div className="d-flex align-items-center justify-content-center border-bottom">
             <div className="my-4 d-flex align-items-center">
               <Image src={logo} alt="" className="earn-logo me-2" />
-              <p className="earn-amount">
-                {formatNumber(Math.round(xp.data.point))}
-              </p>
+              <p className="earn-amount">{Math.round(xp.data.point)}</p>
             </div>
           </div>
         </>
