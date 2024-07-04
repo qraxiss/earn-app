@@ -8,12 +8,10 @@
   .frens-container {
     width: 120px;
     height: 120px;
-    background-color: rgb(177 168 43);
     border-radius: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 50px 15px rgb(255, 243, 80);
 
     .frens-image {
       width: 170px;
@@ -74,7 +72,7 @@
       height: 70px;
 
       .frens-image {
-        width: 110px;
+        width: 190px;
       }
     }
     .earning-container {
