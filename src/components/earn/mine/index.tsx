@@ -29,6 +29,10 @@ export const Mine = () => {
     }
   };
 
+  useEffect(() => {
+    handleIconClick(selectedIcon);
+  }, []);
+
   const handleIconClick = (icon: string) => {
     setSelectedCategory(
       cards.data
@@ -189,8 +193,8 @@ export const Mine = () => {
 
       {isMobile ? (
         <div className="products-container">
-          {selectedCategory.map((product) => (
-            <Product product={product}></Product>
+          {selectedCategory.map((product, idx) => (
+            <Product product={product} key={idx}></Product>
           ))}
         </div>
       ) : (
