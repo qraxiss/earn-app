@@ -22,7 +22,7 @@ export const Friends = () => {
 
   return (
     <section className="frens-section">
-      <div className="frens-container mt-3 mb-5">
+      <div className="frens-container mt-4 mb-5">
         <Image src={Frens} alt="frens" className="frens-image" />
       </div>
       <p className="heading my-3">INVITE FRIENDS</p>

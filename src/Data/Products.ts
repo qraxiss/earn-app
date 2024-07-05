@@ -70,6 +70,7 @@ import TuscanyLuxuryVilla from "../assets/productImages/70 Tuscany Luxury Villa.
 import BeverlyHillsMansion from "../assets/productImages/71 Beverly Hills Mansion.png";
 import CaribbeanPrivateIsland from "../assets/productImages/72 Caribbean Private Island.png";
 import Castle from "../assets/productImages/73 Castle.png";
+import DubaiPenthouse from "../assets/productImages/68 Dubai Penthouse Suite.png";
 
 export const electronics = [
   { name: "Apple iPhone", price: 1300, earnings: 300, power: 0, image: Iphone, eligible: true },
@@ -147,7 +148,7 @@ export const realEstate = [
   { name: "Dubai Luxury Condo", price: 75000, earnings: 1100, power: 0, image: DubaiLuxuryCondo, eligible: true },
   { name: "Aspen Mountain Villa", price: 100000, earnings: 1600, power: 0, image: AspenMountainVilla, eligible: true },
   { name: "Malibu Beachfront", price: 250000, earnings: 2000, power: 0, image: MalibuBeachfront, eligible: true },
-  { name: "Dubai Penthouse", price: 150000, earnings: 1900, power: 0, image: MalibuBeachfront, eligible: true },
+  { name: "Dubai Penthouse", price: 150000, earnings: 1900, power: 0, image: DubaiPenthouse, eligible: true },
   { name: "Miami Luxury Villa", price: 350000, earnings: 4000, power: 0, image: MiamiLuxuryVilla, eligible: true },
   { name: "Tuscany Luxury Villa", price: 390000, earnings: 3000, power: 0, image: TuscanyLuxuryVilla, eligible: true },
   { name: "Beverly Hills Mansion", price: 1000000, earnings: 5000, power: 0, image: BeverlyHillsMansion, eligible: true },

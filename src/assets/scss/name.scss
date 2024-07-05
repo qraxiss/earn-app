@@ -1,24 +1,144 @@
-.name-section {
+.rank-section {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 
-  .howto-container {
+  .rank-container {
     width: 120px;
     height: 120px;
-    background-color: #761a1a;
     border-radius: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 50px 15px #ad1a1a;
 
-    .howto-image {
+    .rank-image {
       width: 170px;
     }
   }
+
+  .stats-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+
+    .rank {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #13c5f0;
+      background-color: #081220;
+      width: 50%;
+      height: 120px;
+      border-radius: 5px;
+
+      .rank-title {
+        font-size: 24px;
+        font-weight: 700;
+      }
+    }
+  }
+  .rank-no {
+    font-size: 14px;
+    width: 10px;
+  }
+  .points {
+    width: 130px !important;
+    font-size: 14px;
+    justify-content: flex-start;
+  }
+  .rank-list-container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .rank-list {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin: 5px;
+      border: 1px solid #737373;
+      background-color: #081220;
+      width: 600px;
+      height: 60px;
+      border-radius: 5px;
+      padding: 15px;
+    }
+  }
+}
+
+.my-rank {
+  position: fixed;
+  width: 94% !important;
+  bottom: 75px;
+  border: 1px solid #13c5f0 !important;
+  .points {
+    width: 100px !important;
+  }
+}
+.profile-img {
+  width: 24px;
+}
+.username {
+  font-size: 18px;
+  font-weight: 300;
+}
+@media (max-width: 768px) {
+  .rank-section {
+    padding-block: 50px;
+    .rank-container {
+      width: 70px;
+      height: 70px;
+
+      .rank-image {
+        width: 210px;
+      }
+    }
+    .stats-container {
+      width: 100%;
+      .rank {
+        height: 76px;
+        .rank-title {
+          font-size: 16px;
+          font-weight: 600;
+          margin-block: 5px;
+        }
+      }
+    }
+    .rank-list-container {
+      width: 100%;
+      .rank-list {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+
+  .name-section {
+    .search-input {
+      width: 100%;
+    }
+    .list-container {
+      width: 90%;
+    }
+  }
+}
+
+.name-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
   .name-container {
     width: 90px;
@@ -68,7 +188,6 @@
 
 @media (max-width: 768px) {
   .name-section {
-    padding-block: 50px;
     .search-input {
       width: 100%;
     }

@@ -127,7 +127,7 @@ export const Mine = () => {
             )}
           </div>
           <div className="d-flex align-items-center justify-content-center border-bottom">
-            <div className="my-4 d-flex align-items-center">
+            <div className="my-5 d-flex align-items-center">
               <Image src={logo} alt="" className="earn-logo me-2" />
               <p className="earn-amount">{Math.round(xp.data.point)}</p>
             </div>

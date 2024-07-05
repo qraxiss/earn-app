@@ -82,7 +82,11 @@ const calculateTimeRemaining = (resetTime: string) => {
   const minutesRemaining = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   const secondsRemaining = Math.floor((diff % (1000 * 60)) / 1000);
 
-  return `${hoursRemaining}: ${minutesRemaining}: ${secondsRemaining}`;
+  const paddedHours = String(hoursRemaining).padStart(2, "0");
+  const paddedMinutes = String(minutesRemaining).padStart(2, "0");
+  const paddedSeconds = String(secondsRemaining).padStart(2, "0");
+
+  return `${paddedHours}:${paddedMinutes}:${paddedSeconds}`;
 };
 
 export const Daily = () => {
@@ -197,7 +201,7 @@ export const Daily = () => {
 
   return (
     <section className="days-section">
-      <div className="weekdays mt-3 mb-5">
+      <div className="weekdays mt-4 mb-5">
         <Image src={Days} alt="weekdays" className="weekdays-image" />
       </div>
       <p className="heading my-3">DAILY TASKS</p>
