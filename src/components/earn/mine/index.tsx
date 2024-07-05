@@ -7,7 +7,13 @@ import { setIcon } from "../../../slices/selected-icon/slice";
 import { AppDispatch } from "../../../store/index";
 import { Image } from "react-bootstrap";
 import Product from "./product";
-import { useCardsQuery, useXpQuery } from "../../../slices/api";
+import {
+  useCardsQuery,
+  useXpQuery,
+  start,
+  claim,
+  status as fetchStatus,
+} from "../../../slices/api";
 import { RootState } from "../../../store";
 
 export const Mine = () => {
@@ -36,6 +42,7 @@ export const Mine = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isSellingStarted, setIsSellingStarted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(14400);
+  const [passedTime, setPassedTime] = useState(0);
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) {
@@ -58,20 +65,46 @@ export const Mine = () => {
     dispatch(setIcon(icon));
   };
 
-  const startSelling = () => {
-    setIsSellingStarted(true);
-    setTimeLeft(14400);
+  const status = useSelector((state: RootState) => state["stack/app"].status);
+
+  useEffect(() => {
+    if (status) {
+      setIsSellingStarted(status.isWaiting);
+      if (status.isWaiting) {
+        setTimeLeft(status.remainTime);
+      } else {
+        document.body.style.backgroundColor = "#FF92FF";
+      }
+    }
+  }, [status]);
+
+  const startSelling = async () => {
+    dispatch(start.initiate({}));
   };
+
+  const claimSelling = async () => {
+    dispatch(claim.initiate({}));
+  };
+
+  const stackPoints = (xp.data.earn / 60) * passedTime;
+  const [point, setPoint] = useState(xp.data.point + stackPoints);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isSellingStarted && timeLeft > 0) {
       interval = setInterval(() => {
         setTimeLeft((prevTime) => prevTime - 1);
+        setPassedTime((prevTime) => prevTime + 1);
+        setPoint((point: number) => point + xp.data.earn / 60);
       }, 1000);
     } else if (timeLeft === 0) {
-      setIsSellingStarted(false);
-      document.body.style.backgroundColor = "#FF92FF";
+      const { refetch } = dispatch(fetchStatus.initiate({}));
+
+      setTimeout(() => {
+        refetch().then((data: any) => {
+          setIsSellingStarted(data.isWaiting);
+        });
+      }, 1000);
     }
 
     return () => clearInterval(interval);
@@ -115,7 +148,12 @@ export const Mine = () => {
             )}
           </div>
           <div className="mt-3">
-            {!isSellingStarted ? (
+            {status.canClaim ? (
+              <h4 className="mine-start started m-0" onClick={claimSelling}>
+                <div className="fill-animation"></div>
+                Claim
+              </h4>
+            ) : !isSellingStarted ? (
               <h4 className="mine-start m-0" onClick={startSelling}>
                 Start Selling
               </h4>
@@ -129,7 +167,7 @@ export const Mine = () => {
           <div className="d-flex align-items-center justify-content-center border-bottom">
             <div className="my-5 d-flex align-items-center">
               <Image src={logo} alt="" className="earn-logo me-2" />
-              <p className="earn-amount">{Math.round(xp.data.point)}</p>
+              <p className="earn-amount">{Math.round(point)}</p>
             </div>
           </div>
         </>
@@ -138,9 +176,7 @@ export const Mine = () => {
           <div className="d-flex align-items-center justify-content-center">
             <div className="my-3 d-flex align-items-center">
               <Image src={logo} alt="" className="earn-logo me-2" />
-              <p className="earn-amount">
-                {formatNumber(Math.round(xp.data.point))}
-              </p>
+              <p className="earn-amount">{formatNumber(Math.round(point))}</p>
             </div>
           </div>
           <div className="farming">

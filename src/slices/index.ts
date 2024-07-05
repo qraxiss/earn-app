@@ -7,6 +7,8 @@ import cardReducer from "./card/slice";
 import cardApi from "./card/api";
 import xpReducer from "./xp/slice";
 import xpApi from "./xp/api";
+import stackReducer from "./stack/slice";
+import stackApi from "./stack/api";
 
 const rootReducer = combineReducers({
   selectedIcon: selectedIconReducer,
@@ -17,6 +19,8 @@ const rootReducer = combineReducers({
   "card/api": cardApi.reducer,
   "xp/app": xpReducer,
   "xp/api": xpApi.reducer,
+  "stack/app": stackReducer,
+  "stack/api": stackApi.reducer,
 });
 
 export default rootReducer;
