@@ -108,7 +108,7 @@ export const Mine = () => {
     }
 
     return () => clearInterval(interval);
-  }, [isSellingStarted, timeLeft]);
+  }, [timeLeft]);
 
   const formatTime = (seconds: number): string => {
     const hours = Math.floor(seconds / 3600);
