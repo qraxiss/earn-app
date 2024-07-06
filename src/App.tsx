@@ -37,6 +37,8 @@ function App() {
   );
   const xpState = useSelector(xpSelector);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     if (isLoading) {
       return;
@@ -56,9 +58,7 @@ function App() {
       const { refetch } = dispatch(status.initiate({}));
       setTimeout(refetch, 1000);
     }
-  }, [statusState.remainTime, statusState.isWaiting]);
-
-  const [isLoading, setIsLoading] = useState(true);
+  }, [isLoading, statusState.remainTime, statusState.isWaiting]);
 
   return <ErrorBoundary>{isLoading ? <Loading /> : <Earn />}</ErrorBoundary>;
 }
