@@ -6,6 +6,10 @@ import Twitter from "../../assets/images/twitter.png";
 import Youtube from "../../assets/images/youtube.png";
 import BlueTick from "../../assets/images/bluetick.png";
 import { Image } from "react-bootstrap";
+import { taskSelector } from "../../slices/task/slice";
+import { useSelector, useDispatch } from "react-redux";
+import { claim } from "../../slices/task/api";
+import { AppDispatch } from "../../store";
 
 // Define the Task type
 interface Task {
@@ -19,84 +23,47 @@ interface Task {
 }
 
 export const Task: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: 1,
-      name: "Subscribe to Shopcek Telegram",
-      image: Telegram,
-      reward: "+10,000",
-      status: "go", // Initially set to "go"
-      completed: true,
-      claimed: false,
-    },
-    {
-      id: 2,
-      name: "Follow Shopcek On X ",
-      image: Twitter,
-      reward: "+10,000",
-      status: "go", // Initially set to "go"
-      completed: false,
-      claimed: false,
-    },
-    {
-      id: 3,
-      name: "Join Shopcek Instagram ",
-      image: Instagram,
-      reward: "+10,000",
-      status: "go", // Initially set to "go"
-      completed: true,
-      claimed: false,
-    },
-    {
-      id: 4,
-      name: "Follow Shopcek on YouTube",
-      image: Youtube,
-      reward: "+10,000",
-      status: "go", // Initially set to "go"
-      completed: false,
-      claimed: false,
-    },
-  ]);
+  // const [tasks, setTasks] = useState<Task[]>([
+  //   {
+  //     id: 1,
+  //     name: "Subscribe to Shopcek Telegram",
+  //     image: Telegram,
+  //     reward: "+10,000",
+  //     status: "go", // Initially set to "go"
+  //     completed: true,
+  //     claimed: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Follow Shopcek On X ",
+  //     image: Twitter,
+  //     reward: "+10,000",
+  //     status: "go", // Initially set to "go"
+  //     completed: false,
+  //     claimed: false,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Join Shopcek Instagram ",
+  //     image: Instagram,
+  //     reward: "+10,000",
+  //     status: "go", // Initially set to "go"
+  //     completed: true,
+  //     claimed: false,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Follow Shopcek on YouTube",
+  //     image: Youtube,
+  //     reward: "+10,000",
+  //     status: "go", // Initially set to "go"
+  //     completed: false,
+  //     claimed: false,
+  //   },
+  // ]);
 
-  const handleTaskCompletion = (id: number) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) => {
-        if (task.id === id) {
-          if (task.status === "go" || task.claimed === true) {
-            // Alert based on the task ID
-            switch (id) {
-              case 1:
-                window.open("https://t.me/Shopcek", "_blank");
-                break;
-              case 2:
-                window.open("https://x.com/shopcek", "_blank");
-                break;
-              case 3:
-                window.open("https://instagram.com/shopcekcom", "_blank");
-                break;
-              case 4:
-                window.open("https://youtube.com/@shopcek", "_blank");
-                break;
-              default:
-                break;
-            }
-
-            return {
-              ...task,
-              status: "claim",
-            };
-          } else if (task.status === "claim") {
-            // Mark task as claimed and show tick if currently "claim"
-            return {
-              ...task,
-              claimed: true,
-            };
-          }
-        }
-        return task; // Return unchanged task for other items
-      })
-    );
-  };
+  const tasks = useSelector(taskSelector);
+  const dispatch: AppDispatch = useDispatch();
 
   return (
     <section className="task-section">
@@ -105,24 +72,27 @@ export const Task: React.FC = () => {
       </div>
       <p className="heading my-3">EARN MORE COINS</p>
       <div className="task d-flex flex-column align-items-center">
-        {tasks.map((task) => (
+        {tasks.map(({ task, isClaimed }: any) => (
           <div
             key={task.id}
-            onClick={() => handleTaskCompletion(task.id)}
+            onClick={() => {
+              dispatch(claim.initiate({ taskId: task.id }));
+              window.open(task.link, "_blank");
+            }}
             className="d-flex justify-content-between align-items-center follow-container my-1 p-2"
           >
             <div className="d-flex align-items-center">
               <div>
                 <Image
-                  src={task.image}
-                  alt={task.name}
+                  src={task.icon}
+                  alt={task.title}
                   className={`follow-images ${
-                    task.name === "Follow Shopcek On X " ? "x-image" : ""
+                    task.title === "Follow Shopcek On X " ? "x-image" : ""
                   }`}
                 />
               </div>
               <div className=" px-1 ">
-                <p className="m-0 task-heading">{task.name}</p>
+                <p className="m-0 task-heading">{task.title}</p>
                 <div className="d-flex align-items-center">
                   <img src={logo} alt="" className="logo me-2" />
                   <h4 className="reward m-0">{task.reward}</h4>
@@ -130,7 +100,7 @@ export const Task: React.FC = () => {
               </div>
             </div>
             <div className="tick-container">
-              {task.claimed ? (
+              {isClaimed ? (
                 <Image
                   src={BlueTick}
                   alt="Completed"

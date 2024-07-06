@@ -12,7 +12,7 @@ export default ({ client }: { client: AxiosInstance }) =>
         headers,
       });
       const result = response.data.data;
-      console.info(response.config.url, result);
+      console.log(response.config.url, result);
       return { data: result };
     } catch (axiosError: any) {
       const err = axiosError;
@@ -20,7 +20,7 @@ export default ({ client }: { client: AxiosInstance }) =>
         status: err.response?.status,
         data: err.response?.data.error.message || err.message,
       };
-      console.info(err.config.url, error);
+      console.log(err.config.url, error);
       return {
         error,
       };

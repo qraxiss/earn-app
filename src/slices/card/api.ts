@@ -16,7 +16,7 @@ const cardApi = createApi({
         url: "/",
         method: "get",
       }),
-      async onQueryStarted(arg, { dispatch, getState, queryFulfilled }) {
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         const { data: cards } = await queryFulfilled;
         dispatch(setCardsData(cards));
       },

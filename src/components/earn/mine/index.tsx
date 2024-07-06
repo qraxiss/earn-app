@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Image } from "react-bootstrap";
 
 //redux
-import { start, claim, status as fetchStatus } from "../../../slices/api";
+import { start, stackClaim } from "../../../slices/api";
 import { setIcon } from "../../../slices/selected-icon/slice";
 import { cardsSelector } from "../../../slices/card/slice";
-import { setPoint, xpSelector } from "../../../slices/xp/slice";
+import { xpSelector } from "../../../slices/xp/slice";
 import { AppDispatch, RootState, store } from "../../../store";
-import { setRemainTime, setPastTime } from "../../../slices/stack/slice";
 
 //images
 import logo from "../../../assets/images/icon.svg";
@@ -48,6 +47,16 @@ const formatTime = (seconds: number): string => {
   }${remainingSeconds}`;
 };
 
+const formatNumber = (num: number): string => {
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(1) + "m";
+  } else if (num >= 1000) {
+    return (num / 1000).toFixed(num % 1000 !== 0 ? 1 : 0) + "k";
+  } else {
+    return num.toString();
+  }
+};
+
 export const Mine = () => {
   const xp = useSelector(xpSelector);
   const cards = useSelector(cardsSelector);
@@ -68,16 +77,6 @@ export const Mine = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [selectedCategory, setSelectedCategory] = useState([] as any[]);
 
-  const formatNumber = (num: number): string => {
-    if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + "m";
-    } else if (num >= 1000) {
-      return (num / 1000).toFixed(num % 1000 !== 0 ? 1 : 0) + "k";
-    } else {
-      return num.toString();
-    }
-  };
-
   const handleIconClick = (icon: string) => {
     setSelectedCategory(
       cards.filter((item: any) => {
@@ -90,9 +89,7 @@ export const Mine = () => {
   const status = useSelector((state: RootState) => state["stack/app"].status);
 
   useEffect(() => {
-    if (status.isWaiting) {
-      setRemainTime(status.remainTime);
-    } else {
+    if (!status.isWaiting) {
       document.body.style.backgroundColor = "#FF92FF";
     }
   }, [status.isWaiting]);
@@ -102,7 +99,7 @@ export const Mine = () => {
   };
 
   const claimSelling = async () => {
-    dispatch(claim.initiate({}));
+    dispatch(stackClaim.initiate({}));
   };
 
   return (
@@ -121,7 +118,7 @@ export const Mine = () => {
       <div className="mt-3">
         {status.canClaim ? (
           <h4 className="mine-start started m-0" onClick={claimSelling}>
-            <div className="fill-animation"></div>
+            {/* <div className="fill-animation"></div> */}
             Claim
           </h4>
         ) : !status.isWaiting ? (
@@ -130,7 +127,12 @@ export const Mine = () => {
           </h4>
         ) : (
           <h4 className="mine-start started m-0">
-            <div className="fill-animation"></div>
+            <div
+              className="fill-animation"
+              style={{
+                animation: `fillBackground ${status.remainTime}s linear forwards`,
+              }}
+            ></div>
             Sales Started
           </h4>
         )}
@@ -144,7 +146,7 @@ export const Mine = () => {
 
       <div className="products-nav position-sticky top-0 z-3 d-flex align-items-center justify-content-center mt-3">
         <div className="d-flex justify-content-between align-items-center mine">
-          {CATEGORIES.map(({ name, slug }) => (
+          {CATEGORIES.map(({ name, slug }, index) => (
             <div
               className={`mine-items text-center ${
                 selectedIcon === slug ? "selected-icon" : ""
@@ -153,6 +155,7 @@ export const Mine = () => {
               onClick={() => {
                 handleIconClick(slug);
               }}
+              key={index}
             >
               {name}
             </div>

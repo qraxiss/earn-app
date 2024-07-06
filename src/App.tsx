@@ -6,7 +6,7 @@ import Loading from "./components/Loading";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./store";
 import { loginAsync } from "./slices/thunk";
-import { cards, xp, status } from "./slices/api";
+import { cards, xp, stackStatus, taskStatus } from "./slices/api";
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
 
@@ -22,7 +22,8 @@ function App() {
       promise = Promise.all([
         dispatch(xp.initiate({})),
         dispatch(cards.initiate({})),
-        dispatch(status.initiate({})),
+        dispatch(stackStatus.initiate({})),
+        dispatch(taskStatus.initiate({})),
       ]);
 
       promise.then(() => {
@@ -66,7 +67,7 @@ function App() {
         }, 1000);
       }
     } else if (statusState.remainTime === 0) {
-      const { refetch } = dispatch(status.initiate({}));
+      const { refetch } = dispatch(stackStatus.initiate({}));
       setTimeout(refetch, 1000);
     }
   }, [isLoading, statusState.remainTime, statusState.isWaiting]);

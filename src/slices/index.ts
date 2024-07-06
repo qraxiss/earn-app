@@ -9,6 +9,8 @@ import xpReducer from "./xp/slice";
 import xpApi from "./xp/api";
 import stackReducer from "./stack/slice";
 import stackApi from "./stack/api";
+import taskReducer from "./task/slice";
+import taskApi from "./task/api";
 
 const rootReducer = combineReducers({
   selectedIcon: selectedIconReducer,
@@ -21,6 +23,8 @@ const rootReducer = combineReducers({
   "xp/api": xpApi.reducer,
   "stack/app": stackReducer,
   "stack/api": stackApi.reducer,
+  "task/app": taskReducer,
+  "task/api": taskApi.reducer,
 });
 
 export default rootReducer;
