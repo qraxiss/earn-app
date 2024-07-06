@@ -38,6 +38,7 @@ function App() {
   const xpState = useSelector(xpSelector);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [firstPassedTime, setFirstPassedTime] = useState(false);
 
   useEffect(() => {
     if (isLoading) {
@@ -45,15 +46,26 @@ function App() {
     }
 
     if (statusState.isWaiting && statusState.remainTime > 0) {
-      dispatch(
-        setPoint(xpState.point + statusState.pastTime * (xpState.earn / 60))
-      );
+      if (!firstPassedTime) {
+        const relativeXp =
+          xpState.point + statusState.pastTime * (xpState.earn / 60);
 
-      setTimeout(() => {
-        dispatch(setRemainTime(statusState.remainTime - 1));
-        dispatch(setPastTime(statusState.passedTime + 1));
-        dispatch(setPoint(xpState.point + xpState.earn / 60));
-      }, 1000);
+        dispatch(setPoint(relativeXp));
+
+        setTimeout(() => {
+          dispatch(setRemainTime(statusState.remainTime - 1));
+          dispatch(setPastTime(statusState.pastTime + 1));
+          dispatch(setPoint(relativeXp + xpState.earn / 60));
+        }, 1000);
+
+        setFirstPassedTime(true);
+      } else {
+        setTimeout(() => {
+          dispatch(setRemainTime(statusState.remainTime - 1));
+          dispatch(setPastTime(statusState.pastTime + 1));
+          dispatch(setPoint(xpState.point + xpState.earn / 60));
+        }, 1000);
+      }
     } else if (statusState.remainTime === 0) {
       const { refetch } = dispatch(status.initiate({}));
       setTimeout(refetch, 1000);
