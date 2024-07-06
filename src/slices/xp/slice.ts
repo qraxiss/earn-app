@@ -2,10 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 
 const initialState = {
-  data: {
-    point: 0,
-    earn: 0,
-  },
+  data: null as any,
 };
 
 const xpSlice = createSlice({

@@ -38,7 +38,15 @@ function App() {
   const xpState = useSelector(xpSelector);
 
   useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
     if (statusState.isWaiting && statusState.remainTime > 0) {
+      dispatch(
+        setPoint(xpState.point + statusState.pastTime * (xpState.earn / 60))
+      );
+
       setTimeout(() => {
         dispatch(setRemainTime(statusState.remainTime - 1));
         dispatch(setPastTime(statusState.passedTime + 1));
