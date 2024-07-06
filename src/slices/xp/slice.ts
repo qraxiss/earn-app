@@ -1,16 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../store";
 
 const initialState = {
-  data: {},
-  loading: false,
-  error: null,
+  data: {
+    point: 0,
+    earn: 0,
+  },
 };
 
 const xpSlice = createSlice({
   name: "xp/app",
   initialState,
-  reducers: {},
+  reducers: {
+    setPoint(state, { payload: point }) {
+      state.data.point = point;
+    },
+
+    setXp(state, { payload: data }) {
+      state.data = data;
+    },
+  },
 });
 
-export const {} = xpSlice.actions;
+export const { setPoint, setXp } = xpSlice.actions;
 export default xpSlice.reducer;
+export const xpSelector = (state: RootState) => state["xp/app"].data;

@@ -3,9 +3,9 @@ import EarningLogo from "../../../assets/images/EarningLogo.png";
 import Lock from "../../../assets/images/lock.png";
 import logo from "../../../assets/images/icon.svg";
 
-import { buyCardAsync, upgradeCardAsync } from "../../../slices/thunk";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
+import { buy as buyApi, upgrade as upgradeApi } from "../../../slices/card/api";
 
 const formatNumber = (num: number): string => {
   if (num >= 1000000) {
@@ -60,7 +60,7 @@ export default function Product({
           <div
             className={`buy-button d-flex flex-column justify-content-center align-items-center`}
             onClick={() => {
-              dispatch(buyCardAsync({ cardId: info.id }));
+              dispatch(buyApi.initiate({ cardId: info.id }));
             }}
           >
             <div className="d-flex align-items-center gap-2">
@@ -120,7 +120,7 @@ export default function Product({
           <div
             className={`buy-button d-flex flex-column justify-content-center align-items-center`}
             onClick={() => {
-              dispatch(upgradeCardAsync({ cardId: info.id }));
+              dispatch(upgradeApi.initiate({ cardId: info.id }));
             }}
           >
             <div className="d-flex align-items-center gap-2">

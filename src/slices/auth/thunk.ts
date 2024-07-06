@@ -6,8 +6,8 @@ import {
   logoutStart,
   logoutSuccess,
 } from "./slice";
-import { login as loginEarn, logout } from "../../slices/api";
-import { login as loginAuth } from "../../clients/auth";
+import { logout } from "../../slices/api";
+import { login } from "../../clients/auth";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const loginAsync = createAsyncThunk(
@@ -15,7 +15,7 @@ export const loginAsync = createAsyncThunk(
   async (_, { dispatch }) => {
     try {
       dispatch(loginStart());
-      const { jwt } = await loginAuth();
+      const { jwt } = await login();
       dispatch(
         loginSuccess({
           user: {

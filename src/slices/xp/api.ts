@@ -2,6 +2,7 @@ import client from "../../clients/earn";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import axiosReduxIntegration from "../../axios/axios-redux-integration";
 import config from "../../config";
+import { setXp } from "./slice";
 
 const pointApi = createApi({
   baseQuery: axiosReduxIntegration({ client: client })({
@@ -14,6 +15,10 @@ const pointApi = createApi({
         url: "/",
         method: "get",
       }),
+      async onQueryStarted(arg, { dispatch, getState, queryFulfilled }) {
+        const { data: earn } = await queryFulfilled;
+        dispatch(setXp(earn));
+      },
     }),
   }),
 });
