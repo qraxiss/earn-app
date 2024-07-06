@@ -19,7 +19,6 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(loginAsync());
-      console.log("test", cards.initiate({}));
       promise = Promise.all([
         dispatch(xp.initiate({})),
         dispatch(cards.initiate({})),
@@ -48,14 +47,14 @@ function App() {
     if (statusState.isWaiting && statusState.remainTime > 0) {
       if (!firstPassedTime) {
         const relativeXp =
-          xpState.point + statusState.pastTime * (xpState.earn / 60);
+          xpState.point + statusState.pastTime * (xpState.earn / 3600);
 
         dispatch(setPoint(relativeXp));
 
         setTimeout(() => {
           dispatch(setRemainTime(statusState.remainTime - 1));
           dispatch(setPastTime(statusState.pastTime + 1));
-          dispatch(setPoint(relativeXp + xpState.earn / 60));
+          dispatch(setPoint(relativeXp + xpState.earn / 3600));
         }, 1000);
 
         setFirstPassedTime(true);
@@ -63,7 +62,7 @@ function App() {
         setTimeout(() => {
           dispatch(setRemainTime(statusState.remainTime - 1));
           dispatch(setPastTime(statusState.pastTime + 1));
-          dispatch(setPoint(xpState.point + xpState.earn / 60));
+          dispatch(setPoint(xpState.point + xpState.earn / 3600));
         }, 1000);
       }
     } else if (statusState.remainTime === 0) {
