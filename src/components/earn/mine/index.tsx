@@ -140,7 +140,7 @@ export const Mine = () => {
       <div className="d-flex align-items-center justify-content-center border-bottom">
         <div className="my-5 d-flex align-items-center">
           <Image src={logo} alt="" className="earn-logo me-2" />
-          <p className="earn-amount">{Math.round(xp.point)}</p>
+          <p className="earn-amount">{Math.round(xp.point).toLocaleString()}</p>
         </div>
       </div>
 
