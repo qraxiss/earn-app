@@ -6,7 +6,10 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./store/index";
+import WebApp from "@twa-dev/sdk";
 eruda.init();
+
+console.log(WebApp);
 
 const AppWrapper = () => {
   useEffect(() => {
