@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import logo from "../../assets/images/ShopcekLogo.png";
-import Instagram from "../../assets/images/Instagram.png";
-import Telegram from "../../assets/images/telegram.png";
-import Twitter from "../../assets/images/twitter.png";
-import Youtube from "../../assets/images/youtube.png";
 import BlueTick from "../../assets/images/bluetick.png";
 import { Image } from "react-bootstrap";
 import { taskSelector } from "../../slices/task/slice";
 import { useSelector, useDispatch } from "react-redux";
-import { claim } from "../../slices/task/api";
+import { taskClaim } from "../../slices/task/api";
 import { AppDispatch } from "../../store";
 
 // Define the Task type
@@ -76,7 +72,7 @@ export const Task: React.FC = () => {
           <div
             key={task.id}
             onClick={() => {
-              dispatch(claim.initiate({ taskId: task.id }));
+              dispatch(taskClaim.initiate({ taskId: task.id }));
               window.open(task.link, "_blank");
             }}
             className="d-flex justify-content-between align-items-center follow-container my-1 p-2"

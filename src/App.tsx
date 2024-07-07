@@ -13,6 +13,9 @@ import { RootState } from "./store";
 import { setRemainTime, setPastTime } from "./slices/stack/slice";
 import { setPoint } from "./slices/xp/slice";
 import { xpSelector } from "./slices/xp/slice";
+import { dailyStatus, days } from "./slices/api";
+import { dailySelector } from "./slices/daily/slice";
+import { setRemainTimeForClaim } from "./slices/daily/slice";
 function App() {
   const dispatch: AppDispatch = useDispatch();
   let promise: Promise<any>;
@@ -24,6 +27,8 @@ function App() {
         dispatch(cards.initiate({})),
         dispatch(stackStatus.initiate({})),
         dispatch(taskStatus.initiate({})),
+        dispatch(dailyStatus.initiate({})),
+        dispatch(days.initiate({})),
       ]);
 
       promise.then(() => {
@@ -71,6 +76,22 @@ function App() {
       setTimeout(refetch, 1000);
     }
   }, [isLoading, statusState.remainTime, statusState.isWaiting]);
+
+  const { status } = useSelector(dailySelector);
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
+    if (!status.canClaim && status.remainTimeForClaim > 0) {
+      setTimeout(() => {
+        dispatch(setRemainTimeForClaim(status.remainTimeForClaim - 1));
+      }, 1000);
+    } else if (status.remainTimeForClaim === 0) {
+      const { refetch } = dispatch(dailyStatus.initiate({}));
+      setTimeout(refetch, 1000);
+    }
+  }, [isLoading, status.remainTimeForClaim, status.canClaim]);
 
   return <ErrorBoundary>{isLoading ? <Loading /> : <Earn />}</ErrorBoundary>;
 }

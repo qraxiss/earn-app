@@ -1,13 +1,6 @@
-export { xp, useXpQuery } from "./xp/api";
-export { cards, useCardsQuery } from "./card/api";
-export { logout, login, useLoginMutation, useLogoutMutation } from "./auth/api";
-export {
-  claim as stackClaim,
-  status as stackStatus,
-  start,
-  useClaimMutation,
-  useStartMutation,
-  useStatusQuery,
-} from "./stack/api";
-
-export { status as taskStatus, claim as taskClaim } from "./task/api";
+export { xp } from "./xp/api";
+export { cards } from "./card/api";
+export { logout, login } from "./auth/api";
+export { stackClaim, stackStatus, start } from "./stack/api";
+export { taskStatus, taskClaim } from "./task/api";
+export { dailyClaim, dailyStatus, days } from "./daily/api";

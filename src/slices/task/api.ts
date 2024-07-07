@@ -36,4 +36,4 @@ const taskApi = createApi({
 
 export default taskApi;
 export const { useClaimMutation, useStatusQuery } = taskApi;
-export const { status, claim } = taskApi.endpoints;
+export const { status: taskStatus, claim: taskClaim } = taskApi.endpoints;

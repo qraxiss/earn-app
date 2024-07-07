@@ -8,6 +8,10 @@ import LuckyItem from "../../assets/images/Luckyitem.png";
 import { Image } from "react-bootstrap";
 import SlideUpPanel from "../TaskSlider";
 
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../store";
+import { dailySelector } from "../../slices/daily/slice";
+import { dailyClaim } from "../../slices/api";
 interface Task {
   id: string;
   heading: string;
@@ -89,15 +93,24 @@ const calculateTimeRemaining = (resetTime: string) => {
   return `${paddedHours}:${paddedMinutes}:${paddedSeconds}`;
 };
 
+const formatTime = (seconds: number): string => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+  return `${hours}:${minutes < 10 ? "0" : ""}${minutes}:${
+    remainingSeconds < 10 ? "0" : ""
+  }${remainingSeconds}`;
+};
+
 export const Daily = () => {
-  const [activeDay, setActiveDay] = useState(1);
-  const [isMobile, setIsMobile] = useState(false);
+  const dispatch: AppDispatch = useDispatch();
+  const { status, days } = useSelector(dailySelector);
+
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [activeTask, setActiveTask] = useState<string | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [tasks, setTasks] = useState<Task[]>(dailyData);
-  const [claim, setClaim] = useState(false);
 
   useEffect(() => {
     const sessionStartTime = new Date().getTime();
@@ -133,23 +146,8 @@ export const Daily = () => {
     }
   };
 
-  const handleClaim = () => {
-    setClaim(true);
-    setTimeout(() => {
-      setClaim(false);
-    }, calculateRemainingTimeUntilReset());
-  };
-
-  const calculateRemainingTimeUntilReset = () => {
-    const now = new Date();
-    const reset = new Date(now);
-    reset.setUTCHours(0, 0, 0, 0);
-
-    if (now > reset) {
-      reset.setUTCDate(reset.getUTCDate() + 1); // Set for the next day if past reset time
-    }
-
-    return reset.getTime() - now.getTime();
+  const handleClaim = async () => {
+    dispatch(dailyClaim.initiate({}));
   };
 
   useEffect(() => {
@@ -186,230 +184,185 @@ export const Daily = () => {
     return () => clearInterval(interval);
   }, [tasks]);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 767);
-    };
-
-    handleResize(); // Set initial value
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <section className="days-section">
       <div className="weekdays mt-4 mb-5">
         <Image src={Days} alt="weekdays" className="weekdays-image" />
       </div>
       <p className="heading my-3">DAILY TASKS</p>
-      {isMobile ? (
-        <>
-          <div className="d-flex justify-content-between w-100">
-            {tasks.map((card, index) => (
-              <div
-                key={index}
-                onClick={() => handleClosePanel(card.id)}
-                className={`daily-card ${
-                  card.completed ? "completed" : "not-completed"
-                } ${isPanelOpen ? "panel-open" : ""}`}
-              >
-                <h6 className="m-0">{card.heading}</h6>
-                <img src={card.img} alt="" />
-                <h6>{calculateTimeRemaining(card.resetTime)}</h6>
-                {card.completed ? (
-                  <span className="dot">
-                    <img className="w-100" src={GreenTick} alt="" />
-                  </span>
-                ) : (
-                  <span className="white-dot"></span>
-                )}
-              </div>
-            ))}
-            <SlideUpPanel
-              show={isPanelOpen}
-              onClose={() => handleClosePanel(null)}
-              activeTask={activeTask}
-            >
-              {activeTask === "login" && (
-                <>
-                  <div className="d-flex align-items-center w-100">
-                    <h5
-                      className="my-3 flex-grow-1 text-center"
-                      style={{ marginRight: "-25px" }}
+      <div className="d-flex justify-content-between w-100">
+        {tasks.map((card, index) => (
+          <div
+            key={index}
+            onClick={() => handleClosePanel(card.id)}
+            className={`daily-card ${
+              card.completed ? "completed" : "not-completed"
+            } ${isPanelOpen ? "panel-open" : ""}`}
+          >
+            <h6 className="m-0">{card.heading}</h6>
+            <img src={card.img} alt="" />
+            <h6>{formatTime(status.remainTimeForClaim)}</h6>
+            {card.completed ? (
+              <span className="dot">
+                <img className="w-100" src={GreenTick} alt="" />
+              </span>
+            ) : (
+              <span className="white-dot"></span>
+            )}
+          </div>
+        ))}
+        <SlideUpPanel
+          show={isPanelOpen}
+          onClose={() => handleClosePanel(null)}
+          activeTask={activeTask}
+        >
+          {activeTask === "login" && (
+            <>
+              <div className="d-flex align-items-center w-100">
+                <h5
+                  className="my-3 flex-grow-1 text-center"
+                  style={{ marginRight: "-25px" }}
+                >
+                  Daily Log-In
+                </h5>
+                <span
+                  onClick={() => handleClosePanel(null)}
+                  className="close cursor-pointer d-flex align-items-center justify-content-end"
+                >
+                  <i className="bi bi-x-circle"></i>
+                </span>
+              </div>{" "}
+              <p className="w-75 ">
+                Complete your daily logins & Boost your earnings!
+              </p>
+              <div className="days-container my-2">
+                <div className="days">
+                  {data.map((item, index) => (
+                    <div
+                      key={index}
+                      className={`days-item ${
+                        index === status.daily.day - 1 ? "active" : ""
+                      } ${index === status.daily.day ? "next-active" : ""}`}
                     >
-                      Daily Log-In
-                    </h5>
-                    <span
-                      onClick={() => handleClosePanel(null)}
-                      className="close cursor-pointer d-flex align-items-center justify-content-end"
-                    >
-                      <i className="bi bi-x-circle"></i>
-                    </span>
-                  </div>{" "}
-                  <p className="w-75 ">
-                    Complete your daily logins & Boost your earnings!
-                  </p>
-                  <div className="days-container my-2">
-                    <div className="days">
-                      {data.map((item, index) => (
-                        <div
-                          key={index}
-                          className={`days-item ${
-                            index === activeDay - 1 ? "active" : ""
-                          } ${index === activeDay ? "next-active" : ""}`}
-                        >
-                          <div>
-                            <p className="days-title">{item.title}</p>
-                          </div>
-                          <Image
-                            src={item.image}
-                            alt={`${item.title} reward`}
-                            className="days-logo"
-                          />
-                          <h4 className="heading">{item.points}</h4>
-                        </div>
-                      ))}
                       <div>
-                        <button
-                          className="claim-button mt-3"
-                          onClick={handleClaim}
-                        >
-                          {claim ? "Come back tomorrow!" : "Claim"}
-                        </button>
+                        <p className="days-title">{item.title}</p>
                       </div>
+                      <Image
+                        src={item.image}
+                        alt={`${item.title} reward`}
+                        className="days-logo"
+                      />
+                      <h4 className="heading">{item.points}</h4>
+                    </div>
+                  ))}
+                  <div>
+                    <button className="claim-button mt-3" onClick={handleClaim}>
+                      {status.canClaim
+                        ? "Claim"
+                        : formatTime(status.remainTimeForClaim)}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+          {activeTask === "luckyItem" && (
+            <>
+              <div className="d-flex align-items-center w-100">
+                <h5
+                  className="my-3 flex-grow-1 text-center"
+                  style={{ marginRight: "-25px" }}
+                >
+                  Lucky Item
+                </h5>
+                <span
+                  onClick={() => handleClosePanel(null)}
+                  className="close cursor-pointer d-flex align-items-center justify-content-end"
+                >
+                  <i className="bi bi-x-circle"></i>
+                </span>
+              </div>
+              <p className="w-75 m-0">
+                Find the Lucky Item of the day & Earn extra coins!
+              </p>
+              <div className="lucky-Item my-3">
+                <Image
+                  src={LuckyItem}
+                  alt={`Lucky Item`}
+                  className="luckyItem-image"
+                />
+              </div>
+              <div className="my-3 d-flex align-items-center">
+                <Image src={Shopcek} alt="" className="earn-logo me-2" />
+                <h1 className="m-0">+5.000.000</h1>
+              </div>
+              <div>
+                <button className="claim-button mt-3" onClick={handleClaim}>
+                  {status.canClaim
+                    ? "Claim"
+                    : formatTime(status.remainTimeForClaim)}
+                </button>
+              </div>
+            </>
+          )}
+          {activeTask === "triviaQuest" && (
+            <>
+              <div className="d-flex align-items-center w-100">
+                <h5
+                  className="my-3 flex-grow-1 text-center"
+                  style={{ marginRight: "-25px" }}
+                >
+                  Trivia Quest
+                </h5>
+                <span
+                  onClick={() => handleClosePanel(null)}
+                  className="close cursor-pointer d-flex align-items-center justify-content-end"
+                >
+                  <i className="bi bi-x-circle"></i>
+                </span>
+              </div>{" "}
+              <p className="w-75 m-0">
+                Take on today's trivia and earn rewards!
+              </p>
+              <div className="trivia-question my-3">
+                {dailyData[2]?.questions?.[currentQuestionIndex] && (
+                  <div className="question-container">
+                    <h6 className="my-3">
+                      {dailyData[2].questions[currentQuestionIndex].question}
+                    </h6>
+                    <div className="options my-3">
+                      {dailyData[2].questions[currentQuestionIndex].options.map(
+                        (option, idx) => (
+                          <div
+                            key={idx}
+                            className={`option-button ${
+                              selectedAnswer === option ? "selected" : ""
+                            }`}
+                            onClick={() => handleAnswerSelect(option)}
+                          >
+                            {option}
+                          </div>
+                        )
+                      )}
                     </div>
                   </div>
-                </>
-              )}
-              {activeTask === "luckyItem" && (
-                <>
-                  <div className="d-flex align-items-center w-100">
-                    <h5
-                      className="my-3 flex-grow-1 text-center"
-                      style={{ marginRight: "-25px" }}
-                    >
-                      Lucky Item
-                    </h5>
-                    <span
-                      onClick={() => handleClosePanel(null)}
-                      className="close cursor-pointer d-flex align-items-center justify-content-end"
-                    >
-                      <i className="bi bi-x-circle"></i>
-                    </span>
-                  </div>
-                  <p className="w-75 m-0">
-                    Find the Lucky Item of the day & Earn extra coins!
-                  </p>
-                  <div className="lucky-Item my-3">
-                    <Image
-                      src={LuckyItem}
-                      alt={`Lucky Item`}
-                      className="luckyItem-image"
-                    />
-                  </div>
-                  <div className="my-3 d-flex align-items-center">
-                    <Image src={Shopcek} alt="" className="earn-logo me-2" />
-                    <h1 className="m-0">+5.000.000</h1>
-                  </div>
-                  <div>
-                    <button className="claim-button mt-3" onClick={handleClaim}>
-                      {claim ? "Come back tomorrow!" : "Claim"}
-                    </button>
-                  </div>
-                </>
-              )}
-              {activeTask === "triviaQuest" && (
-                <>
-                  <div className="d-flex align-items-center w-100">
-                    <h5
-                      className="my-3 flex-grow-1 text-center"
-                      style={{ marginRight: "-25px" }}
-                    >
-                      Trivia Quest
-                    </h5>
-                    <span
-                      onClick={() => handleClosePanel(null)}
-                      className="close cursor-pointer d-flex align-items-center justify-content-end"
-                    >
-                      <i className="bi bi-x-circle"></i>
-                    </span>
-                  </div>{" "}
-                  <p className="w-75 m-0">
-                    Take on today's trivia and earn rewards!
-                  </p>
-                  <div className="trivia-question my-3">
-                    {dailyData[2]?.questions?.[currentQuestionIndex] && (
-                      <div className="question-container">
-                        <h6 className="my-3">
-                          {
-                            dailyData[2].questions[currentQuestionIndex]
-                              .question
-                          }
-                        </h6>
-                        <div className="options my-3">
-                          {dailyData[2].questions[
-                            currentQuestionIndex
-                          ].options.map((option, idx) => (
-                            <div
-                              key={idx}
-                              className={`option-button ${
-                                selectedAnswer === option ? "selected" : ""
-                              }`}
-                              onClick={() => handleAnswerSelect(option)}
-                            >
-                              {option}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <div className="my-2 d-flex align-items-center">
-                    <Image src={Shopcek} alt="" className="earn-logo me-2" />
-                    <h1 className="m-0">+2.000.000</h1>
-                  </div>
-                  <div>
-                    <button className="claim-button mt-3" onClick={handleClaim}>
-                      {claim ? "Come back tomorrow!" : "Claim"}
-                    </button>
-                  </div>
-                </>
-              )}
-            </SlideUpPanel>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="days-container my-3">
-            <div className="days">
-              {data.map((item, index) => (
-                <div
-                  key={index}
-                  className={`days-item ${
-                    index === activeDay - 1 ? "active" : "disabled"
-                  }`}
-                >
-                  <p className="days-title">{item.title}</p>
-                  <Image
-                    src={item.image}
-                    alt={`${item.title} reward`}
-                    className="days-logo"
-                  />
-                  <h4 className="heading">{item.points}</h4>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <button className="claim-button mt-3" onClick={handleClaim}>
-              {claim ? "Come back tomorrow!" : "Claim"}
-            </button>
-          </div>
-        </>
-      )}
+                )}
+              </div>
+              <div className="my-2 d-flex align-items-center">
+                <Image src={Shopcek} alt="" className="earn-logo me-2" />
+                <h1 className="m-0">+2.000.000</h1>
+              </div>
+              <div>
+                <button className="claim-button mt-3" onClick={handleClaim}>
+                  {status.canClaim
+                    ? "Claim"
+                    : formatTime(status.remainTimeForClaim)}
+                </button>
+              </div>
+            </>
+          )}
+        </SlideUpPanel>
+      </div>
     </section>
   );
 };

@@ -49,5 +49,9 @@ const stackApi = createApi({
 });
 
 export const { useStartMutation, useClaimMutation, useStatusQuery } = stackApi;
-export const { status, claim, start } = stackApi.endpoints;
+export const {
+  status: stackStatus,
+  claim: stackClaim,
+  start,
+} = stackApi.endpoints;
 export default stackApi;
