@@ -4,6 +4,7 @@ import xpApi from "./xp/api";
 import stackApi from "./stack/api";
 import taskApi from "./task/api";
 import dailyApi from "./daily/api";
+import frensApi from "./frens/api";
 
 const apiMiddlewares = [
   authApi.middleware,
@@ -12,6 +13,7 @@ const apiMiddlewares = [
   stackApi.middleware,
   taskApi.middleware,
   dailyApi.middleware,
+  frensApi.middleware,
 ];
 
 export default apiMiddlewares;

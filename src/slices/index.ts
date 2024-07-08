@@ -13,6 +13,8 @@ import taskReducer from "./task/slice";
 import taskApi from "./task/api";
 import dailyReducer from "./daily/slice";
 import dailyApi from "./daily/api";
+import frensReducer from "./frens/slice";
+import frensApi from "./frens/api";
 
 const rootReducer = combineReducers({
   selectedIcon: selectedIconReducer,
@@ -29,6 +31,8 @@ const rootReducer = combineReducers({
   "task/api": taskApi.reducer,
   "daily/app": dailyReducer,
   "daily/api": dailyApi.reducer,
+  "frens/app": frensReducer,
+  "frens/api": frensApi.reducer,
 });
 
 export default rootReducer;

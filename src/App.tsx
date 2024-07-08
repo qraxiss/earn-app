@@ -16,6 +16,7 @@ import { xpSelector } from "./slices/xp/slice";
 import { dailyStatus, days } from "./slices/api";
 import { dailySelector } from "./slices/daily/slice";
 import { setRemainTimeForClaim } from "./slices/daily/slice";
+import { referrers } from "./slices/api";
 function App() {
   const dispatch: AppDispatch = useDispatch();
   let promise: Promise<any>;
@@ -29,6 +30,7 @@ function App() {
         dispatch(taskStatus.initiate({})),
         dispatch(dailyStatus.initiate({})),
         dispatch(days.initiate({})),
+        dispatch(referrers.initiate({})),
       ]);
 
       promise.then(() => {
