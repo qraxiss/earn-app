@@ -4,13 +4,11 @@ import axios from "axios";
 import WebApp from "@twa-dev/sdk";
 
 const authClient = axios.create({
-  baseURL: config.authUrl,
+  baseURL: config.earnUrl,
 });
 
 export async function login() {
   const res = await authClient.post("/telegram/auth", {
-    service: "earn",
-    botUsername: "shopcekbot",
     initData: WebApp.initData,
   });
 
