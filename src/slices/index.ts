@@ -16,6 +16,8 @@ import dailyApi from "./daily/api";
 import frensReducer from "./frens/slice";
 import frensApi from "./frens/api";
 
+import leaderBoardApi from "./leader-board/api";
+
 const rootReducer = combineReducers({
   selectedIcon: selectedIconReducer,
   selectedMenu: selectedMenuReducer,
@@ -33,6 +35,7 @@ const rootReducer = combineReducers({
   "daily/api": dailyApi.reducer,
   "frens/app": frensReducer,
   "frens/api": frensApi.reducer,
+  "leader-board/api": leaderBoardApi.reducer,
 });
 
 export default rootReducer;

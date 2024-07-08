@@ -6,17 +6,23 @@ import Loading from "./components/Loading";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./store";
 import { loginAsync } from "./slices/thunk";
-import { cards, xp, stackStatus, taskStatus } from "./slices/api";
+import {
+  cards,
+  xp,
+  stackStatus,
+  taskStatus,
+  dailyStatus,
+  days,
+  referrers,
+  stats,
+  ranks,
+} from "./slices/api";
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
 
 import { setRemainTime, setPastTime } from "./slices/stack/slice";
-import { setPoint } from "./slices/xp/slice";
-import { xpSelector } from "./slices/xp/slice";
-import { dailyStatus, days } from "./slices/api";
-import { dailySelector } from "./slices/daily/slice";
-import { setRemainTimeForClaim } from "./slices/daily/slice";
-import { referrers } from "./slices/api";
+import { setPoint, xpSelector } from "./slices/xp/slice";
+import { dailySelector, setRemainTimeForClaim } from "./slices/daily/slice";
 function App() {
   const dispatch: AppDispatch = useDispatch();
   let promise: Promise<any>;
@@ -31,6 +37,8 @@ function App() {
         dispatch(dailyStatus.initiate({})),
         dispatch(days.initiate({})),
         dispatch(referrers.initiate({})),
+        dispatch(stats.initiate({})),
+        dispatch(ranks.initiate({})),
       ]);
 
       promise.then(() => {

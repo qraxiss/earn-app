@@ -5,6 +5,7 @@ import stackApi from "./stack/api";
 import taskApi from "./task/api";
 import dailyApi from "./daily/api";
 import frensApi from "./frens/api";
+import leaderBoardApi from "./leader-board/api";
 
 const apiMiddlewares = [
   authApi.middleware,
@@ -14,6 +15,7 @@ const apiMiddlewares = [
   taskApi.middleware,
   dailyApi.middleware,
   frensApi.middleware,
+  leaderBoardApi.middleware,
 ];
 
 export default apiMiddlewares;
