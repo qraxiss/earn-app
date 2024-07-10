@@ -3,13 +3,13 @@ import axiosReduxIntegration from "../../axios/axios-redux-integration";
 import config from "../../config";
 import earnClient from "../../clients/earn";
 
-import { setDailyStatus, setDays } from "./slice";
+import { setDailyStatus } from "./slice";
 import { xp } from "../api";
 
-const dailyApi = createApi({
-  reducerPath: "daily/api",
+const dailyCardApi = createApi({
+  reducerPath: "daily-card/api",
   endpoints: (build) => ({
-    claim: build.mutation({
+    cardClaim: build.mutation({
       query: () => ({
         url: "/claim",
         method: "post",
@@ -21,7 +21,7 @@ const dailyApi = createApi({
       },
     }),
 
-    status: build.query({
+    cardStatus: build.query({
       query: () => ({
         url: "/status",
         method: "get",
@@ -32,27 +32,11 @@ const dailyApi = createApi({
         dispatch(xp.initiate({})).refetch();
       },
     }),
-
-    days: build.query({
-      query: () => ({
-        url: "/days",
-        method: "get",
-      }),
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        const { data: days } = await queryFulfilled;
-        dispatch(setDays(days));
-      },
-    }),
   }),
   baseQuery: axiosReduxIntegration({ client: earnClient })({
-    baseUrl: config.earnUrl + "/daily",
+    baseUrl: config.earnUrl + "/daily/card",
   }),
 });
 
-export const { useClaimMutation, useStatusQuery } = dailyApi;
-export const {
-  claim: dailyClaim,
-  status: dailyStatus,
-  days,
-} = dailyApi.endpoints;
-export default dailyApi;
+export const { cardClaim, cardStatus } = dailyCardApi.endpoints;
+export default dailyCardApi;

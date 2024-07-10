@@ -5,14 +5,15 @@ import Clock from "../../assets/images/clock.png";
 import Question from "../../assets/images/Question.png";
 import GreenTick from "../../assets/images/greentick.png";
 import Shopcek from "../../assets/images/icon.svg";
-import LuckyItem from "../../assets/images/Luckyitem.png";
+import Card from "../../assets/images/Luckyitem.png";
 import { Image } from "react-bootstrap";
 import SlideUpPanel from "../TaskSlider";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store";
-import { dailySelector } from "../../slices/daily/slice";
-import { dailyClaim } from "../../slices/api";
+import { dailySelector } from "../../slices/daily-login/slice";
+import { cardClaim, loginClaim } from "../../slices/api";
+import { dailyCardSelector } from "../../slices/daily-card/slice";
 interface Task {
   id: string;
   heading: string;
@@ -48,17 +49,16 @@ const dailyData = [
     img: DaysRemoveBg,
     resetTime: "00:00",
     completed: true,
-
   },
   {
-    id: "luckyItem",
+    id: "card-claim",
     heading: "Lucky Item",
     img: Clock,
     resetTime: "18:00",
     completed: false,
   },
   {
-    id: "triviaQuest",
+    id: "question",
     heading: "Trivia Quest",
     img: Question,
     resetTime: "12:00",
@@ -106,7 +106,14 @@ const formatTime = (seconds: number): string => {
 
 export const Daily = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { status, days } = useSelector(dailySelector);
+  const { status: loginStatus, days } = useSelector(dailySelector);
+  const { status: cardStatus } = useSelector(dailyCardSelector);
+
+  const states = {
+    question: loginStatus,
+    "card-claim": cardStatus,
+    login: loginStatus,
+  };
 
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [activeTask, setActiveTask] = useState<string | null>(null);
@@ -134,10 +141,10 @@ export const Daily = () => {
 
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer);
-    const triviaQuest = dailyData.find((task) => task.id === "triviaQuest");
+    const quesiton = dailyData.find((task) => task.id === "quesiton");
     if (
-      triviaQuest?.questions &&
-      currentQuestionIndex < triviaQuest.questions.length - 1
+      quesiton?.questions &&
+      currentQuestionIndex < quesiton.questions.length - 1
     ) {
       setTimeout(() => {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -148,8 +155,12 @@ export const Daily = () => {
     }
   };
 
-  const handleClaim = async () => {
-    dispatch(dailyClaim.initiate({}));
+  const handleLoginClaim = async () => {
+    dispatch(loginClaim.initiate({}));
+  };
+
+  const handleCardClaim = async () => {
+    dispatch(cardClaim.initiate({}));
   };
 
   useEffect(() => {
@@ -193,26 +204,41 @@ export const Daily = () => {
       </div>
       <p className="heading my-3">DAILY TASKS</p>
       <div className="d-flex justify-content-between w-100">
-        {tasks.map((card, index) => (
-          <div
-            key={index}
-            onClick={() => handleClosePanel(card.id)}
-            className={`daily-card ${
-              card.completed ? "completed" : "not-completed"
-            } ${isPanelOpen ? "panel-open" : ""}`}
-          >
-            <h6 className="m-0">{card.heading}</h6>
-            <img src={card.img} style={card.img === DaysRemoveBg ? { width:'90px' , height:'90px', marginTop:'-14px'} : {}} alt="" />
-            <h6>{formatTime(status.remainTimeForClaim)}</h6>
-            {card.completed ? (
-              <span className="dot">
-                <img className="w-100" src={GreenTick} alt="" />
-              </span>
-            ) : (
-              <span className="white-dot"></span>
-            )}
-          </div>
-        ))}
+        {tasks.map((card, index) => {
+          const status = states[card.id as "card-claim" | "question" | "login"];
+          return (
+            <div
+              key={index}
+              onClick={() => handleClosePanel(card.id)}
+              className={`daily-card ${
+                status.canClaim ? "completed" : "not-completed"
+              } ${isPanelOpen ? "panel-open" : ""}`}
+            >
+              <h6 className="m-0">{card.heading}</h6>
+              <img
+                src={card.img}
+                style={
+                  card.img === DaysRemoveBg
+                    ? { width: "90px", height: "90px", marginTop: "-14px" }
+                    : {}
+                }
+                alt=""
+              />
+              <h6>
+                {status.canClaim
+                  ? "Claim"
+                  : formatTime(status.remainTimeForClaim)}
+              </h6>
+              {status.canClaim ? (
+                <span className="dot">
+                  <img className="w-100" src={GreenTick} alt="" />
+                </span>
+              ) : (
+                <span className="white-dot"></span>
+              )}
+            </div>
+          );
+        })}
         <SlideUpPanel
           show={isPanelOpen}
           onClose={() => handleClosePanel(null)}
@@ -243,8 +269,10 @@ export const Daily = () => {
                     <div
                       key={index}
                       className={`days-item ${
-                        index === status.daily.day - 1 ? "active" : ""
-                      } ${index === status.daily.day ? "next-active" : ""}`}
+                        index === loginStatus.daily.day - 1 ? "active" : ""
+                      } ${
+                        index === loginStatus.daily.day ? "next-active" : ""
+                      }`}
                     >
                       <div>
                         <p className="days-title">{item.title}</p>
@@ -258,17 +286,20 @@ export const Daily = () => {
                     </div>
                   ))}
                   <div>
-                    <button className="claim-button mt-3" onClick={handleClaim}>
-                      {status.canClaim
+                    <button
+                      className="claim-button mt-3"
+                      onClick={handleLoginClaim}
+                    >
+                      {loginStatus.canClaim
                         ? "Claim"
-                        : formatTime(status.remainTimeForClaim)}
+                        : formatTime(loginStatus.remainTimeForClaim)}
                     </button>
                   </div>
                 </div>
               </div>
             </>
           )}
-          {activeTask === "luckyItem" && (
+          {activeTask === "card-claim" && (
             <>
               <div className="d-flex align-items-center w-100">
                 <h5
@@ -289,7 +320,7 @@ export const Daily = () => {
               </p>
               <div className="lucky-Item my-3">
                 <Image
-                  src={LuckyItem}
+                  src={cardStatus.canClaim ? cardStatus.card.image : Card}
                   alt={`Lucky Item`}
                   className="luckyItem-image"
                 />
@@ -299,15 +330,15 @@ export const Daily = () => {
                 <h1 className="m-0">+5.000.000</h1>
               </div>
               <div>
-                <button className="claim-button mt-3" onClick={handleClaim}>
-                  {status.canClaim
+                <button className="claim-button mt-3" onClick={handleCardClaim}>
+                  {cardStatus.canClaim
                     ? "Claim"
-                    : formatTime(status.remainTimeForClaim)}
+                    : formatTime(loginStatus.remainTimeForClaim)}
                 </button>
               </div>
             </>
           )}
-          {activeTask === "triviaQuest" && (
+          {activeTask === "question" && (
             <>
               <div className="d-flex align-items-center w-100">
                 <h5
@@ -355,10 +386,13 @@ export const Daily = () => {
                 <h1 className="m-0">+2.000.000</h1>
               </div>
               <div>
-                <button className="claim-button mt-3" onClick={handleClaim}>
-                  {status.canClaim
+                <button
+                  className="claim-button mt-3"
+                  onClick={handleLoginClaim}
+                >
+                  {loginStatus.canClaim
                     ? "Claim"
-                    : formatTime(status.remainTimeForClaim)}
+                    : formatTime(loginStatus.remainTimeForClaim)}
                 </button>
               </div>
             </>

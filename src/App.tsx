@@ -11,18 +11,27 @@ import {
   xp,
   stackStatus,
   taskStatus,
-  dailyStatus,
-  days,
+  loginStatus,
+  loginDays,
   referrers,
   stats,
   ranks,
+  cardStatus,
 } from "./slices/api";
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
 
 import { setRemainTime, setPastTime } from "./slices/stack/slice";
 import { setPoint, xpSelector } from "./slices/xp/slice";
-import { dailySelector, setRemainTimeForClaim } from "./slices/daily/slice";
+import {
+  dailySelector,
+  setRemainTimeForClaim,
+} from "./slices/daily-login/slice";
+
+import {
+  dailyCardSelector,
+  setRemainTimeForClaim as setCardRemainTimeForClaim,
+} from "./slices/daily-card/slice";
 function App() {
   const dispatch: AppDispatch = useDispatch();
   let promise: Promise<any>;
@@ -34,11 +43,12 @@ function App() {
         dispatch(cards.initiate({})),
         dispatch(stackStatus.initiate({})),
         dispatch(taskStatus.initiate({})),
-        dispatch(dailyStatus.initiate({})),
-        dispatch(days.initiate({})),
+        dispatch(loginDays.initiate({})),
+        dispatch(loginStatus.initiate({})),
         dispatch(referrers.initiate({})),
         dispatch(stats.initiate({})),
         dispatch(ranks.initiate({})),
+        dispatch(cardStatus.initiate({})),
       ]);
 
       promise.then(() => {
@@ -98,10 +108,28 @@ function App() {
         dispatch(setRemainTimeForClaim(status.remainTimeForClaim - 1));
       }, 1000);
     } else if (status.remainTimeForClaim === 0) {
-      const { refetch } = dispatch(dailyStatus.initiate({}));
+      const { refetch } = dispatch(loginStatus.initiate({}));
       setTimeout(refetch, 1000);
     }
   }, [isLoading, status.remainTimeForClaim, status.canClaim]);
+
+  const { status: cardStatusState } = useSelector(dailyCardSelector);
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
+    if (!cardStatusState.canClaim && cardStatusState.remainTimeForClaim > 0) {
+      setTimeout(() => {
+        dispatch(
+          setCardRemainTimeForClaim(cardStatusState.remainTimeForClaim - 1)
+        );
+      }, 1000);
+    } else if (cardStatusState.remainTimeForClaim === 0) {
+      const { refetch } = dispatch(cardStatus.initiate({}));
+      setTimeout(refetch, 1000);
+    }
+  }, [isLoading, cardStatusState.remainTimeForClaim, cardStatusState.canClaim]);
 
   return <ErrorBoundary>{isLoading ? <Loading /> : <Earn />}</ErrorBoundary>;
 }

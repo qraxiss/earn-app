@@ -11,10 +11,12 @@ import stackReducer from "./stack/slice";
 import stackApi from "./stack/api";
 import taskReducer from "./task/slice";
 import taskApi from "./task/api";
-import dailyReducer from "./daily/slice";
-import dailyApi from "./daily/api";
+import dailyReducer from "./daily-login/slice";
+import dailyApi from "./daily-login/api";
 import frensReducer from "./frens/slice";
 import frensApi from "./frens/api";
+import dailyCardReducer from "./daily-card/slice";
+import dailyCardApi from "./daily-card/api";
 
 import leaderBoardApi from "./leader-board/api";
 
@@ -31,8 +33,10 @@ const rootReducer = combineReducers({
   "stack/api": stackApi.reducer,
   "task/app": taskReducer,
   "task/api": taskApi.reducer,
-  "daily/app": dailyReducer,
-  "daily/api": dailyApi.reducer,
+  "daily-login/app": dailyReducer,
+  "daily-login/api": dailyApi.reducer,
+  "daily-card/app": dailyCardReducer,
+  "daily-card/api": dailyCardApi.reducer,
   "frens/app": frensReducer,
   "frens/api": frensApi.reducer,
   "leader-board/api": leaderBoardApi.reducer,
