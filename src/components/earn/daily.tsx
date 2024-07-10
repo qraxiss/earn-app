@@ -227,6 +227,10 @@ export const Daily = () => {
               <h6>
                 {status.canClaim
                   ? "Claim"
+                  : card.id == "card-claim"
+                  ? status.remainTimeForClaim
+                    ? formatTime(status.remainTimeForClaim)
+                    : "You have to find!"
                   : formatTime(status.remainTimeForClaim)}
               </h6>
               {status.canClaim ? (

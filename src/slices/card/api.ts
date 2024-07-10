@@ -4,6 +4,7 @@ import axiosReduxIntegration from "../../axios/axios-redux-integration";
 import config from "../../config";
 import { setCardsData } from "./slice";
 import { xp } from "../xp/api";
+import { cardStatus } from "../api";
 
 const cardApi = createApi({
   reducerPath: "card/api",
@@ -33,7 +34,8 @@ const cardApi = createApi({
         await queryFulfilled;
         const { refetch: cardsRefetch } = dispatch(cards.initiate({}));
         const { refetch: xpRefetch } = dispatch(xp.initiate({}));
-        await Promise.all([xpRefetch(), cardsRefetch()]);
+        const { refetch: claimCardRefetch } = dispatch(cardStatus.initiate({}));
+        await Promise.all([xpRefetch(), cardsRefetch(), claimCardRefetch()]);
       },
     }),
     upgrade: build.mutation({
@@ -48,7 +50,8 @@ const cardApi = createApi({
         await queryFulfilled;
         const { refetch: cardsRefetch } = dispatch(cards.initiate({}));
         const { refetch: xpRefetch } = dispatch(xp.initiate({}));
-        await Promise.all([xpRefetch(), cardsRefetch()]);
+        const { refetch: claimCardRefetch } = dispatch(cardStatus.initiate({}));
+        await Promise.all([xpRefetch(), cardsRefetch(), claimCardRefetch()]);
       },
     }),
   }),
