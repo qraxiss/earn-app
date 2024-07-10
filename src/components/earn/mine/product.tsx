@@ -39,15 +39,15 @@ export default function Product({
           >
             <h6 className="">PWR {status.level}</h6>
             <h6 className="d-flex justify-content-center align-items-center">
-              <img className="earning-logo me-1" src={EarningLogo} alt="" />
+              <img className="earning-logo me-1" src={EarningLogo}  alt="" />
               {formatNumber(info.totalProfit)} /h
             </h6>
           </div>
           <Image
-            src={info.image}
+            src={info.image }
             alt={info.name}
-            className={`product-image ${status.locked ? "opacity-50" : ""}`}
-          />
+            className={` product-image ${status.locked ? "opacity-50" : ""}`}
+            />
 
           <div className="image-container">
             <h6 className="hourly-income">Hourly Rental Income</h6>

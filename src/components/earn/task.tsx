@@ -82,15 +82,17 @@ export const Task: React.FC = () => {
                 <Image
                   src={task.icon}
                   alt={task.title}
+                  style={task.title === "Follow Shopcek On X" ? { width: '70px', height: '100px', marginLeft:'-5px', marginRight:'-4px' } : {}}
                   className={`follow-images ${
                     task.title === "Follow Shopcek On X " ? "x-image" : ""
-                  }`}
+                  }`
+}
                 />
               </div>
               <div className=" px-1 ">
                 <p className="m-0 task-heading">{task.title}</p>
                 <div className="d-flex align-items-center">
-                  <img src={logo} alt="" className="logo me-2" />
+                  <img src={logo} alt="" className="logo me-2" style={{width:'50px' , marginTop:'-10px', marginBottom:'-8px'}} />
                   <h4 className="reward m-0">{task.reward}</h4>
                 </div>
               </div>

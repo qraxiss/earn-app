@@ -64,10 +64,11 @@
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
       -webkit-mask-composite: destination-out;
-      mask-composite: exclude; /* For Chrome/Safari */
+      mask-composite: exclude;
+      /* For Chrome/Safari */
     }
 
-    .days-item.active + .days-item {
+    .days-item.active+.days-item {
       opacity: 1;
       background-color: #1e3557;
     }
@@ -83,6 +84,7 @@
 
     .weekdays-image {
       width: 200px;
+      
     }
   }
 }
@@ -157,8 +159,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 5px; /* Same border-radius as .trivia-question */
-  padding: 2px; /* Space between the border and the content */
+  border-radius: 5px;
+  /* Same border-radius as .trivia-question */
+  padding: 2px;
+  /* Space between the border and the content */
   box-sizing: border-box;
   background: linear-gradient(to right, #0097b2, #7ed957);
   -webkit-mask:
@@ -182,13 +186,16 @@
   border-radius: 10px;
   cursor: pointer;
 }
+
 .daily-card.panel-open {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
+
 .not-completed {
   border: 1px solid #737373;
 }
+
 .completed::before {
   content: "";
   position: absolute;
@@ -206,9 +213,11 @@
 .daily-card h5 {
   font-weight: 400;
 }
+
 .daily-card img {
   width: 55%;
 }
+
 .dot {
   display: flex;
   width: 10px;
@@ -231,19 +240,23 @@
   top: 6px;
   height: 10px;
   border-radius: 50%;
-  animation: blink 1s infinite; /* Apply the blink animation */
+  animation: blink 1s infinite;
+  /* Apply the blink animation */
 }
 
 /* Keyframes for the blinking effect */
 @keyframes blink {
+
   0%,
   100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0;
   }
 }
+
 .slide-up-panel {
   position: fixed;
   bottom: -75%;
@@ -284,20 +297,26 @@
   cursor: pointer;
   margin-right: 10px;
 }
+
 @media (max-width: 768px) {
   .days-section {
-   padding-block: 50px;
+    padding-block: 50px;
+
     .weekdays {
       width: 70px;
       height: 70px;
+
       .weekdays-image {
         width: 210px;
       }
     }
+
     .days-container {
       width: 100%;
+
       .days {
         gap: 10px;
+
         .days-item {
           width: 30%;
           height: 90px;
@@ -307,6 +326,7 @@
             font-weight: 500;
             margin: 0px;
           }
+
           .days-logo {
             width: 30px;
           }

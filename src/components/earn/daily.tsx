@@ -1,5 +1,6 @@
-import React, { useState, useEffect, MouseEvent } from "react";
+import React, { useState, useEffect } from "react";
 import Days from "../../assets/images/days.png";
+import DaysRemoveBg from "../../assets/images/days-r-bg.png";
 import Clock from "../../assets/images/clock.png";
 import Question from "../../assets/images/Question.png";
 import GreenTick from "../../assets/images/greentick.png";
@@ -44,9 +45,10 @@ const dailyData = [
   {
     id: "login",
     heading: "Daily Log-in",
-    img: Days,
+    img: DaysRemoveBg,
     resetTime: "00:00",
     completed: true,
+
   },
   {
     id: "luckyItem",
@@ -200,7 +202,7 @@ export const Daily = () => {
             } ${isPanelOpen ? "panel-open" : ""}`}
           >
             <h6 className="m-0">{card.heading}</h6>
-            <img src={card.img} alt="" />
+            <img src={card.img} style={card.img === DaysRemoveBg ? { width:'90px' , height:'90px', marginTop:'-14px'} : {}} alt="" />
             <h6>{formatTime(status.remainTimeForClaim)}</h6>
             {card.completed ? (
               <span className="dot">
