@@ -17,6 +17,8 @@ import {
   stats,
   ranks,
   cardStatus,
+  questionStatus,
+  question,
 } from "./slices/api";
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
@@ -32,6 +34,11 @@ import {
   dailyCardSelector,
   setRemainTimeForClaim as setCardRemainTimeForClaim,
 } from "./slices/daily-card/slice";
+
+import {
+  dailyQuestionSelector,
+  setRemainTimeForClaim as setQuestionRemainTimeForClaim,
+} from "./slices/daily-question/slice";
 function App() {
   const dispatch: AppDispatch = useDispatch();
   let promise: Promise<any>;
@@ -49,6 +56,8 @@ function App() {
         dispatch(stats.initiate({})),
         dispatch(ranks.initiate({})),
         dispatch(cardStatus.initiate({})),
+        dispatch(question.initiate({})),
+        dispatch(questionStatus.initiate({})),
       ]);
 
       promise.then(() => {
@@ -130,6 +139,33 @@ function App() {
       setTimeout(refetch, 1000);
     }
   }, [isLoading, cardStatusState.remainTimeForClaim, cardStatusState.canClaim]);
+
+  const { status: questionStatusState } = useSelector(dailyQuestionSelector);
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
+    if (
+      !questionStatusState.canClaim &&
+      questionStatusState.remainTimeForClaim > 0
+    ) {
+      setTimeout(() => {
+        dispatch(
+          setQuestionRemainTimeForClaim(
+            questionStatusState.remainTimeForClaim - 1
+          )
+        );
+      }, 1000);
+    } else if (questionStatusState.remainTimeForClaim === 0) {
+      const { refetch } = dispatch(questionStatus.initiate({}));
+      setTimeout(refetch, 1000);
+    }
+  }, [
+    isLoading,
+    questionStatusState.remainTimeForClaim,
+    questionStatusState.canClaim,
+  ]);
 
   return <ErrorBoundary>{isLoading ? <Loading /> : <Earn />}</ErrorBoundary>;
 }

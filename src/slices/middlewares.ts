@@ -7,6 +7,7 @@ import dailyApi from "./daily-login/api";
 import frensApi from "./frens/api";
 import leaderBoardApi from "./leader-board/api";
 import dailyCardApi from "./daily-card/api";
+import dailyQuestionApi from "./daily-question/api";
 const apiMiddlewares = [
   authApi.middleware,
   cardApi.middleware,
@@ -17,6 +18,7 @@ const apiMiddlewares = [
   frensApi.middleware,
   leaderBoardApi.middleware,
   dailyCardApi.middleware,
+  dailyQuestionApi.middleware,
 ];
 
 export default apiMiddlewares;
