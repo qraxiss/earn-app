@@ -17,7 +17,8 @@ import frensReducer from "./frens/slice";
 import frensApi from "./frens/api";
 import dailyCardReducer from "./daily-card/slice";
 import dailyCardApi from "./daily-card/api";
-
+import dailyQuestionApi from "./daily-question/api";
+import dailyQuestionReducer from "./daily-question/slice";
 import leaderBoardApi from "./leader-board/api";
 
 const rootReducer = combineReducers({
@@ -39,6 +40,8 @@ const rootReducer = combineReducers({
   "daily-card/api": dailyCardApi.reducer,
   "frens/app": frensReducer,
   "frens/api": frensApi.reducer,
+  "daily-question/app": dailyQuestionReducer,
+  "daily-question/api": dailyQuestionApi.reducer,
   "leader-board/api": leaderBoardApi.reducer,
 });
 

@@ -14,6 +14,8 @@ import { AppDispatch } from "../../store";
 import { dailySelector } from "../../slices/daily-login/slice";
 import { cardClaim, loginClaim } from "../../slices/api";
 import { dailyCardSelector } from "../../slices/daily-card/slice";
+import { dailyQuestionSelector } from "../../slices/daily-question/slice";
+import { questionClaim } from "../../slices/api";
 interface Task {
   id: string;
   heading: string;
@@ -108,9 +110,12 @@ export const Daily = () => {
   const dispatch: AppDispatch = useDispatch();
   const { status: loginStatus, days } = useSelector(dailySelector);
   const { status: cardStatus } = useSelector(dailyCardSelector);
+  const { status: questionStatus, question } = useSelector(
+    dailyQuestionSelector
+  );
 
   const states = {
-    question: loginStatus,
+    question: questionStatus,
     "card-claim": cardStatus,
     login: loginStatus,
   };
@@ -141,6 +146,7 @@ export const Daily = () => {
 
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer);
+    console.log(answer);
     const quesiton = dailyData.find((task) => task.id === "quesiton");
     if (
       quesiton?.questions &&
@@ -161,6 +167,10 @@ export const Daily = () => {
 
   const handleCardClaim = async () => {
     dispatch(cardClaim.initiate({}));
+  };
+
+  const handleQuestionClaim = async () => {
+    dispatch(questionClaim.initiate({}));
   };
 
   useEffect(() => {
@@ -233,7 +243,7 @@ export const Daily = () => {
                     : "You have to find!"
                   : formatTime(status.remainTimeForClaim)}
               </h6>
-              {status.canClaim ? (
+              {!status.canClaim ? (
                 <span className="dot">
                   <img className="w-100" src={GreenTick} alt="" />
                 </span>
@@ -362,25 +372,21 @@ export const Daily = () => {
                 Take on today's trivia and earn rewards!
               </p>
               <div className="trivia-question my-3">
-                {dailyData[2]?.questions?.[currentQuestionIndex] && (
+                {question && (
                   <div className="question-container">
-                    <h6 className="my-3">
-                      {dailyData[2].questions[currentQuestionIndex].question}
-                    </h6>
+                    <h6 className="my-3">{question.question}</h6>
                     <div className="options my-3">
-                      {dailyData[2].questions[currentQuestionIndex].options.map(
-                        (option, idx) => (
-                          <div
-                            key={idx}
-                            className={`option-button ${
-                              selectedAnswer === option ? "selected" : ""
-                            }`}
-                            onClick={() => handleAnswerSelect(option)}
-                          >
-                            {option}
-                          </div>
-                        )
-                      )}
+                      {question.options.map((option: string, idx: number) => (
+                        <div
+                          key={idx}
+                          className={`option-button ${
+                            selectedAnswer === option ? "selected" : ""
+                          }`}
+                          onClick={() => handleAnswerSelect(option)}
+                        >
+                          {option}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 )}
@@ -392,11 +398,16 @@ export const Daily = () => {
               <div>
                 <button
                   className="claim-button mt-3"
-                  onClick={handleLoginClaim}
+                  onClick={handleQuestionClaim}
+                  disabled={question.answer !== selectedAnswer}
                 >
-                  {loginStatus.canClaim
-                    ? "Claim"
-                    : formatTime(loginStatus.remainTimeForClaim)}
+                  {questionStatus.canClaim
+                    ? selectedAnswer
+                      ? question.answer === selectedAnswer
+                        ? "Claim"
+                        : "Wrong Answer"
+                      : "Select Answer"
+                    : formatTime(questionStatus.remainTimeForClaim)}
                 </button>
               </div>
             </>

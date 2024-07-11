@@ -7,3 +7,4 @@ export { loginClaim, loginDays, loginStatus } from "./daily-login/api";
 export { cardClaim, cardStatus } from "./daily-card/api";
 export { referrers } from "./frens/api";
 export { stats, ranks } from "./leader-board/api";
+export { questionClaim, question, questionStatus } from "./daily-question/api";
