@@ -4,6 +4,6 @@
 // };
 
 export default {
-  earnUrl: "https://api.shopcek.com/api",
+  earnUrl: "https://earn-api-a4fafyczhtgzcca7.eastus-01.azurewebsites.net/api",
   authUrl: "https://api.shopcek.com/auth/api",
 };
