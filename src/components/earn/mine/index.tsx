@@ -78,7 +78,9 @@ export const Mine = () => {
     dispatch(setIcon(icon));
   };
 
-  const status = useSelector((state: RootState) => state["stack/app"].status);
+  const { status, earnedXp } = useSelector(
+    (state: RootState) => state["stack/app"]
+  );
 
   useEffect(() => {
     if (!status.isWaiting) {
@@ -111,7 +113,13 @@ export const Mine = () => {
         {status.canClaim ? (
           <h4 className="mine-start started m-0" onClick={claimSelling}>
             {/* <div className="fill-animation"></div> */}
-            Claim
+            <div className="w-45 p-3">Claim</div>
+            <div className="my-5 d-flex align-items-center w-45 p-4">
+              <Image src={logo} alt="" className="earn-logo earned-xp" />
+              <p className="earned-amount">
+                {Math.round(status.earnPerHour * 4).toLocaleString()}
+              </p>
+            </div>
           </h4>
         ) : !status.isWaiting ? (
           <h4 className="mine-start m-0" onClick={startSelling}>
@@ -125,7 +133,13 @@ export const Mine = () => {
                 animation: `fillBackground ${status.remainTime}s linear forwards`,
               }}
             ></div>
-            Sales Started
+            <div className="w-45 p-3">Sales Started</div>
+            <div className="my-5 d-flex align-items-center w-45 p-4">
+              <Image src={logo} alt="" className="earn-logo earned-xp" />
+              <p className="earned-amount">
+                {Math.round(earnedXp).toLocaleString()}
+              </p>
+            </div>
           </h4>
         )}
       </div>

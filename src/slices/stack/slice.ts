@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../store";
 
 const initialState = {
   status: {} as any,
+  earnedXp: 0,
 };
 
 const stackSlice = createSlice({
@@ -17,8 +19,13 @@ const stackSlice = createSlice({
     setPastTime(state, { payload: time }) {
       state.status.pastTime = time;
     },
+    setEarnedXp(state, { payload: xp }) {
+      state.earnedXp = xp;
+    },
   },
 });
 
-export const { setStatus, setPastTime, setRemainTime } = stackSlice.actions;
+export const { setStatus, setPastTime, setRemainTime, setEarnedXp } =
+  stackSlice.actions;
 export default stackSlice.reducer;
+export const stackSelector = (state: RootState) => state["stack/app"];

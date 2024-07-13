@@ -23,7 +23,7 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "./store";
 
-import { setRemainTime, setPastTime } from "./slices/stack/slice";
+import { setRemainTime, setPastTime, setEarnedXp } from "./slices/stack/slice";
 import { setPoint, xpSelector } from "./slices/xp/slice";
 import {
   dailySelector,
@@ -39,6 +39,8 @@ import {
   dailyQuestionSelector,
   setRemainTimeForClaim as setQuestionRemainTimeForClaim,
 } from "./slices/daily-question/slice";
+
+import { stackSelector } from "./slices/stack/slice";
 function App() {
   const dispatch: AppDispatch = useDispatch();
   let promise: Promise<any>;
@@ -66,10 +68,8 @@ function App() {
     })();
   }, []);
 
-  const statusState = useSelector(
-    (state: RootState) => state["stack/app"].status
-  );
   const xpState = useSelector(xpSelector);
+  const stackState = useSelector(stackSelector);
 
   const [isLoading, setIsLoading] = useState(true);
   const [firstPassedTime, setFirstPassedTime] = useState(false);
@@ -79,32 +79,38 @@ function App() {
       return;
     }
 
-    if (statusState.isWaiting && statusState.remainTime > 0) {
+    if (stackState.status.isWaiting && stackState.status.remainTime > 0) {
       if (!firstPassedTime) {
         const relativeXp =
-          xpState.point + statusState.pastTime * (xpState.earn / 3600);
+          stackState.status.pastTime * (stackState.status.earnPerHour / 3600);
 
-        dispatch(setPoint(relativeXp));
+        dispatch(setEarnedXp(relativeXp));
 
         setTimeout(() => {
-          dispatch(setRemainTime(statusState.remainTime - 1));
-          dispatch(setPastTime(statusState.pastTime + 1));
-          dispatch(setPoint(relativeXp + xpState.earn / 3600));
+          dispatch(setRemainTime(stackState.status.remainTime - 1));
+          dispatch(setPastTime(stackState.status.pastTime + 1));
+          dispatch(
+            setEarnedXp(relativeXp + stackState.status.earnPerHour / 3600)
+          );
         }, 1000);
 
         setFirstPassedTime(true);
       } else {
         setTimeout(() => {
-          dispatch(setRemainTime(statusState.remainTime - 1));
-          dispatch(setPastTime(statusState.pastTime + 1));
-          dispatch(setPoint(xpState.point + xpState.earn / 3600));
+          dispatch(setRemainTime(stackState.status.remainTime - 1));
+          dispatch(setPastTime(stackState.status.pastTime + 1));
+          dispatch(
+            setEarnedXp(
+              stackState.earnedXp + stackState.status.earnPerHour / 3600
+            )
+          );
         }, 1000);
       }
-    } else if (statusState.remainTime === 0) {
+    } else if (stackState.status.remainTime === 0) {
       const { refetch } = dispatch(stackStatus.initiate({}));
       setTimeout(refetch, 1000);
     }
-  }, [isLoading, statusState.remainTime, statusState.isWaiting]);
+  }, [isLoading, stackState.status.remainTime, stackState.status.isWaiting]);
 
   const { status } = useSelector(dailySelector);
   useEffect(() => {
