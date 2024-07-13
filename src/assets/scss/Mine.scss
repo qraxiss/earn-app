@@ -115,10 +115,10 @@
   margin-top: 5px;
   text-align: center;
 }
-.product-hover:hover {
+.product-hover {
   justify-content: space-between !important;
 }
-.product-hover:hover .buy-button {
+.product-hover .buy-button {
   background: #15253b;
   transition: background 0.3s, padding 0.3s, border-radius 0.3s;
   padding: 5px 30px;
@@ -126,11 +126,11 @@
   border: 1px solid #737373;
 }
 
-.product-hover:hover .lock {
+.product-hover .lock {
   opacity: 0;
 }
 
-.product-hover:hover .buy-button {
+.product-hover .buy-button {
   opacity: 1;
 }
 .buy-lock {
@@ -140,7 +140,7 @@
   overflow: hidden;
 }
 
-.product-hover:hover .buy-lock {
+.product-hover .buy-lock {
   width: 20px;
   height: 20px;
   opacity: 1;
@@ -150,20 +150,20 @@
   opacity: 0;
 }
 
-.product-hover:hover .price-container {
+.product-hover .price-container {
   opacity: 1;
 }
 
-.product-hover:hover .product-image,
-.product-hover:hover .pwr,
-.product-hover:hover .upgrade-heading {
+.product-hover .product-image,
+.product-hover .pwr,
+.product-hover .upgrade-heading {
   display: none !important;
   transition: opacity 0.5s;
 }
 
-.product-hover:hover .hourly-income,
-.product-hover:hover .image-container,
-.product-hover:hover .buy-heading {
+.product-hover .hourly-income,
+.product-hover .image-container,
+.product-hover .buy-heading {
   display: block !important;
   transition: opacity 0.5s;
 }
