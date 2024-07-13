@@ -61,6 +61,8 @@ export const Task: React.FC = () => {
   const tasks = useSelector(taskSelector);
   const dispatch: AppDispatch = useDispatch();
 
+  const [ids, setIds] = useState<any[]>([]);
+
   return (
     <section className="task-section">
       <div className="task-container mt-4 mb-5">
@@ -72,9 +74,11 @@ export const Task: React.FC = () => {
           <div
             key={task.id}
             onClick={() => {
-              setTimeout(() => {
-                dispatch(taskClaim.initiate({ taskId: task.id }));
-              }, 30000);
+              setIds([...ids, task.id]);
+              setTimeout(async () => {
+                await dispatch(taskClaim.initiate({ taskId: task.id }));
+                setIds(ids.filter((id) => task.id !== id));
+              }, 15000);
               window.open(task.link, "_blank");
             }}
             className="d-flex justify-content-between align-items-center follow-container my-1 p-2"
@@ -124,8 +128,22 @@ export const Task: React.FC = () => {
                   className="completed-tick"
                 />
               ) : (
-                <button className="claim btn">
-                  {task.status === "go" ? "Go" : "Go"}
+                <button
+                  disabled={ids.find((id) => task.id === id)}
+                  className="claim btn"
+                >
+                  {ids.find((id) => task.id === id) ? (
+                    <div
+                      className="spinner-border"
+                      style={{
+                        width: "18px",
+                        height: "18px",
+                      }}
+                      role="status"
+                    ></div>
+                  ) : (
+                    "Go"
+                  )}
                 </button>
               )}
             </div>
