@@ -127,14 +127,9 @@ export const Mine = () => {
           </h4>
         ) : (
           <h4 className="mine-start started m-0">
-            <div
-              className="fill-animation"
-              style={{
-                animation: `fillBackground ${status.remainTime}s linear forwards`,
-              }}
-            ></div>
-            <div className="w-45 p-3">Sales Started</div>
-            <div className="my-5 d-flex align-items-center w-45 p-4">
+            <div></div>
+            <div className="p-3">Sales Started</div>
+            <div className="my-5 d-flex align-items-center p-3">
               <Image src={logo} alt="" className="earn-logo earned-xp" />
               <p className="earned-amount">
                 {Math.round(earnedXp).toLocaleString()}
