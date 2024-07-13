@@ -12,10 +12,18 @@ export const Friends = () => {
 
   const handleCopy = () => {
     const link = `https://t.me/shopcekbot/app?startapp=${WebApp.initDataUnsafe?.user?.id}`; // Replace with your actual link
-    navigator.clipboard.writeText(link).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+    navigator.clipboard
+      .writeText(
+        `${link}
+
+Open your store, become a top shopkeeper, and receive exclusive airdrop!
+🛒 10k Coins as a welcome gift
+👥 Refer friends and earn bonus coins for each referral!`
+      )
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
   };
 
   return (

@@ -8,7 +8,14 @@ import { start, stackClaim } from "../../../slices/api";
 import { setIcon } from "../../../slices/selected-icon/slice";
 import { cardsSelector } from "../../../slices/card/slice";
 import { xpSelector } from "../../../slices/xp/slice";
-import { AppDispatch, RootState, store } from "../../../store";
+import { AppDispatch, RootState } from "../../../store";
+import {
+  open,
+  close,
+  notificationSelector,
+} from "../../../slices/notification/slice";
+
+import { setMenu } from "../../../slices/selected-menu/slice";
 
 //images
 import logo from "../../../assets/images/icon.svg";
@@ -16,8 +23,10 @@ import EarningLogo from "../../../assets/images/EarningLogo.png";
 
 //components
 import Product from "./product";
+import SlideUpPanel from "../../TaskSlider";
 
 import formatNumber from "../../../helpers/format-number";
+import { dailyCardSelector } from "../../../slices/daily-card/slice";
 
 // constants
 const CATEGORIES = [
@@ -53,6 +62,8 @@ export const Mine = () => {
   const xp = useSelector(xpSelector);
   const cards = useSelector(cardsSelector);
   const selectedIcon = useSelector((state: any) => state.selectedIcon.icon);
+  const notification = useSelector(notificationSelector);
+  const { status: cardStatus } = useSelector(dailyCardSelector);
 
   const isXpLoading = useSelector(
     (state: RootState) => state["xp/api"].queries["xp({})"].status
@@ -169,6 +180,53 @@ export const Mine = () => {
           <Product product={product} key={idx}></Product>
         ))}
       </div>
+
+      <SlideUpPanel show={notification} onClose={() => {}}>
+        {
+          <>
+            <div className="d-flex align-items-center w-100">
+              <h5
+                className="my-3 flex-grow-1 text-center"
+                style={{ marginRight: "-25px" }}
+              >
+                Lucky Item
+              </h5>
+              <span
+                onClick={() => {
+                  dispatch(close());
+                }}
+                className="close cursor-pointer d-flex align-items-center justify-content-end"
+              >
+                <i className="bi bi-x-circle"></i>
+              </span>
+            </div>
+            <p className="w-75 m-0">
+              Congratulations, you won 2,000,000 Coins by finding the product of
+              the day.
+            </p>
+            <div className="lucky-Item notification my-3">
+              <Image
+                src={cardStatus.card.image}
+                alt={`Lucky Item`}
+                className="luckyItem-image"
+              />
+            </div>
+            <div>
+              <button
+                className="claim-button mt-3"
+                onClick={() => {
+                  dispatch(close());
+                  setTimeout(() => {
+                    dispatch(setMenu("daily"));
+                  }, 300);
+                }}
+              >
+                Claim
+              </button>
+            </div>
+          </>
+        }
+      </SlideUpPanel>
     </section>
   );
 };

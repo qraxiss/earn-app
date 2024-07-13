@@ -5,7 +5,7 @@ import config from "../../config";
 import { setCardsData } from "./slice";
 import { xp } from "../xp/api";
 import { cardStatus } from "../api";
-
+import { open } from "../notification/slice";
 const cardApi = createApi({
   reducerPath: "card/api",
   baseQuery: axiosReduxIntegration({ client: client })({
@@ -35,7 +35,26 @@ const cardApi = createApi({
         const { refetch: cardsRefetch } = dispatch(cards.initiate({}));
         const { refetch: xpRefetch } = dispatch(xp.initiate({}));
         const { refetch: claimCardRefetch } = dispatch(cardStatus.initiate({}));
-        await Promise.all([xpRefetch(), cardsRefetch(), claimCardRefetch()]);
+        const [
+          ,
+          ,
+          {
+            data: {
+              daily: { finded },
+              canClaim,
+            },
+          },
+        ] = await Promise.all([
+          xpRefetch(),
+          cardsRefetch(),
+          claimCardRefetch(),
+        ]);
+
+        console.log(finded, canClaim);
+
+        if (finded && canClaim) {
+          dispatch(open());
+        }
       },
     }),
     upgrade: build.mutation({
@@ -51,7 +70,26 @@ const cardApi = createApi({
         const { refetch: cardsRefetch } = dispatch(cards.initiate({}));
         const { refetch: xpRefetch } = dispatch(xp.initiate({}));
         const { refetch: claimCardRefetch } = dispatch(cardStatus.initiate({}));
-        await Promise.all([xpRefetch(), cardsRefetch(), claimCardRefetch()]);
+        const [
+          ,
+          ,
+          {
+            data: {
+              daily: { finded },
+              canClaim,
+            },
+          },
+        ] = await Promise.all([
+          xpRefetch(),
+          cardsRefetch(),
+          claimCardRefetch(),
+        ]);
+
+        console.log(finded, canClaim);
+
+        if (finded && canClaim) {
+          dispatch(open());
+        }
       },
     }),
   }),

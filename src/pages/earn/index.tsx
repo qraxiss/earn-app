@@ -55,6 +55,10 @@ export const Earn: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    setSelectedComponent(selectedMenu);
+  }, [selectedMenu]);
+
   return (
     <section className="section header">
       {isMobile ? (
@@ -78,7 +82,9 @@ export const Earn: React.FC = () => {
             <div className="d-flex justify-content-between align-items-center navbar-mobile">
               <div className="flex-fill text-center">
                 <span
-                  className={`navbar-items-mobile ${selectedMenu === "daily" ? "selected-icon" : ""}`}
+                  className={`navbar-items-mobile ${
+                    selectedMenu === "daily" ? "selected-icon" : ""
+                  }`}
                   onClick={() => handleIconClick("daily")}
                 >
                   <img src={DaysImage} alt="" className="menu-logo" />
@@ -87,7 +93,9 @@ export const Earn: React.FC = () => {
               </div>
               <div className="flex-fill text-center">
                 <span
-                  className={`navbar-items-mobile ${selectedMenu === "frens" ? "selected-icon" : ""}`}
+                  className={`navbar-items-mobile ${
+                    selectedMenu === "frens" ? "selected-icon" : ""
+                  }`}
                   onClick={() => handleIconClick("frens")}
                 >
                   <img src={FrensImage} alt="" className="menu-logo" />
@@ -96,7 +104,9 @@ export const Earn: React.FC = () => {
               </div>
               <div className="flex-fill text-center">
                 <span
-                  className={`navbar-items-mobile ${selectedMenu === "mine" ? "selected-icon" : ""}`}
+                  className={`navbar-items-mobile ${
+                    selectedMenu === "mine" ? "selected-icon" : ""
+                  }`}
                   onClick={() => handleIconClick("mine")}
                 >
                   <img src={Store} alt="" className="menu-logo" />
@@ -105,7 +115,9 @@ export const Earn: React.FC = () => {
               </div>
               <div className="flex-fill text-center">
                 <span
-                  className={`navbar-items-mobile ${selectedMenu === "task" ? "selected-icon" : ""}`}
+                  className={`navbar-items-mobile ${
+                    selectedMenu === "task" ? "selected-icon" : ""
+                  }`}
                   onClick={() => handleIconClick("task")}
                 >
                   <img src={TaskImage} alt="" className="menu-logo" />
@@ -114,7 +126,9 @@ export const Earn: React.FC = () => {
               </div>
               <div className="flex-fill text-center">
                 <span
-                  className={`navbar-items-mobile ${selectedMenu === "name" ? "selected-icon" : ""}`}
+                  className={`navbar-items-mobile ${
+                    selectedMenu === "name" ? "selected-icon" : ""
+                  }`}
                   onClick={() => handleIconClick("name")}
                 >
                   <img src={Rank} alt="" className="menu-logo" />

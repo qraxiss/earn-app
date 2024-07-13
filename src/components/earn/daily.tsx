@@ -155,7 +155,7 @@ export const Daily = () => {
   };
 
   const handleCardClaim = async () => {
-    dispatch(cardClaim.initiate({}));
+    if (cardStatus.canClaim) dispatch(cardClaim.initiate({}));
   };
 
   const handleQuestionClaim = async () => {
@@ -328,7 +328,11 @@ export const Daily = () => {
               </p>
               <div className="lucky-Item my-3">
                 <Image
-                  src={cardStatus.canClaim ? cardStatus.card.image : Card}
+                  src={
+                    cardStatus.canClaim || cardStatus.remainTimeForClaim
+                      ? cardStatus.card.image
+                      : Card
+                  }
                   alt={`Lucky Item`}
                   className="luckyItem-image"
                 />
@@ -341,7 +345,9 @@ export const Daily = () => {
                 <button className="claim-button mt-3" onClick={handleCardClaim}>
                   {cardStatus.canClaim
                     ? "Claim"
-                    : formatTime(loginStatus.remainTimeForClaim)}
+                    : cardStatus.remainTimeForClaim
+                    ? formatTime(cardStatus.remainTimeForClaim)
+                    : "You have to find!"}
                 </button>
               </div>
             </>

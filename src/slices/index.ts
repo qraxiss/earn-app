@@ -20,6 +20,7 @@ import dailyCardApi from "./daily-card/api";
 import dailyQuestionApi from "./daily-question/api";
 import dailyQuestionReducer from "./daily-question/slice";
 import leaderBoardApi from "./leader-board/api";
+import notificationReducer from "./notification/slice";
 
 const rootReducer = combineReducers({
   selectedIcon: selectedIconReducer,
@@ -43,6 +44,7 @@ const rootReducer = combineReducers({
   "daily-question/app": dailyQuestionReducer,
   "daily-question/api": dailyQuestionApi.reducer,
   "leader-board/api": leaderBoardApi.reducer,
+  "notification/app": notificationReducer,
 });
 
 export default rootReducer;
