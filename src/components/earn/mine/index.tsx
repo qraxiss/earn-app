@@ -106,7 +106,7 @@ export const Mine = () => {
         {status.isWaiting ? (
           <h4 className="m-0">{formatTime(status.remainTime)}</h4>
         ) : (
-          <h4 className="m-0">04:00:00</h4>
+          <h4 className="m-0">00:00:00</h4>
         )}
       </div>
       <div className="mt-3">
