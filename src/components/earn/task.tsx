@@ -72,7 +72,9 @@ export const Task: React.FC = () => {
           <div
             key={task.id}
             onClick={() => {
-              dispatch(taskClaim.initiate({ taskId: task.id }));
+              setTimeout(() => {
+                dispatch(taskClaim.initiate({ taskId: task.id }));
+              }, 30000);
               window.open(task.link, "_blank");
             }}
             className="d-flex justify-content-between align-items-center follow-container my-1 p-2"
