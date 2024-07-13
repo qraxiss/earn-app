@@ -42,7 +42,7 @@ export const Name = () => {
             >
               {!rank.myRank ? (
                 <div className="d-flex  align-items-center">
-                  <h4 className="my-0 mx-2 rank-no">{rank.rank}</h4>
+                  <h4 className="my-0 mx-2 rank-no">{idx + 1}</h4>
                   <img className="profile-img ms-3 me-2" src={Profile} alt="" />
                   <h4 className="m-0 username">{rank.name}</h4>
                 </div>
