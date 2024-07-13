@@ -277,6 +277,11 @@ export const Daily = () => {
                         item.day === loginStatus.daily.day ? "next-active" : ""
                       }`}
                     >
+                      {item.day < loginStatus.daily.day ? (
+                        <span className="dot" key={item.day}>
+                          <img className="w-100" src={GreenTick} alt="" />
+                        </span>
+                      ) : undefined}
                       <div>
                         <p className="days-title">Day {item.day}</p>
                       </div>
