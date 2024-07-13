@@ -48,7 +48,7 @@
     border-radius: 5px;
     width: 48%;
     padding: 5px;
-    min-height: 210px;
+    min-height: 230px;
     cursor: pointer;
 
     .earning-logo {
@@ -77,8 +77,6 @@
     }
     .product-image {
       width: 100px;
-      height: 90px;
-      object-fit: cover;
     }
   }
 }
@@ -122,10 +120,7 @@
 }
 .product-hover:hover .buy-button {
   background: #15253b;
-  transition:
-    background 0.3s,
-    padding 0.3s,
-    border-radius 0.3s;
+  transition: background 0.3s, padding 0.3s, border-radius 0.3s;
   padding: 5px 30px;
   border-radius: 5px;
   border: 1px solid #737373;

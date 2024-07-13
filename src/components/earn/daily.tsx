@@ -16,6 +16,7 @@ import { cardClaim, loginClaim } from "../../slices/api";
 import { dailyCardSelector } from "../../slices/daily-card/slice";
 import { dailyQuestionSelector } from "../../slices/daily-question/slice";
 import { questionClaim } from "../../slices/api";
+import formatNumber from "../../helpers/format-number";
 interface Task {
   id: string;
   heading: string;
@@ -31,18 +32,6 @@ interface Question {
   options: string[];
   correctAnswer: string;
 }
-
-const data = [
-  { title: "Day 1", image: Shopcek, points: "20K" },
-  { title: "Day 2", image: Shopcek, points: "25K" },
-  { title: "Day 3", image: Shopcek, points: "30K" },
-  { title: "Day 4", image: Shopcek, points: "40K" },
-  { title: "Day 5", image: Shopcek, points: "100K" },
-  { title: "Day 6", image: Shopcek, points: "200K" },
-  { title: "Day 7", image: Shopcek, points: "500K" },
-  { title: "Day 8", image: Shopcek, points: "1M" },
-  { title: "Day 9", image: Shopcek, points: "5M" },
-];
 
 const dailyData = [
   {
@@ -279,24 +268,24 @@ export const Daily = () => {
               </p>
               <div className="days-container my-2">
                 <div className="days">
-                  {data.map((item, index) => (
+                  {days.map((item: any, index: number) => (
                     <div
-                      key={index}
+                      key={item.day}
                       className={`days-item ${
-                        index === loginStatus.daily.day - 1 ? "active" : ""
+                        item.day < loginStatus.daily.day ? "active" : ""
                       } ${
-                        index === loginStatus.daily.day ? "next-active" : ""
+                        item.day === loginStatus.daily.day ? "next-active" : ""
                       }`}
                     >
                       <div>
-                        <p className="days-title">{item.title}</p>
+                        <p className="days-title">Day {item.day}</p>
                       </div>
                       <Image
-                        src={item.image}
-                        alt={`${item.title} reward`}
+                        src={Shopcek}
+                        alt={`Day ${item.title} reward`}
                         className="days-logo"
                       />
-                      <h4 className="heading">{item.points}</h4>
+                      <h4 className="heading">{formatNumber(item.reward)}</h4>
                     </div>
                   ))}
                   <div>

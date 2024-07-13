@@ -60,15 +60,14 @@
       padding: 2px;
       box-sizing: border-box;
       background: linear-gradient(to right, #0097b2, #7ed957);
-      -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
+      -webkit-mask: linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
       -webkit-mask-composite: destination-out;
       mask-composite: exclude;
       /* For Chrome/Safari */
     }
 
-    .days-item.active+.days-item {
+    .days-item.next-active {
       opacity: 1;
       background-color: #1e3557;
     }
@@ -84,7 +83,6 @@
 
     .weekdays-image {
       width: 200px;
-      
     }
   }
 }
@@ -144,8 +142,7 @@
     padding: 2px;
     box-sizing: border-box;
     background: linear-gradient(to right, #0097b2, #7ed957);
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
@@ -165,9 +162,7 @@
   /* Space between the border and the content */
   box-sizing: border-box;
   background: linear-gradient(to right, #0097b2, #7ed957);
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
 }
@@ -203,9 +198,7 @@
   border-radius: 10px;
   padding: 1.8px;
   background: linear-gradient(45deg, #0097b2, #7ed957);
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
@@ -246,7 +239,6 @@
 
 /* Keyframes for the blinking effect */
 @keyframes blink {
-
   0%,
   100% {
     opacity: 1;

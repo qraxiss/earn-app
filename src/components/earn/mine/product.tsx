@@ -6,16 +6,7 @@ import logo from "../../../assets/images/icon.svg";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
 import { buy as buyApi, upgrade as upgradeApi } from "../../../slices/card/api";
-
-const formatNumber = (num: number): string => {
-  if (num >= 1000000) {
-    return (num / 1000000).toFixed(1) + "m";
-  } else if (num >= 1000) {
-    return (num / 1000).toFixed(num % 1000 !== 0 ? 1 : 0) + "k";
-  } else {
-    return num.toString();
-  }
-};
+import formatNumber from "../../../helpers/format-number";
 
 export default function Product({
   product: { info, status, upgrade, buy },
@@ -39,15 +30,15 @@ export default function Product({
           >
             <h6 className="">PWR {status.level}</h6>
             <h6 className="d-flex justify-content-center align-items-center">
-              <img className="earning-logo me-1" src={EarningLogo}  alt="" />
+              <img className="earning-logo me-1" src={EarningLogo} alt="" />
               {formatNumber(info.totalProfit)} /h
             </h6>
           </div>
           <Image
-            src={info.image }
+            src={info.image}
             alt={info.name}
             className={` product-image ${status.locked ? "opacity-50" : ""}`}
-            />
+          />
 
           <div className="image-container">
             <h6 className="hourly-income">Hourly Rental Income</h6>

@@ -5,16 +5,7 @@ import Profile from "../../assets/images/Profile.png";
 import { Image } from "react-bootstrap";
 import { ranksSelector, statsSelector } from "../../slices/leader-board/api";
 import { useSelector } from "react-redux";
-
-const formatNumber = (num: number): string => {
-  if (num >= 1000000) {
-    return (num / 1000000).toFixed(1) + "m";
-  } else if (num >= 1000) {
-    return (num / 1000).toFixed(num % 1000 !== 0 ? 1 : 0) + "k";
-  } else {
-    return num.toString();
-  }
-};
+import formatNumber from "../../helpers/format-number";
 
 export const Name = () => {
   const ranks = useSelector(ranksSelector);

@@ -17,6 +17,8 @@ import EarningLogo from "../../../assets/images/EarningLogo.png";
 //components
 import Product from "./product";
 
+import formatNumber from "../../../helpers/format-number";
+
 // constants
 const CATEGORIES = [
   {
@@ -45,16 +47,6 @@ const formatTime = (seconds: number): string => {
   return `${hours}:${minutes < 10 ? "0" : ""}${minutes}:${
     remainingSeconds < 10 ? "0" : ""
   }${remainingSeconds}`;
-};
-
-const formatNumber = (num: number): string => {
-  if (num >= 1000000) {
-    return (num / 1000000).toFixed(1) + "m";
-  } else if (num >= 1000) {
-    return (num / 1000).toFixed(num % 1000 !== 0 ? 1 : 0) + "k";
-  } else {
-    return num.toString();
-  }
 };
 
 export const Mine = () => {
