@@ -41,6 +41,7 @@ import {
 } from "./slices/daily-question/slice";
 
 import { stackSelector } from "./slices/stack/slice";
+import WebApp from "@twa-dev/sdk";
 function App() {
   const dispatch: AppDispatch = useDispatch();
   let promise: Promise<any>;
@@ -77,6 +78,10 @@ function App() {
   useEffect(() => {
     if (isLoading) {
       return;
+    }
+
+    if (WebApp && !WebApp.isExpanded) {
+      WebApp.expand();
     }
 
     if (stackState.status.isWaiting && stackState.status.remainTime > 0) {
