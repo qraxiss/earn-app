@@ -69,7 +69,6 @@ function App() {
     })();
   }, []);
 
-  const xpState = useSelector(xpSelector);
   const stackState = useSelector(stackSelector);
 
   const [isLoading, setIsLoading] = useState(true);

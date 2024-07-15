@@ -203,7 +203,7 @@
 }
 
 .mine-start.started {
-  background: black;
+  background: none;
   overflow: hidden;
   justify-content: space-around;
 }
@@ -262,6 +262,24 @@
     background-color: #1e3557;
     border-radius: 5px;
   }
+}
+
+.cool-background {
+  background-color: #1e3557;
+  border-radius: 5px;
+  align-items: center;
+  display: flex;
+}
+
+.fill-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: black;
+  z-index: 1;
+  animation: fillBackground 5s linear infinite forwards; /* 4 hours = 14400 seconds */
 }
 
 .electronics-container {

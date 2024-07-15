@@ -20,6 +20,7 @@ import { setMenu } from "../../../slices/selected-menu/slice";
 //images
 import logo from "../../../assets/images/icon.svg";
 import EarningLogo from "../../../assets/images/EarningLogo.png";
+import remainTime from "../../../assets/images/remain-time.png";
 
 //components
 import Product from "./product";
@@ -110,22 +111,40 @@ export const Mine = () => {
   return (
     <section className="mine-section">
       <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
-        <h4 className="m-0 d-flex align-items-center">
+        <h4 className="cool-background p-1 m-0 d-flex align-items-center">
           <img className="mine-logo me-2" src={EarningLogo} alt="" />{" "}
           {formatNumber(Math.round(xp.earn))}/h
         </h4>
-        {status.isWaiting ? (
-          <h4 className="m-0">{formatTime(status.remainTime)}</h4>
-        ) : (
-          <h4 className="m-0">00:00:00</h4>
-        )}
+
+        <h4
+          className="cool-background p-1 m-0"
+          style={{
+            width: "39%",
+          }}
+        >
+          <img className="mine-logo me-2" src={remainTime} alt="" />{" "}
+          {status.isWaiting ? `0${formatTime(status.remainTime)}` : "04:00:00"}
+        </h4>
       </div>
       <div className="mt-3">
         {status.canClaim ? (
-          <h4 className="mine-start started m-0" onClick={claimSelling}>
+          <h4
+            className="mine-start started m-0"
+            style={{
+              background: "black",
+            }}
+            onClick={claimSelling}
+          >
             {/* <div className="fill-animation"></div> */}
-            <div className="w-45 p-3">Claim</div>
-            <div className="my-5 d-flex align-items-center w-45 p-4">
+            <div className="p-2">Claim</div>
+            <div
+              className="my-5 d-flex align-items-center p-2"
+              style={{
+                width: "47%",
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
               <Image src={logo} alt="" className="earn-logo earned-xp" />
               <p className="earned-amount">
                 {Math.round(status.earnPerHour * 4).toLocaleString()}
@@ -138,9 +157,24 @@ export const Mine = () => {
           </h4>
         ) : (
           <h4 className="mine-start started m-0">
-            <div></div>
-            <div className="p-3">Sales Started</div>
-            <div className="my-5 d-flex align-items-center p-3">
+            <div className="fill-animation"></div>
+            <div
+              className="p-1"
+              style={{
+                zIndex: 2,
+              }}
+            >
+              Sales Started
+            </div>
+            <div
+              className="my-5 d-flex align-items-center p-2"
+              style={{
+                width: "47%",
+                display: "flex",
+                justifyContent: "flex-end",
+                zIndex: 2,
+              }}
+            >
               <Image src={logo} alt="" className="earn-logo earned-xp" />
               <p className="earned-amount">
                 {Math.round(earnedXp).toLocaleString()}
