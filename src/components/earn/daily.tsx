@@ -48,20 +48,20 @@ const dailyData = [
     resetTime: "18:00",
     completed: false,
   },
-  {
-    id: "question",
-    heading: "Trivia Quest",
-    img: Question,
-    resetTime: "12:00",
-    completed: false,
-    questions: [
-      {
-        question: "What is the name of the smallest unit of Bitcoin?",
-        options: ["satoshi", "bit", "hodl", "coin"],
-        correctAnswer: "satoshi",
-      },
-    ],
-  },
+  // {
+  //   id: "question",
+  //   heading: "Trivia Quest",
+  //   img: Question,
+  //   resetTime: "12:00",
+  //   completed: false,
+  //   questions: [
+  //     {
+  //       question: "What is the name of the smallest unit of Bitcoin?",
+  //       options: ["satoshi", "bit", "hodl", "coin"],
+  //       correctAnswer: "satoshi",
+  //     },
+  //   ],
+  // },
 ];
 
 const calculateTimeRemaining = (resetTime: string) => {
@@ -99,19 +99,19 @@ export const Daily = () => {
   const dispatch: AppDispatch = useDispatch();
   const { status: loginStatus, days } = useSelector(dailySelector);
   const { status: cardStatus } = useSelector(dailyCardSelector);
-  const { status: questionStatus, question } = useSelector(
-    dailyQuestionSelector
-  );
+  // const { status: questionStatus, question } = useSelector(
+  //   dailyQuestionSelector
+  // );
 
   const states = {
-    question: questionStatus,
+    // question: questionStatus,
     "card-claim": cardStatus,
     login: loginStatus,
   };
 
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [activeTask, setActiveTask] = useState<string | null>(null);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  // const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [tasks, setTasks] = useState<Task[]>(dailyData);
 
@@ -133,22 +133,22 @@ export const Daily = () => {
     setActiveTask(task);
   };
 
-  const handleAnswerSelect = (answer: string) => {
-    setSelectedAnswer(answer);
-    console.log(answer);
-    const quesiton = dailyData.find((task) => task.id === "quesiton");
-    if (
-      quesiton?.questions &&
-      currentQuestionIndex < quesiton.questions.length - 1
-    ) {
-      setTimeout(() => {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
-        setSelectedAnswer(null);
-      }, 500); // Delay to show the selected answer for a short time
-    } else {
-      // Handle completion of all questions
-    }
-  };
+  // const handleAnswerSelect = (answer: string) => {
+  //   setSelectedAnswer(answer);
+  //   console.log(answer);
+  //   const quesiton = dailyData.find((task) => task.id === "quesiton");
+  //   if (
+  //     quesiton?.questions &&
+  //     currentQuestionIndex < quesiton.questions.length - 1
+  //   ) {
+  //     setTimeout(() => {
+  //       setCurrentQuestionIndex(currentQuestionIndex + 1);
+  //       setSelectedAnswer(null);
+  //     }, 500); // Delay to show the selected answer for a short time
+  //   } else {
+  //     // Handle completion of all questions
+  //   }
+  // };
 
   const handleLoginClaim = async () => {
     dispatch(loginClaim.initiate({}));
@@ -158,9 +158,9 @@ export const Daily = () => {
     if (cardStatus.canClaim) dispatch(cardClaim.initiate({}));
   };
 
-  const handleQuestionClaim = async () => {
-    dispatch(questionClaim.initiate({}));
-  };
+  // const handleQuestionClaim = async () => {
+  //   dispatch(questionClaim.initiate({}));
+  // };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -198,13 +198,14 @@ export const Daily = () => {
 
   return (
     <section className="days-section">
-      <div className="weekdays mt-4 mb-5">
+      {/* <div className="weekdays mt-4 mb-5">
         <Image src={Days} alt="weekdays" className="weekdays-image" />
-      </div>
+      </div> */}
       <p className="heading my-3">DAILY TASKS</p>
-      <div className="d-flex justify-content-between w-100">
+      <div className="daily-task-cards">
         {tasks.map((card, index) => {
-          const status = states[card.id as "card-claim" | "question" | "login"];
+          const status = states[card.id as "card-claim" | "login"];
+          console.log(status, card.id);
           return (
             <div
               key={index}
@@ -348,66 +349,6 @@ export const Daily = () => {
                     : cardStatus.remainTimeForClaim
                     ? formatTime(cardStatus.remainTimeForClaim)
                     : "You have to find!"}
-                </button>
-              </div>
-            </>
-          )}
-          {activeTask === "question" && (
-            <>
-              <div className="d-flex align-items-center w-100">
-                <h5
-                  className="my-3 flex-grow-1 text-center"
-                  style={{ marginRight: "-25px" }}
-                >
-                  Trivia Quest
-                </h5>
-                <span
-                  onClick={() => handleClosePanel(null)}
-                  className="close cursor-pointer d-flex align-items-center justify-content-end"
-                >
-                  <i className="bi bi-x-circle"></i>
-                </span>
-              </div>{" "}
-              <p className="w-75 m-0">
-                Take on today's trivia and earn rewards!
-              </p>
-              <div className="trivia-question my-3">
-                {question && (
-                  <div className="question-container">
-                    <h6 className="my-3">{question.question}</h6>
-                    <div className="options my-3">
-                      {question.options.map((option: string, idx: number) => (
-                        <div
-                          key={idx}
-                          className={`option-button ${
-                            selectedAnswer === option ? "selected" : ""
-                          }`}
-                          onClick={() => handleAnswerSelect(option)}
-                        >
-                          {option}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div className="my-2 d-flex align-items-center">
-                <Image src={Shopcek} alt="" className="earn-logo me-2" />
-                <h1 className="m-0">+2.000.000</h1>
-              </div>
-              <div>
-                <button
-                  className="claim-button mt-3"
-                  onClick={handleQuestionClaim}
-                  disabled={question.answer !== selectedAnswer}
-                >
-                  {questionStatus.canClaim
-                    ? selectedAnswer
-                      ? question.answer === selectedAnswer
-                        ? "Claim"
-                        : "Wrong Answer"
-                      : "Select Answer"
-                    : formatTime(questionStatus.remainTimeForClaim)}
                 </button>
               </div>
             </>

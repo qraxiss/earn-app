@@ -24,11 +24,11 @@ const TaskCard: React.FC<TaskCardProps> = ({
   status,
   isPanelOpen,
   handleClosePanel,
-  formatTime
+  formatTime,
 }) => {
   return (
     <div
-      onClick={() => handleClosePanel(card.id)}
+      // onClick={() => handleClosePanel(card.id)}
       className={`daily-card ${
         status.canClaim ? "completed" : "not-completed"
       } ${isPanelOpen ? "panel-open" : ""}`}

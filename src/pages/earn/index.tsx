@@ -79,7 +79,7 @@ export const Earn: React.FC = () => {
           </Container>
 
           <div className="d-flex align-items-center justify-content-center pt-5">
-            <div className="d-flex justify-content-between align-items-center navbar-mobile">
+            <div className="d-flex justify-content-around align-items-center navbar-mobile">
               {/* <div className="flex-fill text-center">
                 <span
                   className={`navbar-items-mobile ${
