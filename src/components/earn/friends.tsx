@@ -64,7 +64,14 @@ Open your store, become a top shopkeeper, and receive exclusive airdrop!
           <div key={idx} className="friend-list my-2">
             <h4 className="refer-title m-0">{refer}</h4>
             <div className="d-flex align-items-center">
-              <img src={logo} alt="" className="menu-logo me-1" />
+              <img
+                src={logo}
+                alt=""
+                className="menu-logo me-2"
+                style={{
+                  width: "15px",
+                }}
+              />
               <p className="refer-number">{Number(30000).toLocaleString()}</p>
             </div>
           </div>
