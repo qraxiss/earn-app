@@ -80,7 +80,7 @@ export const Earn: React.FC = () => {
 
           <div className="d-flex align-items-center justify-content-center pt-5">
             <div className="d-flex justify-content-between align-items-center navbar-mobile">
-              <div className="flex-fill text-center">
+              {/* <div className="flex-fill text-center">
                 <span
                   className={`navbar-items-mobile ${
                     selectedMenu === "daily" ? "selected-icon" : ""
@@ -90,8 +90,8 @@ export const Earn: React.FC = () => {
                   <img src={DaysImage} alt="" className="menu-logo" />
                   Daily
                 </span>
-              </div>
-              <div className="flex-fill text-center">
+              </div> */}
+              <div className=" text-center">
                 <span
                   className={`navbar-items-mobile ${
                     selectedMenu === "frens" ? "selected-icon" : ""
@@ -102,7 +102,7 @@ export const Earn: React.FC = () => {
                   Frens
                 </span>
               </div>
-              <div className="flex-fill text-center">
+              <div className=" text-center">
                 <span
                   className={`navbar-items-mobile ${
                     selectedMenu === "mine" ? "selected-icon" : ""
@@ -113,7 +113,7 @@ export const Earn: React.FC = () => {
                   My Store
                 </span>
               </div>
-              <div className="flex-fill text-center">
+              <div className=" text-center">
                 <span
                   className={`navbar-items-mobile ${
                     selectedMenu === "task" ? "selected-icon" : ""
@@ -124,7 +124,7 @@ export const Earn: React.FC = () => {
                   Task
                 </span>
               </div>
-              <div className="flex-fill text-center">
+              {/* <div className="flex-fill text-center">
                 <span
                   className={`navbar-items-mobile ${
                     selectedMenu === "name" ? "selected-icon" : ""
@@ -134,7 +134,7 @@ export const Earn: React.FC = () => {
                   <img src={Rank} alt="" className="menu-logo" />
                   Rank
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
         </>

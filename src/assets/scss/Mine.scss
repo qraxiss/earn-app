@@ -17,12 +17,12 @@
   margin: 0;
 }
 .earned-amount {
-  // font-size: 48px;
-  font-weight: 600;
+  font-size: 16px;
+  // font-weight: 600;
   margin: 0;
 }
 .earn-logo {
-  width: 50px;
+  width: 48px;
   height: auto;
 }
 
@@ -82,6 +82,7 @@
     }
     .product-image {
       width: 100px;
+      margin-bottom: 6px;
     }
   }
 }
@@ -128,6 +129,7 @@
   transition: background 0.3s, padding 0.3s, border-radius 0.3s;
   padding: 5px 23px;
   border-radius: 5px;
+  margin-top: 10px;
   border: 1px solid #737373;
 }
 
@@ -178,20 +180,20 @@
 }
 
 .mine-logo {
-  width: 24px;
+  width: 20px;
 }
 .mine-start {
   width: 100%;
   height: 40px;
   background-color: black;
-  border: 2px solid #c2c2c2;
+  border: 1px solid #c2c2c2;
   background: linear-gradient(108deg, #ff92ff, #5c63f9);
   display: flex;
   border-radius: 5px;
   justify-content: center;
   align-items: center;
   z-index: 1;
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
@@ -206,6 +208,7 @@
   background: none;
   overflow: hidden;
   justify-content: space-around;
+  color: #C0BEBD;
 }
 
 .mine-start::before {
@@ -355,9 +358,10 @@
   .mine {
     width: 100%;
     .mine-items {
-      font-size: 12px;
-      font-weight: 500;
-      padding-inline: 8px;
+      font-size: 13px;
+      font-weight: 900;
+      padding-left: 4px;
+      padding-right: 4px;
       margin-inline: 0px;
       margin-block: 0px;
       padding-block: 10px;

@@ -12,7 +12,7 @@ import { AppDispatch, RootState } from "../../../store";
 import {
   open,
   close,
-  notificationSelector,
+  notificationSelector
 } from "../../../slices/notification/slice";
 
 import { setMenu } from "../../../slices/selected-menu/slice";
@@ -33,20 +33,20 @@ import { dailyCardSelector } from "../../../slices/daily-card/slice";
 const CATEGORIES = [
   {
     name: "Electronics",
-    slug: "electronics",
+    slug: "electronics"
   },
   {
     name: "Fashion",
-    slug: "fashion",
+    slug: "fashion"
   },
   {
     name: "Vehicle",
-    slug: "vehicle",
+    slug: "vehicle"
   },
   {
     name: "Real Estate",
-    slug: "real-estate",
-  },
+    slug: "real-estate"
+  }
 ];
 
 // functions
@@ -111,27 +111,27 @@ export const Mine = () => {
   return (
     <section className="mine-section">
       <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
-        <h4 className="cool-background p-1 m-0 d-flex align-items-center">
-          <img className="mine-logo me-2" src={EarningLogo} alt="" />{" "}
+        <h6 className="cool-background p-2 m-0" style={{ width: "32%", height: "35.2px" }}>
+          <img className="mine-logo me-1" src={EarningLogo} alt="" />{" "}
           {formatNumber(Math.round(xp.earn))}/h
-        </h4>
+        </h6>
 
-        <h4
-          className="cool-background p-1 m-0"
+        <h6
+          className="cool-background p-2 m-0"
           style={{
-            width: "39%",
+            width: "32%"
           }}
         >
-          <img className="mine-logo me-2" src={remainTime} alt="" />{" "}
+          <img className="mine-logo me-1" src={remainTime} alt="" />{" "}
           {status.isWaiting ? `0${formatTime(status.remainTime)}` : "04:00:00"}
-        </h4>
+        </h6>
       </div>
       <div className="mt-3">
         {status.canClaim ? (
           <h4
             className="mine-start started m-0"
             style={{
-              background: "black",
+              background: "black"
             }}
             onClick={claimSelling}
           >
@@ -142,7 +142,7 @@ export const Mine = () => {
               style={{
                 width: "47%",
                 display: "flex",
-                justifyContent: "flex-end",
+                justifyContent: "flex-end"
               }}
             >
               <Image src={logo} alt="" className="earn-logo earned-xp" />
@@ -161,7 +161,7 @@ export const Mine = () => {
             <div
               className="p-1"
               style={{
-                zIndex: 2,
+                zIndex: 2
               }}
             >
               Sales Started
@@ -172,7 +172,7 @@ export const Mine = () => {
                 width: "47%",
                 display: "flex",
                 justifyContent: "flex-end",
-                zIndex: 2,
+                zIndex: 2
               }}
             >
               <Image src={logo} alt="" className="earn-logo earned-xp" />
@@ -194,7 +194,7 @@ export const Mine = () => {
         <div className="d-flex justify-content-between align-items-center mine">
           {CATEGORIES.map(({ name, slug }, index) => (
             <div
-              className={`mine-items text-center ${
+              className={`mine-items text-center  ${
                 selectedIcon === slug ? "selected-icon" : ""
               }`}
               style={{ width: "25%" }}

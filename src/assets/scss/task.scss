@@ -15,6 +15,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 
     .task-image {
       width: 210px;
@@ -77,6 +78,13 @@
       .task-image {
         width: 235px;
       }
+    }
+    .daily-task-cards {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
     }
     padding-block: 50px;
     .follow-container {

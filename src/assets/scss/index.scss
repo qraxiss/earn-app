@@ -84,7 +84,7 @@ html {
   position: fixed;
   bottom: -5px;
   width: 100%;
-  padding: 0 10px;
+  padding: 2px 20px 2px 20px;
 
   .navbar-items-mobile {
     display: flex;
@@ -100,7 +100,7 @@ html {
     margin-block: 13px;
     position: relative;
     text-wrap: nowrap;
-    top: -12px;
+    top: -8px;
     cursor: pointer;
   }
   .selected-icon {

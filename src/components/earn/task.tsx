@@ -6,10 +6,14 @@ import { taskSelector } from "../../slices/task/slice";
 import { useSelector, useDispatch } from "react-redux";
 import { taskClaim } from "../../slices/task/api";
 import { AppDispatch } from "../../store";
+import TaskCard from "./TaskCard";
+import DaysRemoveBg from "../../assets/images/days-r-bg.png";
+import Clock from "../../assets/images/clock.png";
+import Question from "../../assets/images/Question.png";
 
 // Define the Task type
 interface Task {
-  id: number;
+  id: string;
   name: string;
   image: string;
   reward: string;
@@ -63,11 +67,59 @@ export const Task: React.FC = () => {
 
   const [ids, setIds] = useState<any[]>([]);
 
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+
+  const handleClosePanel = (task: string | null = null) => {
+    setIsPanelOpen(!isPanelOpen);
+  };
+
+  const formatTime = (seconds: number) => {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${hrs}h ${mins}m ${secs}s`;
+  };
+
+  const dailyData = [
+    {
+      id: "login",
+      heading: "Daily Log-in",
+      img: DaysRemoveBg,
+      resetTime: "00:00",
+      completed: true
+    },
+    {
+      id: "card-claim",
+      heading: "Lucky Item",
+      img: Clock,
+      resetTime: "18:00",
+      completed: false
+    }
+  ];
+
   return (
     <section className="task-section">
       <div className="task-container mt-4 mb-5">
         <Image src={logo} alt="Task" className="task-image" />
       </div>
+
+      {/* TASK CARD COMPONENTİ BURAYA GELECEK */}
+      <div className="daily-task-cards">
+        {dailyData.map((card) => (
+          <TaskCard
+            key={card.id}
+            card={card}
+            status={{
+              canClaim: card.completed,
+              remainTimeForClaim: 0 // Replace with actual time remaining logic if needed
+            }}
+            isPanelOpen={isPanelOpen}
+            handleClosePanel={handleClosePanel}
+            formatTime={formatTime}
+          />
+        ))}
+      </div>
+
       <p className="heading my-3">EARN MORE COINS</p>
       <div className="task d-flex flex-column align-items-center">
         {tasks.map(({ task, isClaimed }: any) => (
@@ -94,7 +146,7 @@ export const Task: React.FC = () => {
                           width: "70px",
                           height: "100px",
                           marginLeft: "-5px",
-                          marginRight: "-4px",
+                          marginRight: "-4px"
                         }
                       : {}
                   }
@@ -113,7 +165,7 @@ export const Task: React.FC = () => {
                     style={{
                       width: "50px",
                       marginTop: "-10px",
-                      marginBottom: "-8px",
+                      marginBottom: "-8px"
                     }}
                   />
                   <h4 className="reward m-0">{task.reward}</h4>
@@ -137,7 +189,7 @@ export const Task: React.FC = () => {
                       className="spinner-border"
                       style={{
                         width: "18px",
-                        height: "18px",
+                        height: "18px"
                       }}
                       role="status"
                     ></div>

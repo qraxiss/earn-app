@@ -59,7 +59,7 @@
       width: 600px;
       height: 60px;
       border-radius: 5px;
-      padding: 15px;
+      padding: 15px 20px;
     }
   }
 }
@@ -90,10 +90,19 @@
       width: 100%;
       .friend-list {
         width: 100%;
-        height: 50px;
+        height: 25px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+      }
+      .refer-title {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .refer-number {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 0;
       }
     }
   }

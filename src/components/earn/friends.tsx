@@ -62,10 +62,10 @@ Open your store, become a top shopkeeper, and receive exclusive airdrop!
         </p>
         {referrers.map((refer: any, idx: number) => (
           <div key={idx} className="friend-list my-2">
-            <h4 className="m-0">{refer}</h4>
+            <h4 className="refer-title m-0">{refer}</h4>
             <div className="d-flex align-items-center">
-              <img src={logo} alt="" className="menu-logo me-2" />
-              <p className="heading">{30000}</p>
+              <img src={logo} alt="" className="menu-logo me-1" />
+              <p className="refer-number">{Number(30000).toLocaleString()}</p>
             </div>
           </div>
         ))}
