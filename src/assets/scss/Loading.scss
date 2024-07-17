@@ -54,8 +54,8 @@
   aspect-ratio: 1;
   display: grid;
   border-radius: 50%;
-  background:
-    linear-gradient(0deg, #155f71 30%, #0000 0 70%, #13c5f0 0) 50% / 8% 100%,
+  background: linear-gradient(0deg, #155f71 30%, #0000 0 70%, #13c5f0 0) 50% /
+      8% 100%,
     linear-gradient(90deg, #155f71 30%, #0000 0 70%, #13c5f0 0) 50% / 100% 8%;
   background-repeat: no-repeat;
   animation: l23 1s infinite steps(12);
@@ -80,6 +80,8 @@
   position: relative;
   width: 45px;
   z-index: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .Loading-logo {
@@ -111,9 +113,7 @@
   padding: 2px;
   box-sizing: border-box;
   background: linear-gradient(to bottom, #13c5f0, #f556b7);
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
 }
