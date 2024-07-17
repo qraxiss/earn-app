@@ -12,7 +12,7 @@ import { AppDispatch, RootState } from "../../../store";
 import {
   open,
   close,
-  notificationSelector
+  notificationSelector,
 } from "../../../slices/notification/slice";
 
 import { setMenu } from "../../../slices/selected-menu/slice";
@@ -33,20 +33,20 @@ import { dailyCardSelector } from "../../../slices/daily-card/slice";
 const CATEGORIES = [
   {
     name: "Electronics",
-    slug: "electronics"
+    slug: "electronics",
   },
   {
     name: "Fashion",
-    slug: "fashion"
+    slug: "fashion",
   },
   {
     name: "Vehicle",
-    slug: "vehicle"
+    slug: "vehicle",
   },
   {
     name: "Real Estate",
-    slug: "real-estate"
-  }
+    slug: "real-estate",
+  },
 ];
 
 // functions
@@ -111,7 +111,10 @@ export const Mine = () => {
   return (
     <section className="mine-section">
       <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
-        <h6 className="cool-background p-2 m-0" style={{ width: "32%", height: "35.2px" }}>
+        <h6
+          className="cool-background p-2 m-0"
+          style={{ width: "32%", height: "35.2px" }}
+        >
           <img className="mine-logo me-1" src={EarningLogo} alt="" />{" "}
           {formatNumber(Math.round(xp.earn))}/h
         </h6>
@@ -119,7 +122,7 @@ export const Mine = () => {
         <h6
           className="cool-background p-2 m-0"
           style={{
-            width: "32%"
+            width: "32%",
           }}
         >
           <img className="mine-logo me-1" src={remainTime} alt="" />{" "}
@@ -131,7 +134,7 @@ export const Mine = () => {
           <h4
             className="mine-start started m-0"
             style={{
-              background: "black"
+              background: "black",
             }}
             onClick={claimSelling}
           >
@@ -142,7 +145,7 @@ export const Mine = () => {
               style={{
                 width: "47%",
                 display: "flex",
-                justifyContent: "flex-end"
+                justifyContent: "flex-end",
               }}
             >
               <Image src={logo} alt="" className="earn-logo earned-xp" />
@@ -161,7 +164,7 @@ export const Mine = () => {
             <div
               className="p-1"
               style={{
-                zIndex: 2
+                zIndex: 2,
               }}
             >
               Sales Started
@@ -172,7 +175,7 @@ export const Mine = () => {
                 width: "47%",
                 display: "flex",
                 justifyContent: "flex-end",
-                zIndex: 2
+                zIndex: 2,
               }}
             >
               <Image src={logo} alt="" className="earn-logo earned-xp" />
@@ -251,7 +254,7 @@ export const Mine = () => {
                 onClick={() => {
                   dispatch(close());
                   setTimeout(() => {
-                    dispatch(setMenu("daily"));
+                    dispatch(setMenu("task"));
                   }, 300);
                 }}
               >

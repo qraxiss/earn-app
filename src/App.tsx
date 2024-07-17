@@ -42,11 +42,22 @@ import {
 
 import { stackSelector } from "./slices/stack/slice";
 import WebApp from "@twa-dev/sdk";
+
+import IsNotMobile from "./components/IsNotMobile";
 function App() {
   const dispatch: AppDispatch = useDispatch();
   let promise: Promise<any>;
+  const isMobile =
+    WebApp.platform === "android" ||
+    WebApp.platform === "android_x" ||
+    WebApp.platform === "ios";
+
   useEffect(() => {
     (async () => {
+      if (!isMobile) {
+        return;
+      }
+
       await dispatch(loginAsync());
       promise = Promise.all([
         dispatch(xp.initiate({})),
@@ -177,7 +188,11 @@ function App() {
     questionStatusState.canClaim,
   ]);
 
-  return <ErrorBoundary>{isLoading ? <Loading /> : <Earn />}</ErrorBoundary>;
+  return isMobile ? (
+    <ErrorBoundary>{isLoading ? <Loading /> : <Earn />}</ErrorBoundary>
+  ) : (
+    <IsNotMobile></IsNotMobile>
+  );
 }
 
 export default App;
