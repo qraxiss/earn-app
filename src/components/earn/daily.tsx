@@ -205,7 +205,6 @@ export const Daily = () => {
       <div className="daily-task-cards">
         {tasks.map((card, index) => {
           const status = states[card.id as "card-claim" | "login"];
-          console.log(status, card.id);
           return (
             <div
               key={index}
@@ -233,12 +232,20 @@ export const Daily = () => {
                     : "You have to find!"
                   : formatTime(status.remainTimeForClaim)}
               </h6>
-              {!status.canClaim ? (
+              {status.canClaim ? (
+                <span className="white-dot"></span>
+              ) : card.id == "card-claim" ? (
+                status.remainTimeForClaim ? (
+                  <span className="dot">
+                    <img className="w-100" src={GreenTick} alt="" />
+                  </span>
+                ) : (
+                  <span className="white-dot"></span>
+                )
+              ) : (
                 <span className="dot">
                   <img className="w-100" src={GreenTick} alt="" />
                 </span>
-              ) : (
-                <span className="white-dot"></span>
               )}
             </div>
           );

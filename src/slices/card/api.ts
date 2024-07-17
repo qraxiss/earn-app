@@ -50,8 +50,6 @@ const cardApi = createApi({
           claimCardRefetch(),
         ]);
 
-        console.log(finded, canClaim);
-
         if (finded && canClaim) {
           dispatch(open());
         }
@@ -84,8 +82,6 @@ const cardApi = createApi({
           cardsRefetch(),
           claimCardRefetch(),
         ]);
-
-        console.log(finded, canClaim);
 
         if (finded && canClaim) {
           dispatch(open());

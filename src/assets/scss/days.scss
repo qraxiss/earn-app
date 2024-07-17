@@ -90,15 +90,15 @@
 .lucky-Item {
   border: 1px solid #5c63f9;
   border-radius: 5px;
-  width: 65%;
-  height: 25vh;
+  width: 30vh;
+  height: 30vh;
   display: flex;
   justify-content: center;
   align-items: center;
 
   .luckyItem-image {
-    width: 150px;
-    max-height: 130px;
+    width: 25vh;
+    // max-height: 130px;
   }
 }
 
