@@ -238,7 +238,7 @@ export const Mine = () => {
               </span>
             </div>
             <p className="w-75 m-0">
-              Congratulations, you won 2,000,000 Coins by finding the product of
+              Congratulations, you won 5,000,000 Coins by finding the product of
               the day.
             </p>
             <div className="lucky-Item notification my-3">
