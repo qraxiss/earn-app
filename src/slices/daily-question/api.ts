@@ -28,7 +28,7 @@ const dailyQuestionApi = createApi({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const { data: status } = await queryFulfilled;
         dispatch(setDailyStatus(status));
-        dispatch(xp.initiate({})).refetch();
+        // dispatch(xp.initiate({})).refetch();
       },
     }),
 

@@ -64,14 +64,10 @@ function App() {
         dispatch(cards.initiate({})),
         dispatch(stackStatus.initiate({})),
         dispatch(taskStatus.initiate({})),
-        dispatch(loginDays.initiate({})),
+        dispatch(cardStatus.initiate({})),
         dispatch(loginStatus.initiate({})),
         dispatch(referrers.initiate({})),
         dispatch(stats.initiate({})),
-        dispatch(ranks.initiate({})),
-        dispatch(cardStatus.initiate({})),
-        dispatch(question.initiate({})),
-        dispatch(questionStatus.initiate({})),
       ]);
 
       promise.then(() => {
@@ -88,8 +84,6 @@ function App() {
   useEffect(() => {
     if (isLoading) {
       return;
-    }
-
     if (WebApp && !WebApp.isExpanded) {
       WebApp.expand();
     }

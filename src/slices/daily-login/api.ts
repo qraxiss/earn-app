@@ -40,6 +40,7 @@ const dailyApi = createApi({
       }),
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const { data: days } = await queryFulfilled;
+        console.log(days);
         dispatch(setDays(days));
       },
     }),

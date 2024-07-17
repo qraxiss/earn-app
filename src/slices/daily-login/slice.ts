@@ -12,7 +12,44 @@ const initialState = {
     },
   },
 
-  days: [],
+  days: [
+    {
+      day: 1,
+      reward: 20000,
+    },
+    {
+      day: 2,
+      reward: 25000,
+    },
+    {
+      day: 3,
+      reward: 30000,
+    },
+    {
+      day: 4,
+      reward: 40000,
+    },
+    {
+      day: 5,
+      reward: 100000,
+    },
+    {
+      day: 6,
+      reward: 200000,
+    },
+    {
+      day: 7,
+      reward: 500000,
+    },
+    {
+      day: 8,
+      reward: 1000000,
+    },
+    {
+      day: 9,
+      reward: 5000000,
+    },
+  ],
 };
 
 type status = {
