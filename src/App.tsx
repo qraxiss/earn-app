@@ -67,7 +67,6 @@ function App() {
         dispatch(cardStatus.initiate({})),
         dispatch(loginStatus.initiate({})),
         dispatch(referrers.initiate({})),
-        dispatch(stats.initiate({})),
       ]);
 
       promise.then(() => {
@@ -82,10 +81,12 @@ function App() {
   const [firstPassedTime, setFirstPassedTime] = useState(false);
 
   useEffect(() => {
-    if (isLoading) {
-      return;
     if (WebApp && !WebApp.isExpanded) {
       WebApp.expand();
+    }
+
+    if (isLoading) {
+      return;
     }
 
     if (stackState.status.isWaiting && stackState.status.remainTime > 0) {
