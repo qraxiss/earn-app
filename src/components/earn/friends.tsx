@@ -61,7 +61,7 @@ Open your store, become a top shopkeeper, and receive exclusive airdrop!
           List of Your Friends ({referrers.length})
         </p>
         {referrers.map((refer: any, idx: number) => (
-          <div key={idx} className="friend-list my-2">
+          <div key={idx} className="friend-list my-1">
             <h4 className="refer-title m-0">{refer}</h4>
             <div className="d-flex align-items-center">
               <img src={logo} alt="" className="menu-logo me-1" />

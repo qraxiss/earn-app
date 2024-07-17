@@ -344,9 +344,21 @@
   .earn-amount {
     font-size: 35px;
   }
-
   .earned-amount {
     font-size: 20px;
+    display: inline-block;
+    margin-inline: 12px;
+  }
+  .claim-container {
+    flex: 1;
+    text-align: left;
+  }
+  .logo-container {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
   }
   .logo {
     width: 20px;
@@ -354,6 +366,10 @@
   }
   .earn-logo {
     width: 40px;
+  }
+  .amount-container {
+    text-align: right;
+    white-space: nowrap; /*  Metnin kaymasını önler ve logo yerini korur */
   }
   .mine {
     width: 100%;

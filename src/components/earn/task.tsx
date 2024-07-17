@@ -10,7 +10,7 @@ import DaysRemoveBg from "../../assets/images/days-r-bg.png";
 import Clock from "../../assets/images/clock.png";
 import Tasks from "../../assets/images/tasks.png";
 
-import Earninglogo from "../../assets/images/EarningLogo.png";
+import ShopcekLogo from "../../assets/images/ShopcekLogo.png";
 
 import { Daily } from "./daily";
 
@@ -164,14 +164,14 @@ export const Task: React.FC = () => {
                 <p className="m-0 task-heading">{task.title}</p>
                 <div className="d-flex align-items-center">
                   <img
-                    src={Earninglogo}
+                    src={ShopcekLogo}
                     alt=""
-                    className="logo me-1"
+                    className="logo m-0"
                     style={{
-                      width: "14px",
+                      width: "28px",
                     }}
                   />
-                  <h4 className="reward m-0">{task.reward}</h4>
+                  <h4 className="reward m-0">{task.reward.toLocaleString()}</h4>
                 </div>
               </div>
             </div>

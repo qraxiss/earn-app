@@ -120,7 +120,12 @@ export const Earn: React.FC = () => {
                   }`}
                   onClick={() => handleIconClick("task")}
                 >
-                  <img src={TaskImage} alt="" className="menu-logo" />
+                  <img
+                    src={TaskImage}
+                    alt=""
+                    className="menu-logo"
+                    style={{ marginLeft: "2px" }}
+                  />
                   Task
                 </span>
               </div>

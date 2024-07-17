@@ -1,4 +1,3 @@
-//react
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Image } from "react-bootstrap";
@@ -108,10 +107,16 @@ export const Mine = () => {
     dispatch(stackClaim.initiate({}));
   };
 
+  const getMarginLeft = (xp: number) => {
+    const xpString = Math.round(xp).toLocaleString();
+    const xpLength = xpString.replace(/\./g, "").length;
+    return `${xpLength * 13}px`;
+  };
+
   return (
     <section className="mine-section">
       <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
-        <h6 className="cool-background p-2 m-0" style={{ width: "32%", height: "35.2px" }}>
+        <h6 className="cool-background p-2 m-0" style={{ height: "30px" }}>
           <img className="mine-logo me-1" src={EarningLogo} alt="" />{" "}
           {formatNumber(Math.round(xp.earn))}/h
         </h6>
@@ -119,7 +124,8 @@ export const Mine = () => {
         <h6
           className="cool-background p-2 m-0"
           style={{
-            width: "32%"
+            width: "32%",
+            height: "30px"
           }}
         >
           <img className="mine-logo me-1" src={remainTime} alt="" />{" "}
@@ -136,18 +142,33 @@ export const Mine = () => {
             onClick={claimSelling}
           >
             {/* <div className="fill-animation"></div> */}
-            <div className="p-2">Claim</div>
             <div
-              className="my-5 d-flex align-items-center p-2"
+              className="p-1"
               style={{
-                width: "47%",
-                display: "flex",
-                justifyContent: "flex-end"
+                zIndex: 2
               }}
             >
+              Claim
+            </div>
+            <div
+              className="logo-container"
+              style={{ marginRight: getMarginLeft(earnedXp) }}
+            >
               <Image src={logo} alt="" className="earn-logo earned-xp" />
-              <p className="earned-amount">
-                {Math.round(status.earnPerHour * 4).toLocaleString()}
+            </div>
+
+            <div
+              className="d-flex align-items-center position-absolute"
+              style={{
+                right: 0,
+                zIndex: 2
+              }}
+            >
+              <p
+                className="earned-amount"
+                style={{ marginLeft: getMarginLeft(earnedXp) }}
+              >
+                {Math.round(earnedXp).toLocaleString()}
               </p>
             </div>
           </h4>
@@ -156,7 +177,7 @@ export const Mine = () => {
             Start Selling
           </h4>
         ) : (
-          <h4 className="mine-start started m-0">
+          <h4 className="mine-start started m-0 d-flex justify-content-between align-items-center position-relative">
             <div className="fill-animation"></div>
             <div
               className="p-1"
@@ -167,16 +188,23 @@ export const Mine = () => {
               Sales Started
             </div>
             <div
-              className="my-5 d-flex align-items-center p-2"
+              className="logo-container"
+              style={{ marginRight: getMarginLeft(earnedXp) }}
+            >
+              <Image src={logo} alt="" className="earn-logo earned-xp" />
+            </div>
+
+            <div
+              className="d-flex align-items-center position-absolute"
               style={{
-                width: "47%",
-                display: "flex",
-                justifyContent: "flex-end",
+                right: 0,
                 zIndex: 2
               }}
             >
-              <Image src={logo} alt="" className="earn-logo earned-xp" />
-              <p className="earned-amount">
+              <p
+                className="earned-amount"
+                style={{ marginLeft: getMarginLeft(earnedXp) }}
+              >
                 {Math.round(earnedXp).toLocaleString()}
               </p>
             </div>
