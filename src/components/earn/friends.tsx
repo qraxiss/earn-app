@@ -11,7 +11,7 @@ export const Friends = () => {
   const { referrers } = useSelector(frensSelector);
 
   const handleCopy = () => {
-    const link = `https://t.me/shopcekbot/app?startapp=${WebApp.initDataUnsafe?.user?.id}`; // Replace with your actual link
+    const link = `https://t.me/shopcekbot/start?startapp=${WebApp.initDataUnsafe?.user?.id}`; // Replace with your actual link
     navigator.clipboard
       .writeText(
         `${link}
