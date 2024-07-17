@@ -27,6 +27,7 @@ import SlideUpPanel from "../../TaskSlider";
 
 import formatNumber from "../../../helpers/format-number";
 import { dailyCardSelector } from "../../../slices/daily-card/slice";
+import { stackSelector } from "../../../slices/stack/slice";
 
 // constants
 const CATEGORIES = [
@@ -63,6 +64,7 @@ export const Mine = () => {
   const cards = useSelector(cardsSelector);
   const selectedIcon = useSelector((state: any) => state.selectedIcon.icon);
   const notification = useSelector(notificationSelector);
+  const stack = useSelector(stackSelector);
   const { status: cardStatus } = useSelector(dailyCardSelector);
 
   const isXpLoading = useSelector(
@@ -110,7 +112,7 @@ export const Mine = () => {
   const getMarginLeft = (xp: number) => {
     const xpString = Math.round(xp).toLocaleString();
     const xpLength = xpString.replace(/\./g, "").length;
-    return `${xpLength * 13}px`;
+    return `${xpLength * 4.5}px`;
   };
 
   return (
@@ -152,24 +154,22 @@ export const Mine = () => {
             </div>
             <div
               className="logo-container"
-              style={{ marginRight: getMarginLeft(earnedXp) }}
-            >
-              <Image src={logo} alt="" className="earn-logo earned-xp" />
-            </div>
-
-            <div
-              className="d-flex align-items-center position-absolute"
               style={{
-                right: 0,
-                zIndex: 2,
+                marginRight: "10%",
               }}
             >
-              <p
-                className="earned-amount"
-                style={{ marginLeft: getMarginLeft(earnedXp) }}
+              <Image src={logo} alt="" className="earn-logo earned-xp" />
+              <div
+                className="d-flex align-items-center"
+                style={{
+                  right: 0,
+                  zIndex: 2,
+                }}
               >
-                {Math.round(earnedXp).toLocaleString()}
-              </p>
+                <p className="earned-amount">
+                  {Math.round(stack.status.earnPerHour * 4).toLocaleString()}
+                </p>
+              </div>
             </div>
           </h4>
         ) : !status.isWaiting ? (
@@ -189,24 +189,25 @@ export const Mine = () => {
             </div>
             <div
               className="logo-container"
-              style={{ marginRight: getMarginLeft(earnedXp) }}
-            >
-              <Image src={logo} alt="" className="earn-logo earned-xp" />
-            </div>
-
-            <div
-              className="d-flex align-items-center position-absolute"
               style={{
-                right: 0,
-                zIndex: 2,
+                marginRight: "10%",
               }}
             >
-              <p
-                className="earned-amount"
-                style={{ marginLeft: getMarginLeft(earnedXp) }}
+              <Image src={logo} alt="" className="earn-logo earned-xp" />
+              <div
+                className="d-flex align-items-center"
+                style={{
+                  right: 0,
+                  zIndex: 2,
+                }}
               >
-                {Math.round(earnedXp).toLocaleString()}
-              </p>
+                <p
+                  className="earned-amount"
+                  // style={{ marginLeft: getMarginLeft(earnedXp) }}
+                >
+                  {Math.round(earnedXp).toLocaleString()}
+                </p>
+              </div>
             </div>
           </h4>
         )}
