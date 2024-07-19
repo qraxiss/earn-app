@@ -283,6 +283,7 @@
   background: black;
   z-index: 1;
   animation: fillBackground 5s linear infinite forwards; /* 4 hours = 14400 seconds */
+  border-radius: 5px;
 }
 
 .electronics-container {
