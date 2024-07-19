@@ -1,4 +1,3 @@
-import eruda from "eruda";
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
@@ -7,7 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider as ReduxProvider } from "react-redux";
 import { store } from "./store/index";
 import WebApp from "@twa-dev/sdk";
-eruda.init();
 
 console.log(WebApp);
 
