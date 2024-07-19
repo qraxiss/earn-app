@@ -68,8 +68,8 @@
       border-bottom: 1px solid #737373;
       font-size: 15px;
       white-space: normal;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
       height: 46px;
       font-weight: 600;
       margin-bottom: 8px;
@@ -148,7 +148,7 @@
   width: 0;
   height: 0;
   opacity: 0;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .product-hover .buy-lock {
@@ -206,9 +206,9 @@
 
 .mine-start.started {
   background: none;
-  overflow: hidden;
+  // overflow: hidden;
   justify-content: space-around;
-  color: #C0BEBD;
+  color: #c0bebd;
 }
 
 .mine-start::before {

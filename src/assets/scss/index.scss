@@ -17,12 +17,12 @@ html {
   background-color: #0b182b;
   overscroll-behavior: none;
   height: 100%;
-  overflow: hidden;
+  // overflow: hidden;
 }
 #root {
   height: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
+  // overflow: auto;
+  // -webkit-overflow-scrolling: touch;
 }
 
 .header-container {
