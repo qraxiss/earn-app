@@ -16,9 +16,11 @@ export const Friends = () => {
       .writeText(
         `${link}
 
-Open your store, become a top shopkeeper, and receive exclusive airdrop!
-🛒 10k Coins as a welcome gift
-👥 Refer friends and earn bonus coins for each referral!`
+Open your store, become a top shopkeeper, and get an exclusive airdrop! 
+🛒 Receive 10k Coins as a welcome gift 
+👥 Refer friends and earn bonus coins! 
+
+Airdrop Details: 60% for top earners and referrers, 40% for 500 lucky participants. Everyone who launches the app is eligible for the raffle. Live raffle three days before token listing. Don't miss out! Join now and start winning!`
       )
       .then(() => {
         setCopied(true);
