@@ -164,11 +164,11 @@ export const Task: React.FC = () => {
                 <p className="m-0 task-heading">{task.title}</p>
                 <div className="d-flex align-items-center">
                   <img
-                    src={EarningLogo}
+                    src={logo}
                     alt=""
-                    className="logo m-0 me-1"
+                    className="logo"
                     style={{
-                      width: "16px",
+                      width: "32px",
                     }}
                   />
                   <h4 className="reward m-0">{task.reward.toLocaleString()}</h4>
