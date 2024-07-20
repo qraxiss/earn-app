@@ -47,7 +47,7 @@
     width: 10px;
   }
   .points {
-    width: 130px !important;
+    // width: 130px !important;
     font-size: 14px;
     justify-content: flex-start;
   }
@@ -70,6 +70,12 @@
       border-radius: 5px;
       padding: 15px;
     }
+  }
+}
+
+.rank {
+  .heading {
+    font-weight: 700;
   }
 }
 

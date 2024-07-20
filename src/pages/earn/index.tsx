@@ -129,7 +129,7 @@ export const Earn: React.FC = () => {
                   Task
                 </span>
               </div>
-              {/* <div className="flex-fill text-center">
+              {/* <div className="text-center">
                 <span
                   className={`navbar-items-mobile ${
                     selectedMenu === "name" ? "selected-icon" : ""

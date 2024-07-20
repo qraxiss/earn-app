@@ -6,6 +6,11 @@ import { Image } from "react-bootstrap";
 import { ranksSelector, statsSelector } from "../../slices/leader-board/api";
 import { useSelector } from "react-redux";
 import formatNumber from "../../helpers/format-number";
+import first from "../../assets/images/1st.png";
+import second from "../../assets/images/2nd.png";
+import third from "../../assets/images/3rd.png";
+
+const top3 = [first, second, third];
 
 export const Name = () => {
   const ranks = useSelector(ranksSelector);
@@ -22,13 +27,15 @@ export const Name = () => {
           <div className="rank">
             <p className="rank-title">Total Players</p>
             <div className="d-flex align-items-center">
-              <p className="heading">{stats.totalUser}</p>
+              <p className="heading">{stats.totalUser.toLocaleString()}</p>
             </div>
           </div>
           <div className="rank">
             <p className="rank-title">Daily Users</p>
             <div className="d-flex align-items-center">
-              <p className="heading">{stats.dailyActiveUser}</p>
+              <p className="heading">
+                {stats.dailyActiveUser.toLocaleString()}
+              </p>
             </div>
           </div>
         </div>
@@ -42,9 +49,17 @@ export const Name = () => {
             >
               {!rank.myRank ? (
                 <div className="d-flex  align-items-center">
-                  <h4 className="my-0 mx-2 rank-no">{idx + 1}</h4>
+                  {top3[idx] ? (
+                    <Image className="menu-logo" src={top3[idx]}></Image>
+                  ) : (
+                    <h4 className="my-0 mx-2 rank-no">{idx + 1}</h4>
+                  )}
                   <img className="profile-img ms-3 me-2" src={Profile} alt="" />
-                  <h4 className="m-0 username">{rank.name}</h4>
+                  <h4 className="m-0 username">
+                    {rank.name.length > 12
+                      ? `${rank.name.slice(0, 12).trim()}...`
+                      : rank.name}
+                  </h4>
                 </div>
               ) : (
                 <>

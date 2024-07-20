@@ -67,6 +67,8 @@ function App() {
         dispatch(cardStatus.initiate({})),
         dispatch(loginStatus.initiate({})),
         dispatch(referrers.initiate({})),
+        dispatch(ranks.initiate({})),
+        dispatch(stats.initiate({})),
       ]);
 
       promise.then(() => {

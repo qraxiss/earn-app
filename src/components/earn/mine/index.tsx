@@ -20,6 +20,7 @@ import { setMenu } from "../../../slices/selected-menu/slice";
 import logo from "../../../assets/images/icon.svg";
 import EarningLogo from "../../../assets/images/EarningLogo.png";
 import remainTime from "../../../assets/images/remain-time.png";
+import Rank from "../../../assets/images/1st.png";
 
 //components
 import Product from "./product";
@@ -109,27 +110,23 @@ export const Mine = () => {
     dispatch(stackClaim.initiate({}));
   };
 
-  const getMarginLeft = (xp: number) => {
-    const xpString = Math.round(xp).toLocaleString();
-    const xpLength = xpString.replace(/\./g, "").length;
-    return `${xpLength * 4.5}px`;
-  };
-
   return (
     <section className="mine-section">
       <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
-        <h6 className="cool-background p-2 m-0" style={{ height: "30px" }}>
+        <h6 className="cool-background p-2 m-0">
           <img className="mine-logo me-1" src={EarningLogo} alt="" />{" "}
           {formatNumber(Math.round(xp.earn))}/h
         </h6>
-
         <h6
           className="cool-background p-2 m-0"
-          style={{
-            width: "32%",
-            height: "30px",
+          onClick={() => {
+            dispatch(setMenu("name"));
           }}
         >
+          <img className="mine-logo me-1" src={Rank} alt="" /> Rank
+        </h6>
+
+        <h6 className="cool-background p-2 m-0">
           <img className="mine-logo me-1" src={remainTime} alt="" />{" "}
           {status.isWaiting ? `0${formatTime(status.remainTime)}` : "04:00:00"}
         </h6>
