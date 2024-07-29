@@ -177,7 +177,7 @@ export const Mine = () => {
           <h4 className="mine-start started m-0 d-flex justify-content-between align-items-center position-relative">
             <div className="fill-animation"></div>
             <div
-              className="p-1"
+              className="p-3"
               style={{
                 zIndex: 2,
               }}
