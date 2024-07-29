@@ -18,6 +18,127 @@
     }
   }
 
+  .prize-pool {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: #15253b;
+    width: 100%;
+    border-radius: 8px;
+    border-color: #13c5f0;
+    border-width: 2px;
+    border-style: solid;
+
+    .bigger-ton {
+      background-color: black;
+      border-radius: 50%;
+      width: 5.5em;
+      height: 5.5em;
+
+      img {
+        width: 100%;
+        height: 92%;
+      }
+    }
+
+    .rewards {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      font-size: 1rem;
+
+      .title {
+        font-weight: 1000;
+        font-size: 1em;
+      }
+
+      .ton {
+        font-weight: 1000;
+        color: #7dd957;
+        font-size: 1.67em;
+      }
+      .shpc {
+        font-size: 1.5em;
+      }
+    }
+  }
+
+  .invite-information {
+    background-color: #1e3557;
+    width: 100%;
+    border-radius: 8px;
+    border-color: #13c5f0;
+    border-width: 2px;
+    border-style: solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    .smaller-coin {
+      background-color: black;
+      border-radius: 50%;
+      width: 2em;
+      height: 2em;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .rewards {
+      font-size: 0.7rem;
+
+      .reward {
+        display: flex;
+        align-items: center;
+      }
+
+      .title {
+        font-weight: 700;
+        font-size: 1.3em;
+      }
+      .tokens {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        gap: 2em;
+        .ton {
+          font-size: 1.2em;
+          font-weight: 800;
+          color: #7dd957;
+        }
+        .shpc {
+          font-size: 1.2em;
+          font-weight: 800;
+          color: #7dd957;
+        }
+
+        .coin {
+          font-size: 1.2em;
+          font-weight: 600;
+          display: flex;
+          align-items: baseline;
+
+          .info {
+            padding-left: 0.3em;
+            font-size: 0.7em;
+            color: #b4b2b9;
+          }
+        }
+      }
+    }
+
+    img {
+      width: 25%;
+    }
+  }
+
   .earning-container {
     display: flex;
     flex-direction: row;
@@ -49,13 +170,74 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
     .friend-list {
+      .smaller-coin {
+        background-color: black;
+        border-radius: 50%;
+        width: 1.3em;
+        height: 1.3em;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 115%;
+          height: 115%;
+        }
+      }
+
+      .rewards {
+        font-size: 0.82rem;
+
+        .reward {
+          display: flex;
+          align-items: center;
+          gap: 0.4em;
+        }
+
+        .title {
+          font-weight: 700;
+          font-size: 1.3em;
+        }
+
+        .ton {
+          font-size: 1em;
+          font-weight: 700;
+          color: #7dd957;
+        }
+        .shpc {
+          font-size: 1em;
+          font-weight: 700;
+          color: #7dd957;
+        }
+        .tokens {
+          display: flex;
+          flex-direction: row;
+          justify-content: start;
+          gap: 2em;
+
+          .coin {
+            font-size: 1.2em;
+            font-weight: 600;
+            display: flex;
+            align-items: baseline;
+
+            .info {
+              padding-left: 0.3em;
+              font-size: 0.9em;
+              color: #b4b2b9;
+            }
+          }
+        }
+      }
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
       border: 1px solid #737373;
-      background-color: #081220;
+      background-color: #1e3557;
       width: 600px;
       height: 60px;
       border-radius: 5px;
@@ -90,7 +272,7 @@
       width: 100%;
       .friend-list {
         width: 100%;
-        height: 25px;
+        height: 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -99,6 +281,14 @@
       .refer-title {
         font-size: 16px;
         font-weight: 600;
+        display: flex;
+        flex-direction: row;
+        gap: 0.8em;
+        align-items: center;
+        .count {
+          font-size: 20px;
+          font-weight: 700;
+        }
       }
       .refer-number {
         font-size: 18px;
